@@ -12,6 +12,7 @@ Course Title: Project 150.
 Game Name: MULTIPLE GAME
 
 Description:
+
 In this project, we work on various kinds of games, specifically focusing on children to enrich their knowledge and thinking capability. 
 1.Tac-Tac-Toe:
 The game is played on a grid that's 3 squares by 3 squares. If you are X, your friend (or the computer in this case) is O. Players take turns putting their marks in empty squares. The first player to get 3 of her marks in a row (up, down, across, or diagonally) is the winner.
@@ -23,10 +24,13 @@ The player controls a long, thin creature, resembling a snake, which roams aroun
 Snakes and ladders are a simple and exciting game, Snake and ladders game is based on luck. In this game, you will have to roll down the dice, to move to different positions on the board, wherein on the journey to the destination, you will be pulled down by snakes and raised to a higher position by a ladder.
 
 Game Play:
+
 There have different types of theose games like Easy version, Medium Version, Hard Version, man vs man and man vs computer.
 
 
 Player Goal:
+
+
 1.Tic-Tac-Toe:
 The goal of Tic Tac Toe is for a player to successfully align a set of their own symbols (traditionally "X" or "O") horizontally, vertically, or diagonally on a 3x3 grid. The game is typically played by two players taking turns to place their symbol in an empty cell of the grid. The player who achieves the first alignment of three of their symbols in a row wins the game.
 
@@ -38,6 +42,7 @@ Players roll a die and navigate the board. Landing on a ladder advances a player
 
 
 Development Goal:
+
 1.Tic-Tac-Toe:
 Tic Tac Toe is well known game that is simple to grasp, easy to adapt and excellent for building beginner planning, problem solving and perspective taking skills. This post is going to focus on how you can use Tic Tac Toe to help develop your child's gross motor, fine motor, social, emotional and cognitive skills.
 
