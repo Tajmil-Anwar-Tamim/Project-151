@@ -53,6 +53,7 @@ Most board games are useful for helping children develop confidence with importa
 While developing the ludo and snake ladder game, we wanted to ensure it can engage multiple players. We wanted to have a group of five or six people playing the game together. With AI-based algorithms, we ensured that the game against the computer is equally interesting and interactive.
 
 SUBMITTED BY:
+
 Name: Md Saminul Amin
 Reg No. 2021331014
 
