@@ -14,7 +14,7 @@ Game Name: MULTIPLE GAME
 Description:
 
 In this project, we work on various kinds of games, specifically focusing on children to enrich their knowledge and thinking capability. 
-1.Tac-Tac-Toe:
+1.Tic-Tac-Toe:
 The game is played on a grid that's 3 squares by 3 squares. If you are X, your friend (or the computer in this case) is O. Players take turns putting their marks in empty squares. The first player to get 3 of her marks in a row (up, down, across, or diagonally) is the winner.
 
 2.Snake Game:
