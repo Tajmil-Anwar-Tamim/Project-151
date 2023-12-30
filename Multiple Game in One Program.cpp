@@ -3,16 +3,16 @@
     PacMan Lite, Snake-Ladder Ludo, Sudoku, Head-Tail Cricket)
     in different mode.
 
-    For Increasing the facinity of the Program, we use some exclusive theme,
-    (such as getch() , ASCII (-128 to 31) etc. Thats all are not supported in
-    all OS & all Compiler. So I prefer to Run it in Windows OS & Latest C++Compiler..
-
+    To Run the Program in Different OS, we delete some exclusive theme,
+    (such as <conio.h>, getch() , ASCII (-128 to 31) etc. Because Thats all are not supported in
+    all OS & all Compiler.
 */
 
+
 #include <bits/stdc++.h>
-#include <stdlib.h>
-#include <time.h>
-#include <conio.h>                        //for getch();
+//#include <stdlib.h>
+//#include <time.h>
+//#include <conio.h>                        //for /** getch(); */
 
 #define TabM  cout << "\t\t\t\t\t\t";    //Likhagulo Middle Show korar jonno
 #define TabM2 cout << "\t\t\t\t     ";
@@ -24,8 +24,8 @@
 
 #define StrM  cout << "* * * * ";
 #define Str   cout << "* ";
-#define BrdrM cout << "o o o o o o o o o o o ";
-#define Brdr  cout << "o ";
+#define BrdrM cout << "* * * * * * * * * * * ";
+#define Brdr  cout << "* ";
 
 #define show        cout << "\tScore : " << Score << endl << endl;
 #define showScore   cout << "\tScore : " << Score << endl;
@@ -35,7 +35,7 @@ using namespace std;
 
 string Dicission (string a)
 {
-    New New New getch();
+    New New New /** getch(); */
     TabM2 cout << "\tTo Play Again Press-'1'\n";
     TabM2 cout << "\tTo Goto Menu  Press-'0'\n";
     TabM  cin >> a;
@@ -45,7 +45,7 @@ string Dicission (string a)
 
 string Dicission_Bonus (string a)
 {
-    New getch();
+    New /** getch(); */
     TabM2 cout << "\tTo Play Again,               Press-'1'\n";
     TabM2 cout << "\tTo Play Another BONUS GAME , Press-'2'\n";
     TabM2 cout << "\tTo Goto MENU,                Press-'0'\n";
@@ -78,8 +78,8 @@ int main()
             TabM cout << ch << "   MULTIPLE GAME   " << ch;
     Menu:
             New New
-            TabM2 printf("Press 1,   to Play         TIC TAC TIC(Man vs Com)\n");
-            TabM2 printf("Press 2,   to Play         TIC TAC TIC(Man vs Man)\n\n");
+            TabM2 printf("Press 1,   to Play         TIC TAC TOE(Man vs Com)\n");
+            TabM2 printf("Press 2,   to Play         TIC TAC TOE(Man vs Man)\n\n");
             TabM2 printf("Press 3,   to Play            SNAKE GAME (Classic)\n");
             TabM2 printf("Press 4,   to Play            SNAKE GAME (  Box  )\n\n");
             TabM2 printf("Press 5,   to Play            PACMAN Lite (Normal)\n");
@@ -115,7 +115,7 @@ int main()
             char who, Index_Data[11]; //'who' uses for who play first & Index_Data[10] contains Data which Index fill up or Not
             char Index_Symbol[11];   //Box-Symbol String (show 'x', 'o', ' ')
 
-            cout << "\t\t\t\t\t       TIC TAC TIC   \n\n";
+            cout << "\t\t\t\t\t       TIC TAC TOE   \n\n";
             cout << "\t\t\t\t\t    [Man vs Computer]\n\n";
             cout << "\t\t\t  [Everytime Press '1' to '9' For Push Your Symbol in the Box] " << endl << endl;
 
@@ -131,8 +131,6 @@ int main()
                 {
                     Index_Data[i]= 0;
                 }
-
-    //           New cout << "\t\t\t  "; cout << "[Everytime Press '1' to '9' For Push Your Symbol in the Box] " << endl << endl;
 
                 Print_Loop_ttt_vsc://Print_Update
 
@@ -290,7 +288,7 @@ int main()
                         else if(Index_Data [5]== 2 && Index_Data [7]== 2 && Index_Data [3]== 0)  {  Computer = 3; }
 
                         //Depends of Computer(computer er amar jita atkanor formula gulo)
-                        if     (Index_Data [1]== 1 && Index_Data [2]== 1 && Index_Data [3]== 0)  {  Computer = 3; }
+                        else if(Index_Data [1]== 1 && Index_Data [2]== 1 && Index_Data [3]== 0)  {  Computer = 3; }
                         else if(Index_Data [1]== 1 && Index_Data [3]== 1 && Index_Data [2]== 0)  {  Computer = 2; }
                         else if(Index_Data [2]== 1 && Index_Data [3]== 1 && Index_Data [1]== 0)  {  Computer = 1; }
                         else if(Index_Data [4]== 1 && Index_Data [5]== 1 && Index_Data [6]== 0)  {  Computer = 6; }
@@ -358,7 +356,7 @@ int main()
                         else if(Index_Data [5]== 2 && Index_Data [7]== 2 && Index_Data [3]== 0)  {  Computer = 3; }
 
                         //Depends of Computer(computer er amar jita atkanor formula gulo)
-                        if     (Index_Data [1]== 1 && Index_Data [2]== 1 && Index_Data [3]== 0)  {  Computer = 3; }
+                        else if(Index_Data [1]== 1 && Index_Data [2]== 1 && Index_Data [3]== 0)  {  Computer = 3; }
                         else if(Index_Data [1]== 1 && Index_Data [3]== 1 && Index_Data [2]== 0)  {  Computer = 2; }
                         else if(Index_Data [2]== 1 && Index_Data [3]== 1 && Index_Data [1]== 0)  {  Computer = 1; }
                         else if(Index_Data [4]== 1 && Index_Data [5]== 1 && Index_Data [6]== 0)  {  Computer = 6; }
@@ -489,7 +487,7 @@ int main()
             char Index_Data [10];
             char Index_Symbol [10];
 
-            cout << "\t\t\t\t\t       TIC TAC TIC\n";
+            cout << "\t\t\t\t\t       TIC TAC TOE\n";
             cout << "\t\t\t\t\t       [Man vs Man]\n\n";
             cout << "\t\t\t  [Everytime Press '1' to '9' For Push Your Symbol in the Box] " << endl << endl;
 
@@ -689,7 +687,7 @@ int main()
                     {
                         if(Fruit== Snake_Body[i]) {x= -1;  break; }
                     }
-                    if((x== -1 || Fruit== Snake_Head) && Change<= 100 ) //Chnge variable ta Newar karon holo jodi snake body r size full arear soman hoy orthat fruit dewar moto kono jayga na thake tahole snake body borabor kono ek jaygay fruit porbe , eta na use korle oi muhurte program continiously choltei thakto, susthu vabe game complete hoto na
+                    if((x== -1 || Fruit== Snake_Head) && Change<= 100 ) //Chnge variable ta Newar karon holo jodi snake body r size full PlayGroundr soman hoy orthat fruit dewar moto kono jayga na thake tahole snake body borabor kono ek jaygay fruit porbe , eta na use korle oi muhurte program continiously choltei thakto, susthu vabe game complete hoto na
                     {
                         x= 0;
                         Fruit++;
@@ -703,14 +701,17 @@ int main()
                 }
 
                 PlayGround [Fruit]= temp%2+42; //Fruit Symbol (*, +)
-                PlayGround [Snake_Head]= 2;    //Snake Head Symbol (Ascii 2)
+////                PlayGround[Snake_Head]= 2;  //Snake Head Symbol(Smile Face) //This is not show in all compiller. So we Delete it.
+                PlayGround[Snake_Head]= '@';     //Snake Head Symbol
 
                 for(i= Score+3; i>0; i--)
                 {
-                    PlayGround [Snake_Body[i]]= 254; //Snake Body Symbol
+////                    PlayGround[Snake_Body[i]]= 254;  //Snake Body Symbol     //This is not show in all compiller. So we Delete it.
+                    PlayGround[Snake_Body[i]]= 'o';
                 }
-                PlayGround [Snake_Body[Score+3]]= 4; //Snake Tail Symbol
+////                PlayGround[Snake_Body[Score+3]]= 4;  //Snake Tail Symbol     //This is not show in all compiller. So we Delete it.
 
+                PlayGround[Snake_Body[Score+3]]= '-';
                 New;
                 TabM;  Brdr;  BrdrM;  New;  //Border
                 TabM;  Brdr;
@@ -785,7 +786,7 @@ int main()
             }
 
             New New New
-            getch();
+            /** getch(); */
 
             Again = Dicission (Kall);
             if(Again!= "1") goto Menu;
@@ -808,7 +809,7 @@ int main()
             int Snake_Head= 46;
             int Snake_Body[110]= {0};
             char Move;
-            char Area[111];
+            char PlayGround[111];
 
             cout << "\t\t\t\t\t\tSNAKE GAME [Box](10x10)\n\n";
             cout<<"#Introduction : Here your target is eat more Fruit to Increase Score. The Snake's Size is increasing according to eat Fruit. If the Snake Bites it's Body or Border, then the Game is Over.If Score=100, then the Game will be Completed.\n\n";
@@ -842,17 +843,20 @@ int main()
 
                 for(i= 0; i<= 100; i++)
                 {
-                    Area[i]= ' ';
+                    PlayGround[i]= ' ';
                 }
 
-                Area[Fruit]= temp%2+42; //Fruit Symbol(*, +)
-                Area[Snake_Head]= 2;    //Snake Head Symbol
+                PlayGround[Fruit]= temp%2+42; //Fruit Symbol(*, +)
+////                PlayGround[Snake_Head]= 2;    //Snake Head Symbol(Smile Face) //This is not show in all compiller. So we Delete it.
+                PlayGround[Snake_Head]= '@';     //Snake Head Symbol
 
                 for(i= Score+3; i>0; i--)
                 {
-                    Area[Snake_Body[i]]= 254;  //Snake Body Symbol
+////                    PlayGround[Snake_Body[i]]= 254;  //Snake Body Symbol     //This is not show in all compiller. So we Delete it.
+                    PlayGround[Snake_Body[i]]= 'o';
                 }
-                Area[Snake_Body[Score+3]]= 4;  //Snake Tail Symbol
+////                PlayGround[Snake_Body[Score+3]]= 4;  //Snake Tail Symbol     //This is not show in all compiller. So we Delete it.
+                PlayGround[Snake_Body[Score+3]]= '-';
 
                 New;
                 TabM;  Brdr;  BrdrM;  New;
@@ -860,7 +864,7 @@ int main()
 
                 for(i= 1; i<= 100; i++)
                 {
-                   cout << Area[i] << " ";
+                   cout << PlayGround[i] << " ";
                    if(i%10 ==  0) {Brdr;  New;  TabM;  Brdr;  }
                 }
 
@@ -1030,11 +1034,13 @@ int main()
                         if(Fruit[i]== 1) PlayGround[i]= '.';          //jodi Fruit thake tobe Dot Sign dekhabe
                     }
 
-                    PlayGround[PacMan]= 1;                         //PacMan Symbol (Smile face Black)
+////                PlayGround[PacMan]= 1; //PacMan Symbol (Smile Face - Black)
+                    PlayGround[PacMan]= 'P'; //PacMan Symbol
 
                     for(i= 0; i<Number_of_Enemy; i++)
                     {
-                        PlayGround[Enemy[i]]= 2;                   //Enemy Symbol (Smile face White)
+////                        PlayGround[Enemy[i]]=   2; //Enemy Symbol (Smile Face White)
+                            PlayGround[Enemy[i]]= 'X'; //Enemy Symbol
                     }
 
                     New;
@@ -1079,7 +1085,7 @@ int main()
 
                     cin >> Move;
 
-                    if(Move== 'x' || Move== 'X') {goto Menu; } //if You want to Close the Game press 'x'/'X';
+                    if(Move== 'x' || Move== 'X') {break; } //if You want to Close the Game press 'x'/'X';
 
                     if(Move== '6') {PacMan++;        /** to move Right*/     if(PacMan%10== 0)      PacMan --; /** Dont cross right border Right*/  }
                     if(Move== '4') {PacMan--;        /** to move Left */     if((PacMan+20)%10== 9) PacMan ++; /** Dont cross right border Right*/  } //'-' Value Avoiding er jonno +20 dichi
@@ -1206,11 +1212,13 @@ int main()
                     if(Fruit[i]== 1) PlayGround[i]= '.';
                 }
 
-                PlayGround[PacMan]= 1; //PacMan Symbol
+////                PlayGround[PacMan]= 1; //PacMan Symbol (Smile Face - Black)
+                    PlayGround[PacMan]= 'P'; //PacMan Symbol
 
                 for(i= 0; i<Number_of_Enemy; i++)
                 {
-                    PlayGround[Enemy[i]]= 2; //Enemy Symbol
+////                    PlayGround[Enemy[i]]=   2; //Enemy Symbol (Smile Face White)
+                        PlayGround[Enemy[i]]= 'X'; //Enemy Symbol
                 }
 
                 New;
@@ -1237,13 +1245,13 @@ int main()
                 TabM showLife
 
 
-                if(Life== 0) break;
-                if(Score== 100) break;
-                if(Temp== -1) goto Pac_Reform_2;
+                if(Life  ==   0)    break;
+                if(Score == 100) break;
+                if(Temp  ==  -1)   goto Pac_Reform_2;
 
                 cin >> Move;
 
-                if(Move== 'x' || Move== 'X') {goto Menu; } //if You want to Close the Game press 'x'/'X';
+                if(Move== 'x' || Move== 'X') {break; } //if You want to Close the Game press 'x'/'X';
 
                 //Pacman Moving(below)
                 if(Move== '6') {PacMan++;      if( PacMan     %10== 0)      PacMan  -= 10; }
@@ -1349,12 +1357,12 @@ int main()
 
             while(1)
             {
-                getch();
+                /** getch(); */
                 Sound
 
                 for(i= 1; i<= 2; i++)
                 {
-                    //getch();
+                    ///** getch(); */
                     temp += 67;
                     temp= temp%100;
                     srand(time(NULL));
@@ -1479,14 +1487,14 @@ int main()
 
                 while(1)
                 {
-                    //getch();
+                    ///** getch(); */
                     Temp += Number_of_Player*(Temp+1)+1; //not so necessary, you can also change 'c' differently
                     Temp= Temp%99; //Minimized size, not so necessary, you can also change 'c' differently
 
                     for(i= 1; i<= Number_of_Player; i++)
                     {
                         Temp += 5; //not so necessary, you can also change 'c' differently
-                        getch();
+                        /** getch(); */
                         srand(time(NULL));
 
                             Dice= (rand()/(i+1)*i+rand()+Temp*Temp/i)%6; //just for different value of d in same time also, you can also change it differently but '%6' is must nedded
@@ -1879,8 +1887,8 @@ int main()
 
             }
 
-            getch(); TabM cout << "   Congratulation\n";
-            getch(); TabM cout << "   Congratulation\n"; // 3 time Congratulation (not so necessary)
+            /** getch(); */ TabM cout << "   Congratulation\n";
+            /** getch(); */ TabM cout << "   Congratulation\n"; // 3 time Congratulation (not so necessary)
 
 
             Again = Dicission (Kall);
@@ -2220,8 +2228,8 @@ int main()
                 if(flag== 1){TabM cout << "   Congratulation!\n\n\n"; break; } //jodi Shobgulo Shorto thik moto fill up hoy, tobe Ami thik moto Game sompurno korte perechi
 
             }
-                getch(); TabM cout << "   Congratulation\n";
-                getch(); TabM cout << "   Congratulation\n"; // 3 time Congratulation (not so necessary)
+                /** getch(); */ TabM cout << "   Congratulation\n";
+                /** getch(); */ TabM cout << "   Congratulation\n"; // 3 time Congratulation (not so necessary)
 
             Again = Dicission (Kall);
             if(Again!= "1") goto Menu;
@@ -2471,7 +2479,7 @@ int main()
     case 0:
         cout << "\t\t\t\t\t\t Program is Closed.\n";
         cout << "\t\t\t\t\t\tJajakallahu Khairan.\n\n";
-        getch();
+        /** getch(); */
         return 0;
 
     case 13:
@@ -2489,7 +2497,7 @@ int main()
                 case 1:
                     while(1)
                     {
-                        int Bulet,Kil=0,Shoot,Diffc ;
+                        int Bulet,Kil=0,Shoot,Diffc,Temp=100 ;
 
                         TabM  cout<<"  Shooting Game\n\n";
 
@@ -2511,8 +2519,10 @@ int main()
                         {
 
                             srand(time(NULL));
-                            getch();
-                            Shoot = rand() *3/2;
+                            Temp++;
+                            /** getch(); */
+                            Shoot = rand() *3/2 + Temp;
+                            Shoot++;
 
                             if(rand() %(Diffc+1) == Shoot %(Diffc+1)) Kil++;
 
@@ -2576,8 +2586,8 @@ int main()
 
                         Sound
                         New TabM cout<<"       Match Ended     ";
-                        New TabM cout<<"   Your Score    =  "<<win;
-                        New TabM cout<<"& Computer's Score =  "<<lost;
+                        New TabM cout<<"       Your Score=  "<<win;
+                        New TabM cout<<"   & Computer's Score=  "<<lost;
 
                         New New TabM
                         if      (win>lost) cout<<"Congratulation!\n\t\t\t\t\tYou won More mach than Computer\n\n";
@@ -2603,6 +2613,7 @@ int main()
                         while(1)
                         {
                             int n;
+                            Sound
                             char you,com;
                             cout<<"\nPress 'R' or 'P' or 'Z' (without quatation)\t:\t";
                             cin>>you;
@@ -2643,9 +2654,9 @@ int main()
 
                         }
 
-                        New TabM cout<<"     Match Ended     ";
-                        New TabM cout<<"   Your Score    =  "<<win;
-                        New TabM cout<<"& Computer's Score =  "<<lost;
+                        New TabM cout<<"       Match Ended     ";
+                        New TabM cout<<"       Your Score=  "<<win;
+                        New TabM cout<<"   & Computer's Score=  "<<lost;
 
                         New New TabM
                         if      (win>lost) cout<<"Congratulation!\n\t\t\t\t\tYou won More mach than Computer\n\n";
@@ -2666,7 +2677,7 @@ int main()
     default:
         cout << "\t\t\t\t\t\tError Switching!\n\t\t\t\t\t\tProgram is Closed.\n";
         cout << "\t\t\t\t\t\tJajakallahu Khairan.\n\n";
-        getch();
+        /** getch(); */
         return 0;
     }
 
