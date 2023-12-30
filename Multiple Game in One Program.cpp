@@ -5,7 +5,7 @@
 
     For Increasing the facinity of the Program, we use some exclusive theme,
     (such as getch() , ASCII (-128 to 31) etc. Thats all are not supported in
-    all OS & all Compiler. So I prefer to Run it in Windows OS & Latest C++Compiler.
+    all OS & all Compiler. So I prefer to Run it in Windows OS & Latest C++Compiler..
 
 */
 
