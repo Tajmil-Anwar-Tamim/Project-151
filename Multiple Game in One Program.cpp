@@ -1,4 +1,4 @@
-/*
+/**
     In this Program, we can play Multiple Game (Tic Tac Toe, Snake Game,
     PacMan Lite, Snake-Ladder Ludo, Sudoku, Head-Tail Cricket)
     in different mode.
