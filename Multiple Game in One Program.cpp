@@ -1799,6 +1799,7 @@ int main()
                             else
                             {
                                 cout<<"Error! Give Correct Input\n\n";
+                                system("cls");
                                 break;
                             }
 
@@ -1831,6 +1832,7 @@ int main()
         cout << "\t\t\t\t\t\t Program is Closed.\n";
         cout << "\t\t\t\t\t\tJajakallahu Khairan.\n\n";
         getch();
+        system("cls");
         return 0;
 
 
@@ -1838,6 +1840,7 @@ int main()
         cout << "\t\t\t\t\t\tError Switching!\n\t\t\t\t\t\tProgram is Closed.\n";
         cout << "\t\t\t\t\t\tJajakallahu Khairan.\n\n";
         getch();
+        system("cls");
         return 0;
     }
 
