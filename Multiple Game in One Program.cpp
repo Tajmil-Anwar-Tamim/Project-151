@@ -209,7 +209,7 @@ int main()
                         cin >> Me;
     //                    Me= Me % 10;
                         if(Me<0 || Me>= 10)
-                        {New TabM cout << "Wrong Input"; goto Menu; }              // jodi wrong chal dewa hoy, then- game close hobe
+                        {New TabM cout << "Wrong Input"; goto ReCall_Me ; }              // jodi wrong chal dewa hoy, then- game close hobe
 
 
                         if(Index_Data[Me]  !=  0)                       //jodi ghor-tite already chal dewa hoye thake
