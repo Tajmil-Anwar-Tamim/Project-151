@@ -209,7 +209,7 @@ int main()
                         cin >> Me;
     //                    Me= Me % 10;
                         if(Me<0 || Me>= 10)
-                        {New TabM cout << "Wrong Input"; goto ReCall_Me ; }              // jodi wrong chal dewa hoy, then- game close hobe
+                        {New TabM cout << "Wrong Input"; goto ReCall_Me; }              // jodi wrong chal dewa hoy, then- game close hobe
 
 
                         if(Index_Data[Me]  !=  0)                       //jodi ghor-tite already chal dewa hoye thake
@@ -1327,8 +1327,8 @@ int main()
 ////              row=Index/10; col=Index%10;
 ////              if(Index<0 || Index >99) goto Menu;
 
-                if(Temp[Index] != 0) {cout << "Not Changeable\n\n"; continue; }  //Given Value gulo Change kora jabe na
-                if(row==0 || col==0) {cout << "ERROR SWITCH\n\n"; continue; }
+                if(Temp[Index] != 0) {cout << "Index[" << row << "][" << col << "]\t  = ";cout << "Not Changeable\n\n"; continue; }  //Given Value gulo Change kora jabe na
+                if(row==0 || col==0) {cout << "Index[" << row << "][" << col << "]\t  = ";cout << "ERROR INDEX!\n\n"; continue; }
 
                 cout << "Index[" << row << "][" << col << "]\t  = ";
                 cin >> Value;  //Index Value Input
@@ -1844,3 +1844,7 @@ int main()
     goto Menu;
 
 }
+
+
+
+
