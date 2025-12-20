@@ -25,6 +25,19 @@
 
 using namespace std;
 
+// Global Variables <below>
+int Mark=1; char Marked_Symbol;
+char KEY;
+
+int Time_Delay=0;   //time delay in every KEY-hit.
+int KeyHit_Cheak_Count=0;
+
+int TabNumber=6,iGlobal;
+
+bool SoundFlag  = true;
+bool is_Premium = false;
+//bool is_Continuous_Change_Color= false;
+
 enum ConsoleColor {
     Black = 0,
     Blue = 1,
@@ -53,21 +66,7 @@ void SetConsoleColour(ConsoleColor textColor, ConsoleColor bgColor) {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (bgColor << 4) | textColor);
 }
 
-///Global Variables <below>
-char KEY;
-int Time_Delay=0; ///time delay in every KEY-hit.
-int Hit_Cheak_Count=0;
-
-int ColorVar;
 int rd1=0, rd2=0, rd3=0;
-
-int TabNumber=6,iGlobal;
-
-bool SoundFlag  = true;
-bool is_Premium = false;
-//bool is_Continuous_Change_Color= false;
-
-int Mark=1; char Marked_Symbol;
 
 void DisplayAdvise()
 {
@@ -114,6 +113,9 @@ void DisplayWorldView()
 
 }
 
+
+int ColorVar;
+
 void changeTextColour()
 {
     ColorVar++;
@@ -144,7 +146,6 @@ int changeTextColour2()
     if(ColorVar == 4) SetConsoleColour(Magenta,BrightWhite);
     if(ColorVar == 6) SetConsoleColour(Yellow,BrightWhite);
     if(ColorVar == 7) SetConsoleColour(Black,BrightWhite);
-
 
 }
 
@@ -179,9 +180,40 @@ void changeBgColour2()
     if(ColorVar == 7) SetConsoleColour(BrightWhite,Gray);
 }
 
+void gotoxy(int x, int y) {
+    COORD coord;
+    coord.X = x;
+    coord.Y = y;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+
+void hideCursor() {
+    HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO info;
+    info.dwSize = 100;
+    info.bVisible = FALSE;
+    SetConsoleCursorInfo(consoleHandle, &info);
+}
+
+void clearScreen() {
+
+    COORD topLeft = {0, 0};
+    HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_SCREEN_BUFFER_INFO screen;
+    DWORD written;
+
+    GetConsoleScreenBufferInfo(console, &screen);
+    DWORD cells = screen.dwSize.X * screen.dwSize.Y;
+
+    FillConsoleOutputCharacterA(console, ' ', cells, topLeft, &written);
+    FillConsoleOutputAttribute(console, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE,
+                               cells, topLeft, &written);
+    SetConsoleCursorPosition(console, topLeft);
+}
+
 void Instruction()
 {
-    system("cls");
+    clearScreen();
 
     changeTextColour();  cout<<"Press < \' or ; Key >  :  to Change Text Colour     in Black BackGround\n";
     changeTextColour2(); cout<<"Press < \" or : Key >  :  to Change Text Colour     in White BackGround\n"; NewLine
@@ -203,8 +235,8 @@ void Instruction()
     cout<< "Press < ` Key > : to Mute       \n";
     cout<< "Press < ~ Key > : to UnMute     \n\n";
 
-    cout<< "Press <Small'P'> for Premium ASCII Mode (This can be misbehave in Some System\n";
-    cout<< "Press <Small'U'> for Come-back Normal  ASCII Mode\n\n";
+    cout<< "Press <Small'p'> for Premium ASCII Mode (This can be misbehave in Some System)\n";
+    cout<< "Press <Small'u'> for Come-back Normal  ASCII Mode\n\n";
 
     SetConsoleColour (Black,BrightWhite);
     cout<<"Press < Home Key >, to Goto Main Menu\n";
@@ -217,7 +249,6 @@ void Instruction()
 
     //getch();
 }
-
 
 void Manager()
 {
@@ -297,7 +328,7 @@ void Manager()
     if (KEY=='`')  {SoundFlag=false; cout<<"\rMuted";}
     if (KEY=='~')  {SoundFlag= true; cout<<"\r\aUnmuted";}
 
-    Hit_Cheak_Count++;
+    KeyHit_Cheak_Count++;
 
 //    if (KEY=='l' && is_Continuous_Change_Color==false) is_Continuous_Change_Color=true;
 //    if (KEY=='l' && is_Continuous_Change_Color==true) is_Continuous_Change_Color= false;
@@ -327,7 +358,7 @@ char Dicission (char a)
     }
 
     NewLine NewLine NewLine
-    system("cls");
+    clearScreen();
     return a;
 }
 
@@ -357,7 +388,7 @@ char Dicission_TicTacToe (char a)
         }
     }
 
-    system("cls");
+    clearScreen();
     return a;
 }
 
@@ -398,7 +429,7 @@ char Dicission_cricket (char a)
         }
     }
 
-    system("cls");
+    clearScreen();
     return a;
 }
 
@@ -423,7 +454,7 @@ char Dicission_snake (char a)
     }
 
     NewLine NewLine NewLine
-    system("cls");
+    clearScreen();
     return a;
 }
 
@@ -452,7 +483,7 @@ char Dicission_Mini (char a)
     }
 
     NewLine NewLine NewLine
-    system("cls");
+    clearScreen();
     return a;
 }
 
@@ -487,16 +518,17 @@ TTT_Index_Instruction()
     Multi_Tabs_1  NewLine                       //Index Border Degign
     Multi_Tabs_1
 }
-
-
                                                                                                                                                                                                                                                 string Coder_Name = "Coded by \'Tajmil Anwar Tamim\'";
 int main()
 {
-            char Again,Kall;
+    hideCursor(); // কার্সর লুকানো
+//    srand(time(NULL)); // র‍্যান্ডম সিড সেট করা
+
+                char Again,Kall;
             /* srand(time(NULL)); */
 
         Menu:
-            system("cls"); //All Previous Print Erased
+            clearScreen(); //All Previous Print Erased
             //SetConsoleColour(Black,BrightWhite);
 
             if(is_Premium) Marked_Symbol = char(2);
@@ -535,7 +567,7 @@ int main()
     {
 
         this_thread::sleep_for(chrono::milliseconds(Time_Delay));
-        Hit_Cheak_Count++;   if (KEY=='!') cout<<"\r"<<Hit_Cheak_Count<<"                      ";
+        KeyHit_Cheak_Count++;   if (KEY=='!') cout<<"\r"<<KeyHit_Cheak_Count<<"                      ";
 
         if (kbhit())           //Control by arrow KEY
         {
@@ -564,7 +596,7 @@ int main()
             else if (KEY==']')  { changeBgColour2();  goto Menu;}
             else if (KEY=='{')  { ColorVar -=2; changeBgColour();   goto Menu;}
             else if (KEY=='[')  { ColorVar -=2; changeBgColour2();  goto Menu;}
-            //else if (KEY=='!') cout<<"\r"<<Hit_Cheak_Count<<"                          \t\t\t\t\t\t";
+            //else if (KEY=='!') cout<<"\r"<<KeyHit_Cheak_Count<<"                          \t\t\t\t\t\t";
             else if ( KEY==13 || KEY==77 || KEY==32)   break;
             //else if (KEY==75) {goto Menu;}
             else if(KEY=='+' || KEY=='=') {Time_Delay+=10; if(Time_Delay<0) Time_Delay=0; if(Time_Delay>100) Time_Delay=100; cout<<"\rKeyHitDelay(ms): "<<Time_Delay<<"      ";}
@@ -582,7 +614,7 @@ int main()
 
         }
     }
-    system("cls");
+    clearScreen();
 
     switch (Mark){
 
@@ -621,7 +653,7 @@ int main()
 
             if(KEY=='x' || KEY == 75 || KEY==71 || KEY==79 ) goto Menu;
 
-            system("cls");
+            clearScreen();
 
             Multi_Tabs_4 cout << "\t       TIC TAC TOE   \n\n";
             Multi_Tabs_4 cout << "\t    [Man vs Computer]\n\n";
@@ -663,7 +695,7 @@ int main()
             who=KEY;
 
             if(KEY=='i' || KEY=='c')    goto TTT_re;
-            if(KEY=='k') {system("cls"); continue;}
+            if(KEY=='k') {clearScreen(); continue;}
             if(KEY=='m') who='t';
             if(KEY=='x') goto Menu;
 
@@ -678,7 +710,7 @@ int main()
             getch();
 
             TTT_re:
-            system("cls");
+            clearScreen();
 
             int i, Me= 0, Computer= 0, Time= 0, Win_I= 0, Win_Com= 0, Call, con=0;
             char  Index_Data[11]; //'who' uses for who play first & Index_Data[10] contains Data which Index fill up or Not
@@ -746,6 +778,7 @@ int main()
                                 KEY = _getch();      Manager();
 
                                 if    (KEY>='1' && KEY<='9') {Me= KEY-'0'; break;}
+                                if    (KEY==71 || KEY==79)      goto Menu;
                             }
                         }
 
@@ -758,7 +791,7 @@ int main()
 
                     Index_Data[Me]= 1;//Index-tate Amar chal input holo
 
-                    system("cls");
+                    clearScreen();
                     goto Print_Loop_ttt_vsc;        //for printing update result
 
                     Come_Back_1:         //print kore punoray fire ase
@@ -1021,7 +1054,7 @@ int main()
 
 //                    Multi_Tabs_2 cout <<  "Computer Chose :\t" << Computer << endl << endl;  //Output Computer Choice
 
-                    system("cls");
+                    clearScreen();
 
                     goto Print_Loop_ttt_vsc;    //Print Update Result
                     Come_Back_2:                 //Come Back after printing
@@ -1109,7 +1142,7 @@ int main()
                 getch();
             }
 
-            system("cls");
+            clearScreen();
 
             for(i= 0; i<= 9; i++)
             {
@@ -1118,7 +1151,7 @@ int main()
 
             Print_Loop_ttt_vs_man:   //Print_Loop
 
-                system("cls");
+                clearScreen();
 
                 Index_Data[Player_1]= 1;
                 Index_Data[Player_2]= 2;
@@ -1171,6 +1204,7 @@ int main()
                                 KEY = _getch();      Manager();
 
                                 if      (KEY>='1' && KEY<='9') Player_1 = KEY-'0';
+                                else if (KEY==71 || KEY==79) goto Menu;
                                 else goto Recall_Player1;
 
                             }
@@ -1210,6 +1244,7 @@ int main()
                                 KEY = _getch();      Manager();
 
                                 if      (KEY>='1' && KEY<='9') Player_2 = KEY-'0';
+                                else if    (KEY==71 || KEY==79) goto Menu;
                                 else goto Recall_Player2;
 
                             }
@@ -1282,6 +1317,7 @@ int main()
             int Level;
             bool DoubleSnake = false;
             Multi_Tabs_1 cout<< "SPEED (1-9) :  ";
+
             while(true)
             {
                 this_thread::sleep_for(chrono::milliseconds(Time_Delay));
@@ -1300,6 +1336,7 @@ int main()
 
             while(1)
             {
+                clearScreen();
                 int Tempo=0;
                 bool Finish=false, is_Fruit_in_Blank_Space = true, BonusFlag=false;
                 int Fruit, Bonus=0, Score = 0,Point= 0,temp,Call,Change,i,FruitCount=0, BonusCount=0;
@@ -1317,7 +1354,8 @@ int main()
 
                 while(1)
                 {
-                    system("cls");
+                    hideCursor();
+                    gotoxy(0,0);
                     /** changeTextColour(); */
 
                     while(1)                  //jate fruit snake er body borabor na ase
@@ -1828,10 +1866,12 @@ int main()
                 }
                                                  ///Pacman er initial possition
                 Temp=true;
+                clearScreen();
 
                 while(true)                                        ///Protibar Move korar por Program ekhane chole asbe
                 {
-                    system("cls");
+                    hideCursor();
+                    gotoxy(0,0);
                     /** changeTextColour(); */
 
                     for(i = 0; i < 100; i++)
@@ -2111,6 +2151,7 @@ int main()
                         if    (KEY==77)  {col++;break;}
                         if    (KEY>='0' && KEY<='9') {Value= KEY-'0'; break;}
                         if    (KEY=='X') goto Menu;
+                        if    (KEY==71 || KEY==79) goto Menu;
 
                     }
                     row+=9; row%=9;
@@ -2309,7 +2350,7 @@ int main()
                 }
 
             sudko:
-                system("cls");
+                clearScreen();
                 Multi_Tabs_1 cout << "\tSUDOKU GAME\n\n\n";
                 cout<<"#Instruction: Here You should Fill Up All of the Blank Space Properly (According to Sudoku Rules).\n\n\To insert value in the Index, select row(1-9) & column(1-9) number of the Index, then input the value. You can't change the Given Value. If you fill up all the blank space properly, then the level will be completed & You get Congratulation. Otherwise Game will be Running. But if you want to close the program : Press 'x' \n\n\n";
                 Multi_Tabs_3 cout << "You should Fill Up All The Empty(Dot Sign) Index by Inserting Proper Value.\n\n";
@@ -2451,7 +2492,7 @@ int main()
                                 }
                             }
 
-                            system("cls");
+                            clearScreen();
                             you=toupper(KEY);
                             if(you==75) goto Menu;
                             else if(you!='H' && you!= 'T') break;
@@ -2585,7 +2626,7 @@ int main()
                             if(KEY==75) goto Menu;
 
                             you = toupper(KEY);
-                            system("cls");
+                            clearScreen();
 
                             if(you=='X' || you ==77) break;
 
@@ -2621,7 +2662,7 @@ int main()
                             else
                             {
                                 cout<<"Error! Give Correct Input\n\n";
-                                system("cls");
+                                clearScreen();
                                 break;
                             }
                         }
@@ -2720,7 +2761,7 @@ int main()
 
             }
 
-            system("cls");
+            clearScreen();
 
             Multi_Tabs_1 cout << "    CRICKET      \n\n";
             Multi_Tabs_1 cout << char(2) << " " << Team_1 << "  vs  " << Team_2 << " " << char(2) <<endl<<endl;
@@ -2998,11 +3039,12 @@ int main()
         NewLine
 
         getch();
-//        system("cls");
+//        clearScreen();
         Multi_Tabs_1 cout << " Jajakallahu Khairan.\n";
         Multi_Tabs_1 cout << "  See You Next Time.\n";
         getch();
-//        system("cls");
+//        clearScreen();
+        cout<<"\n\nTotal KeyHit Cheak Time : "<<KeyHit_Cheak_Count;
         return 0;
     }
     goto Menu;
