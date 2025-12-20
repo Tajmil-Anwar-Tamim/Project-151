@@ -322,9 +322,9 @@ void Manager()
         cout <<"\r[Flash Color B/W]";
     }
 
-    if (KEY=='<' || KEY==',')  {TabNumber--; if(TabNumber<0) TabNumber=0; }
-    if (KEY=='>' || KEY=='.')  {TabNumber++; }
-    if (KEY=='^')  {TabNumber=6; }
+    if (KEY=='<' || KEY==',')  {TabNumber--; if(TabNumber<0) TabNumber=0; if(Mark==3 || Mark==4 || Mark==7 || Mark==8) clearScreen();}
+    if (KEY=='>' || KEY=='.')  {TabNumber++; if(Mark==3 || Mark==4 || Mark==7 || Mark==8) clearScreen();}
+    if (KEY=='^')  {TabNumber=6; if(Mark==3 || Mark==4 || Mark==7 || Mark==8) clearScreen(); }
     if (KEY=='`')  {SoundFlag=false; cout<<"\rMuted";}
     if (KEY=='~')  {SoundFlag= true; cout<<"\r\aUnmuted";}
 
@@ -1317,7 +1317,7 @@ int main()
 
             int Level;
             bool DoubleSnake = false;
-            Multi_Tabs_1 cout<< "SPEED (1-9) :  ";
+            Multi_Tabs_1 cout<< "SPEED (1-8) :  ";
 
             while(true)
             {
@@ -1326,7 +1326,7 @@ int main()
                 {
                     KEY = _getch();      Manager();
 
-                    if    (KEY>='1' && KEY<='9') {Level= KEY-'0'; break;}
+                    if    (KEY>='1' && KEY<='8') {Level= KEY-'0'; break;}
                     if    (KEY=='x' || KEY==75)  goto Menu;
 
                 }
@@ -1471,7 +1471,7 @@ int main()
                             else if(KEY==77 || KEY=='6' || KEY=='d') // Right arrow
                                 Move='6';
 
-                            else if(KEY=='+' || KEY=='=') {Level++; if(Level==10) Level--;}
+                            else if(KEY=='+' || KEY=='=') {Level++; if(Level==9) Level--;}
                             else if(KEY=='-' || KEY=='_') {Level--; if(Level==0) Level++;}
 
                             else if(KEY=='0' || KEY=='5' || KEY==32 || KEY==13) getch();
@@ -1486,15 +1486,14 @@ int main()
 
 //                     delay = 450-50*Level; ///Speed  ///You can off it
 
-                     if(Level==1) delay=1000;
-                     if(Level==2) delay=500;
-                     if(Level==3) delay=300;
-                     if(Level==4) delay=200;
-                     if(Level==5) delay=100;
-                     if(Level==6) delay=50;
-                     if(Level==7) delay=25;
-                     if(Level==8) delay=10;
-                     if(Level==9) delay=0;
+                     if(Level==1) delay=500;
+                     if(Level==2) delay=300;
+                     if(Level==3) delay=200;
+                     if(Level==4) delay=100;
+                     if(Level==5) delay=50;
+                     if(Level==6) delay=25;
+                     if(Level==7) delay=10;
+                     if(Level==8) delay=0;
 
                     ///if(Move == '5' || Move == '0') continue; //no change
 
@@ -1547,14 +1546,14 @@ int main()
                     }
 
                     Tempo++;
-                    if(Tempo>20) {Bonus=0; BonusFlag=false;}
+                    if(Tempo>25) {Bonus=0; BonusFlag=false;}
 
 
                     if(Snake_Head == Bonus)         //Snake Fruit eat korar sathe sathe -
                     {
                                             //-Score barbe
                         Sound
-                        Point += (22-Tempo);
+                        Point += 2*(30-Tempo);
                         Bonus=0;
                         BonusFlag=false;
                         BonusCount++;
@@ -1814,7 +1813,7 @@ int main()
             cout << "#Instruction : Here Pacman's Target is Eat All Fruit in the Box and Save Himself from Ghost. Ghost is Always try to catch Pacman. If Ghost Catch Pacman then Pacman's Life will Decreased. Use Arrow KEYs for Moving. Pacman has 3 Life. If Pacman lost his all life then Game is over. If PacMan Eat all fruit in the Box then Level will be Completed.\n\n";
 
             int Level;
-            cout<< "SPEED (1-9) :  ";
+            cout<< "SPEED (1-8) :  ";
             while(true)
             {
                 this_thread::sleep_for(chrono::milliseconds(Time_Delay));
@@ -1822,7 +1821,7 @@ int main()
                 {
                     KEY = _getch();      Manager();
 
-                    if    (KEY>='1' && KEY<='9') {Level= KEY-'0'; break;}
+                    if    (KEY>='1' && KEY<='8') {Level= KEY-'0'; break;}
                     if    (KEY=='x' || KEY==75)  goto Menu;
 
                 }
@@ -1942,7 +1941,7 @@ int main()
 
                             else if(KEY=='0' || KEY=='5' || KEY==32 || KEY==13) getch();
 
-                            else if(KEY=='+' || KEY=='=') {Level++; if(Level==10) Level--;}
+                            else if(KEY=='+' || KEY=='=') {Level++; if(Level==9) Level--;}
                             else if(KEY=='-' || KEY=='_') {Level--; if(Level==0)  Level++;}
 
                             else if(KEY=='x'  )  break;
@@ -1950,15 +1949,14 @@ int main()
                             else {Manager(); continue;}
                     }
 
-                     if(Level==1) delay=1000;
-                     if(Level==2) delay=500;
-                     if(Level==3) delay=300;
-                     if(Level==4) delay=200;
-                     if(Level==5) delay=100;
-                     if(Level==6) delay=50;
-                     if(Level==7) delay=25;
-                     if(Level==8) delay=10;
-                     if(Level==9) delay=0;
+                     if(Level==1) delay=500;
+                     if(Level==2) delay=300;
+                     if(Level==3) delay=200;
+                     if(Level==4) delay=100;
+                     if(Level==5) delay=50;
+                     if(Level==6) delay=25;
+                     if(Level==7) delay=10;
+                     if(Level==8) delay=0;
 
                     for(i=0;i<Number_of_Enemy;i++)
                     {
