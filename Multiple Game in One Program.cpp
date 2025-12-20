@@ -555,7 +555,7 @@ int main()
 
             Multi_Tabs_3                                                printf("  Press X,                    to CLOSE  THE PROGRAM\n\n");
 
-            NewLine NewLine //NewLine Line
+            NewLine NewLine
 
 //            Multi_Tabs_1 printf("SWITCH CASE NUMBER");
 
@@ -565,6 +565,7 @@ int main()
 
     while(true)
     {
+        hideCursor();
 
         this_thread::sleep_for(chrono::milliseconds(Time_Delay));
         KeyHit_Cheak_Count++;   if (KEY=='!') cout<<"\r"<<KeyHit_Cheak_Count<<"                      ";
@@ -772,6 +773,7 @@ int main()
 
                         while(true)
                         {
+                            hideCursor();
                             this_thread::sleep_for(chrono::milliseconds(Time_Delay));
                             if (kbhit())           //Control by arrow KEY
                             {
@@ -1195,7 +1197,6 @@ int main()
                         cout << "Player-1 :   ";
 
                         Recall_Player1:
-
 
                             if (kbhit())           //Control by arrow KEY
                             {
