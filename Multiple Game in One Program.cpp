@@ -213,7 +213,7 @@ void clearScreen() {
 
 void Instruction()
 {
-    clearScreen();
+    system("cls");
 
     changeTextColour();  cout<<"Press < \' or ; Key >  :  to Change Text Colour     in Black BackGround\n";
     changeTextColour2(); cout<<"Press < \" or : Key >  :  to Change Text Colour     in White BackGround\n"; NewLine
@@ -322,9 +322,9 @@ void Manager()
         cout <<"\r[Flash Color B/W]";
     }
 
-    if (KEY=='<' || KEY==',')  {TabNumber--; if(TabNumber<0) TabNumber=0; if(Mark==3 || Mark==4 || Mark==7 || Mark==8) clearScreen();}
-    if (KEY=='>' || KEY=='.')  {TabNumber++; if(Mark==3 || Mark==4 || Mark==7 || Mark==8) clearScreen();}
-    if (KEY=='^')  {TabNumber=6; if(Mark==3 || Mark==4 || Mark==7 || Mark==8) clearScreen(); }
+    if (KEY=='<' || KEY==',')  {TabNumber--; if(TabNumber<0) TabNumber=0; if(Mark==3 || Mark==4 || Mark==7 || Mark==8) system("cls");}
+    if (KEY=='>' || KEY=='.')  {TabNumber++; if(Mark==3 || Mark==4 || Mark==7 || Mark==8) system("cls");}
+    if (KEY=='^')  {TabNumber=6; if(Mark==3 || Mark==4 || Mark==7 || Mark==8) system("cls"); }
     if (KEY=='`')  {SoundFlag=false; cout<<"\rMuted";}
     if (KEY=='~')  {SoundFlag= true; cout<<"\r\aUnmuted";}
 
@@ -358,7 +358,7 @@ char Dicission (char a)
     }
 
     NewLine NewLine NewLine
-    clearScreen();
+    system("cls");
     return a;
 }
 
@@ -388,7 +388,7 @@ char Dicission_TicTacToe (char a)
         }
     }
 
-    clearScreen();
+    system("cls");
     return a;
 }
 
@@ -429,7 +429,7 @@ char Dicission_cricket (char a)
         }
     }
 
-    clearScreen();
+    system("cls");
     return a;
 }
 
@@ -454,7 +454,7 @@ char Dicission_snake (char a)
     }
 
     NewLine NewLine NewLine
-    clearScreen();
+    system("cls");
     return a;
 }
 
@@ -483,7 +483,7 @@ char Dicission_Mini (char a)
     }
 
     NewLine NewLine NewLine
-    clearScreen();
+    system("cls");
     return a;
 }
 
@@ -528,13 +528,13 @@ int main()
             /* srand(time(NULL)); */
 
         Menu:
-            clearScreen(); //All Previous Print Erased
+            system("cls"); //All Previous Print Erased
             //SetConsoleColour(Black,BrightWhite);
 
             if(is_Premium) Marked_Symbol = char(2);
             else           Marked_Symbol = char(251);
 
-            Multi_Tabs_1 cout << char(32) << "   MULTIPLE GAMES  "<<char(32);     NewLine NewLine
+            Multi_Tabs_1 cout << char(32) << "    MULTIPLE GAMES  "<<char(32);     for(int i=0;i<3;i++) NewLine
 
             Multi_Tabs_3 if(Mark==1) cout<<Marked_Symbol; else cout<<char(32); printf(" Press 1,   to Play         TIC TAC TOE(Man vs Com)\n");
             Multi_Tabs_3 if(Mark==2) cout<<Marked_Symbol; else cout<<char(32); printf(" Press 2,   to Play         TIC TAC TOE(Man vs Man)\n\n");
@@ -615,7 +615,7 @@ int main()
 
         }
     }
-    clearScreen();
+    system("cls");
 
     switch (Mark){
 
@@ -654,7 +654,7 @@ int main()
 
             if(KEY=='x' || KEY == 75 || KEY==71 || KEY==79 ) goto Menu;
 
-            clearScreen();
+            system("cls");
 
             Multi_Tabs_4 cout << "\t       TIC TAC TOE   \n\n";
             Multi_Tabs_4 cout << "\t    [Man vs Computer]\n\n";
@@ -696,7 +696,7 @@ int main()
             who=KEY;
 
             if(KEY=='i' || KEY=='c')    goto TTT_re;
-            if(KEY=='k') {clearScreen(); continue;}
+            if(KEY=='k') {system("cls"); continue;}
             if(KEY=='m') who='t';
             if(KEY=='x') goto Menu;
 
@@ -711,7 +711,7 @@ int main()
             getch();
 
             TTT_re:
-            clearScreen();
+            system("cls");
 
             int i, Me= 0, Computer= 0, Time= 0, Win_I= 0, Win_Com= 0, Call, con=0;
             char  Index_Data[11]; //'who' uses for who play first & Index_Data[10] contains Data which Index fill up or Not
@@ -793,7 +793,7 @@ int main()
 
                     Index_Data[Me]= 1;//Index-tate Amar chal input holo
 
-                    clearScreen();
+                    system("cls");
                     goto Print_Loop_ttt_vsc;        //for printing update result
 
                     Come_Back_1:         //print kore punoray fire ase
@@ -1056,7 +1056,7 @@ int main()
 
 //                    Multi_Tabs_2 cout <<  "Computer Chose :\t" << Computer << endl << endl;  //Output Computer Choice
 
-                    clearScreen();
+                    system("cls");
 
                     goto Print_Loop_ttt_vsc;    //Print Update Result
                     Come_Back_2:                 //Come Back after printing
@@ -1144,7 +1144,7 @@ int main()
                 getch();
             }
 
-            clearScreen();
+            system("cls");
 
             for(i= 0; i<= 9; i++)
             {
@@ -1153,7 +1153,7 @@ int main()
 
             Print_Loop_ttt_vs_man:   //Print_Loop
 
-                clearScreen();
+                system("cls");
 
                 Index_Data[Player_1]= 1;
                 Index_Data[Player_2]= 2;
@@ -1337,7 +1337,7 @@ int main()
 
             while(1)
             {
-                clearScreen();
+                system("cls");
                 int Tempo=0;
                 bool Finish=false, is_Fruit_in_Blank_Space = true, BonusFlag=false;
                 int Fruit, Bonus=0, Score = 0,Point= 0,temp,Call,Change,i,FruitCount=0, BonusCount=0;
@@ -1866,7 +1866,7 @@ int main()
                 }
                                                  ///Pacman er initial possition
                 Temp=true;
-                clearScreen();
+                system("cls");
 
                 while(true)                                        ///Protibar Move korar por Program ekhane chole asbe
                 {
@@ -2349,7 +2349,7 @@ int main()
                 }
 
             sudko:
-                clearScreen();
+                system("cls");
                 Multi_Tabs_1 cout << "\tSUDOKU GAME\n\n\n";
                 cout<<"#Instruction: Here You should Fill Up All of the Blank Space Properly (According to Sudoku Rules).\n\n\To insert value in the Index, select row(1-9) & column(1-9) number of the Index, then input the value. You can't change the Given Value. If you fill up all the blank space properly, then the level will be completed & You get Congratulation. Otherwise Game will be Running. But if you want to close the program : Press 'x' \n\n\n";
                 Multi_Tabs_3 cout << "You should Fill Up All The Empty(Dot Sign) Index by Inserting Proper Value.\n\n";
@@ -2491,7 +2491,7 @@ int main()
                                 }
                             }
 
-                            clearScreen();
+                            system("cls");
                             you=toupper(KEY);
                             if(you==75) goto Menu;
                             else if(you!='H' && you!= 'T') break;
@@ -2625,7 +2625,7 @@ int main()
                             if(KEY==75) goto Menu;
 
                             you = toupper(KEY);
-                            clearScreen();
+                            system("cls");
 
                             if(you=='X' || you ==77) break;
 
@@ -2661,7 +2661,7 @@ int main()
                             else
                             {
                                 cout<<"Error! Give Correct Input\n\n";
-                                clearScreen();
+                                system("cls");
                                 break;
                             }
                         }
@@ -2760,7 +2760,7 @@ int main()
 
             }
 
-            clearScreen();
+            system("cls");
 
             Multi_Tabs_1 cout << "    CRICKET      \n\n";
             Multi_Tabs_1 cout << char(2) << " " << Team_1 << "  vs  " << Team_2 << " " << char(2) <<endl<<endl;
@@ -3038,14 +3038,13 @@ int main()
         NewLine
 
         getch();
-//        clearScreen();
+//        system("cls");
         Multi_Tabs_1 cout << " Jajakallahu Khairan.\n";
         Multi_Tabs_1 cout << "  See You Next Time.\n";
         getch();
-//        clearScreen();
+//        system("cls");
         cout<<"\n\nTotal KeyHit Cheak Time : "<<KeyHit_Cheak_Count;
         return 0;
     }
     goto Menu;
 }
-
