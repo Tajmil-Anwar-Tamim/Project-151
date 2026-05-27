@@ -29,7 +29,7 @@ using namespace std;
 int Marker=1; char Markered_Symbol;
 char KEY;
                                                                                                                                                                                                                                     string Coder_Name = "Coded by \'Tajmil Anwar Tamim\'";
-int Time_Delay=0;   //time Delay in every KEY-hit.
+int Time_Delay=1;   //time Delay in every KEY-hit.
 int KeyHit_Cheak_Count=0;
 
 int TabNumber=5,iGlobal;
@@ -212,7 +212,7 @@ void clearScreen() {
 void Instruction()
 {
     system("cls");
-    cout<<"COMMON INSTRUCTION :  ";
+    cout<<"COMMON INSTRUCTIONS :  \n";
 
     changeTextColour();  cout<<"Press < \' or ; Key >  :  to Change Text Colour     in Black BackGround\n";
     changeTextColour2(); cout<<"Press < \" or : Key >  :  to Change Text Colour     in White BackGround\n"; NewLine
@@ -257,8 +257,8 @@ void Snake_Instruction()
 
 void Manager()
 {
-    if(KEY=='+' || KEY=='=') {Time_Delay+=10; Sound if(Time_Delay>100) Time_Delay=100; }
-    if(KEY=='-' || KEY=='_') {Time_Delay-=10; Sound if(Time_Delay<0)   Time_Delay=0; }
+    if(KEY=='+' || KEY=='=') {Time_Delay++; Sound if(Time_Delay>100) Time_Delay=91; if(Time_Delay>10) Time_Delay+=9; }
+    if(KEY=='-' || KEY=='_') {Time_Delay--; Sound if(Time_Delay<0)   Time_Delay=0;  if(Time_Delay>10) Time_Delay-=9; }
 
     if (KEY=='p') is_Premium = true;
     if (KEY=='u') is_Premium = false;
@@ -367,6 +367,32 @@ char Dicission (char a)
     return a;
 }
 
+int  Snake_Area_Row = 15 , Snake_Area_Column = 20 ;
+char Dicission_in_Snake_Game  (char a)
+{
+    NewLine
+    Multi_Tabs_3 cout << "\tTo Play Again in Different Speed                 :  Press-  <Esc> \n";
+    Multi_Tabs_3 cout << "\tTo Play Again in    Same   Speed                 :  Press- <Space> \n";
+    Multi_Tabs_3 cout << "\tTo Goto Main Menu                                :  Press- <Home>\n";
+    while(true)
+    {
+        this_thread::sleep_for(chrono::milliseconds(Time_Delay));
+        if (kbhit())           //Control by arrow KEY
+        {
+            KEY = _getch();      Manager();
+
+            if    (KEY==' ' || KEY == 13 )                          {a= '2';   break;}
+            if    (KEY== 27 )                                       {a= '1';   break;}
+            if    (KEY=='x' || KEY=='X' || KEY==79 || KEY==71 )     {a= '0';   break;}
+
+        }
+    }
+
+    NewLine NewLine NewLine
+    system("cls");
+    return a;
+}
+
 char Dicission_TicTacToe (char a)
 {
     NewLine
@@ -438,32 +464,6 @@ char Dicission_cricket (char a)
     return a;
 }
 
-int  Snake_Area_Row = 15 , Snake_Area_Column = 20 ;
-char Dicission_in_Snake_Game  (char a)
-{
-    NewLine
-    Multi_Tabs_3 cout << "\tTo Play Again in Different Speed                 :  Press-  <Esc> \n";
-    Multi_Tabs_3 cout << "\tTo Play Again in    Same   Speed                 :  Press- <Space> \n";
-    Multi_Tabs_3 cout << "\tTo Goto Main Menu                                :  Press- <Home>\n";
-    while(true)
-    {
-        this_thread::sleep_for(chrono::milliseconds(Time_Delay));
-        if (kbhit())           //Control by arrow KEY
-        {
-            KEY = _getch();      Manager();
-
-            if    (KEY==' ' || KEY == 13 )                          {a= '2';   break;}
-            if    (KEY== 27 )                                       {a= '1';   break;}
-            if    (KEY=='x' || KEY=='X' || KEY==79 || KEY==71 )     {a= '0';   break;}
-
-        }
-    }
-
-    NewLine NewLine NewLine
-    system("cls");
-    return a;
-}
-
 char Dicission_in_Mini_Games  (char a)
 {
     NewLine
@@ -493,17 +493,16 @@ char Dicission_in_Mini_Games  (char a)
     return a;
 }
 
+int Snake_Fruit_position_Declaration_Function  (int Return_Fruit) //Decited Fruit possition in Snake Game
+{
+    Return_Fruit= 1 + rand() % ( Snake_Area_Row * Snake_Area_Column );
+    return Return_Fruit;
+}
+
 int Tic_Tac_Toe_Position_Genaration_Function (int Return_Tic_Tac_Toe_Random_Possition)                  //Decited Computer's Chose Index in Tic Tac Toe Game
 {
     Return_Tic_Tac_Toe_Random_Possition = 1 + rand() % 9;
     return Return_Tic_Tac_Toe_Random_Possition;
-}
-
-int Snake_Fruit_position_Declaration_Function  (int Return_Fruit) //Decited Fruit possition in Snake Game
-{
-    /* srand(time(NULL)); */
-    Return_Fruit= 1 + rand() % ( Snake_Area_Row * Snake_Area_Column );
-    return Return_Fruit;
 }
 
 Tic_Tac_Toe_Index_Instructior_Function()
@@ -599,11 +598,11 @@ int main()
             else if (KEY==']')  { changeBgColour2();  goto Menu;}
             else if (KEY=='{')  { ColorVar -=2; changeBgColour();   goto Menu;}
             else if (KEY=='[')  { ColorVar -=2; changeBgColour2();  goto Menu;}
-            //else if (KEY=='!') cout<<"\r"<<KeyHit_Cheak_Count<<"                          \t\t\t\t\t\t";
+            else if (KEY=='!') ;
             else if ( KEY==13 || KEY==77 || KEY==32)   break;
             //else if (KEY==75) {goto Menu;}
-            else if(KEY=='+' || KEY=='=') {Time_Delay+=10; if(Time_Delay<0) Time_Delay=0; if(Time_Delay>100) Time_Delay=100; cout<<"\rKeyHitDelay(ms): "<<Time_Delay<<"      ";}
-            else if(KEY=='-' || KEY=='_') {Time_Delay-=10; if(Time_Delay<0) Time_Delay=0; if(Time_Delay>100) Time_Delay=100; cout<<"\rKeyHitDelay(ms): "<<Time_Delay<<"      ";}
+            else if(KEY=='+' || KEY=='=') {Time_Delay++; if(Time_Delay>100) Time_Delay=91; if(Time_Delay>10) Time_Delay+=9; cout<<"\rPolling_Delay(ms): "<<Time_Delay<<"                          ";}
+            else if(KEY=='-' || KEY=='_') {Time_Delay--; if(Time_Delay<0  ) Time_Delay=0;  if(Time_Delay>10) Time_Delay-=9; cout<<"\rPolling_Delay(ms): "<<Time_Delay<<"                          ";}
             else if(KEY=='@' ){ cout<<"\r"<<Coder_Name;  }
             else if(KEY==8 || KEY==75 || KEY==71)   goto Menu;
 //            else if (KEY=='g' && is_Continuous_Change_Color==false) is_Continuous_Change_Color=true;
@@ -3124,16 +3123,16 @@ But if you want to close the program : Press <Capital 'X'> \n\n\n";
             Multi_Tabs_1  cout << " Program is Closed.\n\n";
             Multi_Tabs_2 cout << ""<<Coder_Name<<endl;
             Multi_Tabs_1  cout << " [ ALHAMDULILLAH ]\n";
-            NewLine Multi_Tabs_1 cout << "Spacial Thanks to \n"; Multi_Tabs_4 cout<<"\tSharif Ahmed "<<endl;
+            NewLine Multi_Tabs_1 cout << "Spacial Thanks to \n"; Multi_Tabs_4 cout<<"\t\t  Sharif Ahmed "<<endl;
             NewLine
 
             getch();
-    //        system("cls");
-            Multi_Tabs_1 cout << " Jajakallahu Khairan.\n";
-            Multi_Tabs_1 cout << "  See You Next Time.\n";
+//            system("cls");
+            Multi_Tabs_1 cout << "Jajakallahu Khairan\n";
+            Multi_Tabs_2 cout << "Meet with You Next Time InshaAllah\n";
             getch();
-    //        system("cls");
-            cout<<"\n\nTotal KeyHit Cheak Time : "<<KeyHit_Cheak_Count;
+//            system("cls");
+            cout<<"\n\nTotal Polling   : "<<KeyHit_Cheak_Count<<endl;
             return 0;
 
         default:
