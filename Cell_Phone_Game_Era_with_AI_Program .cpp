@@ -335,19 +335,21 @@ void Manager()
 
     if (KEY=='\\')
     {
+        ColorVar=0;
         SetConsoleColor(BrightWhite);
         cout <<"\r[Flash Color W/B]";
     }
 
     if (KEY=='|')
     {
+        ColorVar=0;
         SetConsoleColour(Black,BrightWhite);
         cout <<"\r[Flash Color B/W]";
     }
 
-    if (KEY=='<' || KEY==',')  {TabNumber--; if(TabNumber<0) TabNumber=0; if(Marker==3 || Marker==4 || Marker==7 || Marker==8) system("cls");}
-    if (KEY=='>' || KEY=='.')  {TabNumber++; if(Marker==3 || Marker==4 || Marker==7 || Marker==8) system("cls");}
-    if (KEY=='^')  {TabNumber=5; if(Marker==3 || Marker==4 || Marker==7 || Marker==8) system("cls"); }
+    if (KEY=='<' || KEY==',')  {TabNumber--; if(TabNumber<0) TabNumber=0; if(Marker==1 || Marker==2 ) system("cls");}
+    if (KEY=='>' || KEY=='.')  {TabNumber++;                              if(Marker==1 || Marker==2 ) system("cls");}
+    if (KEY=='^')  {TabNumber=5;                                          if(Marker==1 || Marker==2 ) system("cls"); }
     if (KEY=='`')  {SoundFlag=false; cout<<"\rMuted";}
     if (KEY=='~')  {SoundFlag= true; cout<<"\r\aUnmuted";}
 
@@ -563,10 +565,9 @@ void Show_Main_Menu()
     Multi_Tabs_3 if(Marker==7) cout<<Markered_Symbol; else cout<<char(32); printf(" Press 7,   to Enter                    CRICKET ERA\n");
     Multi_Tabs_3 if(Marker==8) cout<<Markered_Symbol; else cout<<char(32); printf(" Press 8,   to Enter                 Mini GAMES ERA\n\n");
 
-    Multi_Tabs_3                                           cout<<char(32); printf(" Press (' \" ] } ),       to Change Text & BG Colour\n");                //Instruction end
-    Multi_Tabs_3                                           cout<<char(32); printf(" Press ?,                to see    More Instruction\n\n");
-
-    Multi_Tabs_3                                           cout<<char(32); printf(" Press X,                     to CLOSE  THE PROGRAM\n\n");
+//    Multi_Tabs_3                                           cout<<char(32); printf(" Press (' \" ] } ),       to Change Text & BG Colour\n");                //Instruction end
+    Multi_Tabs_3                                           cout<<char(32); printf(" Press ?,                to See    More Instruction\n");
+    Multi_Tabs_3                                           cout<<char(32); printf(" Press X,                to CLOSE       THE PROGRAM\n\n");
 
     NewLine NewLine
 
@@ -609,8 +610,8 @@ int main()
             else if (KEY=='>' || KEY=='.' )  {TabNumber++; goto Menu;}
             else if (KEY=='^')  {TabNumber=6; goto Menu;}
 
-            else if (KEY=='\\'){SetConsoleColor(BrightWhite);         goto Menu;}
-            else if (KEY=='|') {SetConsoleColour(Black,BrightWhite);  goto Menu;}
+            else if (KEY=='\\'){ColorVar=0; SetConsoleColor(BrightWhite);         goto Menu;}
+            else if (KEY=='|') {ColorVar=0; SetConsoleColour(Black,BrightWhite);  goto Menu;}
 
             else if (KEY=='\'' )  { changeTextColour();   goto Menu;}
             else if (KEY==';' )   { ColorVar -=2; changeTextColour();   goto Menu;}
@@ -673,6 +674,7 @@ int main()
 
             while(true)
             {
+                hideCursor();
                 this_thread::sleep_for(chrono::milliseconds(Time_Delay));
 
                 if (kbhit())           //Control by arrow KEY
@@ -1169,6 +1171,7 @@ int main()
 
             while(true)
             {
+                hideCursor();
                 this_thread::sleep_for(chrono::milliseconds(Time_Delay));
 
                 if (kbhit())           //Control by arrow KEY
@@ -1501,6 +1504,8 @@ int main()
 
                 Print_Loop_Tic_Tac_Toe_Man_vs_Computer:             //Print_Update
 
+                    gotoxy(0,0);
+
                     Multi_Tabs_4 cout << "\t       TIC TAC TOE   \n\n";
                     Multi_Tabs_4 cout << "\t    [Man vs Computer]\n\n";
                     if      (Level== 1) {Multi_Tabs_1 cout << "EASY LEVEL\n"; }
@@ -1525,7 +1530,6 @@ int main()
 
                     for(i=1;i<=9;i++)  // Printing Loop
                     {
-                        /** changeTextColour(); */
                        cout<<" "<<Index_Symbol[i];
                        if (i==9) {NewLine Multi_Tabs_1 cout<<"   |   |   \n"; NewLine NewLine}
                        else if(i%3 == 0 ) { NewLine Multi_Tabs_1  cout <<"___|___|___\n"; Multi_Tabs_1  }
@@ -1542,29 +1546,25 @@ int main()
                 while(1)
                 {
                     You:
-                        Time++;                //kotota ghor fill up holo- seta count kora hocche
 
-                        ReCall_Me:
-
-                            while(true)
+                        while(true)
+                        {
+                            hideCursor();
+                            this_thread::sleep_for(chrono::milliseconds(Time_Delay));
+                            if (kbhit())           //Control by arrow KEY
                             {
-                                hideCursor();
-                                this_thread::sleep_for(chrono::milliseconds(Time_Delay));
-                                if (kbhit())           //Control by arrow KEY
-                                {
-                                    KEY = _getch();      Manager();
+                                KEY = _getch();
 
-                                    if    (KEY>='1' && KEY<='9') {Me= KEY-'0'; break;}
-                                    if    (KEY==71 || KEY==79)      goto Menu;
-                                }
+                                if         (KEY>='1' && KEY<='9') {Me= KEY-'0'; Time++; break;}
+                                else if    (KEY=='X' || KEY==79)  {goto Menu;}
+                                else                              {Manager(); system("cls"); goto Print_Loop_Tic_Tac_Toe_Man_vs_Computer;}
                             }
+                        }
 
-                            if(Index_Data[Me]  !=  0)                       //jodi ghor-tite already chal dewa hoye thake
-                            { goto ReCall_Me; }                             //tobe accept hobe na, punoray chal dewa lagbe
+                        if(Index_Data[Me]  !=  0)   {Time--; goto You; }       //jodi ghor-tite already chal dewa hoye thake --> tobe accept hobe na, punoray chal dewa lagbe
 
-                        Index_Data[Me]= 1;//Index-tate Amar chal input holo
+                        Index_Data[Me]= 1; //Index-tate Amar chal input holo
 
-                        system("cls");
                         goto Print_Loop_Tic_Tac_Toe_Man_vs_Computer;        //for printing update result
 
                         Come_Back_1:         //print kore punoray fire ase
@@ -1821,9 +1821,6 @@ int main()
                         if (Index_Data[Computer]==0) Index_Data[Computer]= 2; //Input of Computer (computer er chal dewa)
                         else                         {Time--; goto Com;}      // jodi Computer kono Filled ghore chal dey tahole chal hobe na & Computer abar chalbe
 
-
-                        system("cls");
-
                         goto Print_Loop_Tic_Tac_Toe_Man_vs_Computer;    //Print Update Result
                         Come_Back_2:                 //Come Back after printing
 
@@ -1916,7 +1913,8 @@ int main()
 
                 Print_Loop_Tic_Tac_Toe_Man_vs_Man :   //Print_Loop
 
-                    system("cls");
+                    //system("cls");
+                    gotoxy(0,0);
 
                     Index_Data[Player_1]= 1;
                     Index_Data[Player_2]= 2;
@@ -1938,53 +1936,50 @@ int main()
 
                     for(i=1;i<=9;i++)
                     {
-                        /** changeTextColour(); */
                        cout<<" "<<Index_Symbol[i];
-                       if (i==9) {NewLine Multi_Tabs_1 cout<<"   |   |   \n"; NewLine NewLine}
-                       else if(i%3 == 0 ) { NewLine Multi_Tabs_1  cout <<"___|___|___\n"; Multi_Tabs_1  }
+                       if     (i   == 9 ) {NewLine Multi_Tabs_1  cout <<"   |   |   \n"; NewLine NewLine}
+                       else if(i%3 == 0 ) {NewLine Multi_Tabs_1  cout <<"___|___|___\n"; Multi_Tabs_1      }
                        else   cout<<" |";
                     }
 
                     NewLine NewLine
 
-                    if(Time== 0 && who== 2) goto Player2;
+                    hideCursor();
+
+                    if(Time== 0 && who== 2) {Multi_Tabs_2 cout << "  Now Player-2 's Turn   "; goto Player_2_TicTacToe;}
                     if(Time== 0) ;
                     else if(Time%2== 1 && who== 2 || Time%2== 0 && who != 2) goto Back_2;
                     else goto Back_1;
 
                     while(1)
                     {
-                        Player1:
 
-                            Time++;
-                            cout << "Player-1 :   ";
+                        Multi_Tabs_2 cout << "  Now Player-1 's Turn   ";
 
-                            Recall_Player1:
+                        Player_1_TicTacToe:
 
-                                if (kbhit())           //Control by arrow KEY
-                                {
-                                    this_thread::sleep_for(chrono::milliseconds(Time_Delay));
+                            if (kbhit())           //Control by arrow KEY
+                            {
+                                this_thread::sleep_for(chrono::milliseconds(Time_Delay));
 
-                                    KEY = _getch();      Manager();
+                                KEY = _getch();
 
-                                    if      (KEY>='1' && KEY<='9') Player_1 = KEY-'0';
-                                    else if (KEY==71 || KEY==79) goto Menu;
-                                    else goto Recall_Player1;
+                                if      (KEY>='1' && KEY<='9') {Player_1 = KEY-'0'; Time++;}
+                                else if (KEY=='X' || KEY==79 )  goto Menu;
+                                else                           { Manager(); system("cls"); goto Print_Loop_Tic_Tac_Toe_Man_vs_Man ;}
 
-                                }
+                            }
 
-                                else goto Recall_Player1;
+                            else goto Player_1_TicTacToe;
 
-                                if(Index_Data[Player_1] != 0)
-                                {
-    //                                NewLine cout << "Already Exist\n\n";
-                                    goto Recall_Player1;
-                                }
-
-
+                            if(Index_Data[Player_1] != 0)
+                            {
+//                                NewLine cout << "Already Exist\n\n";
+                                Time--;
+                                goto Player_1_TicTacToe;
+                            }
 
                             Index_Data[Player_1]= 1;
-
 
                             goto Print_Loop_Tic_Tac_Toe_Man_vs_Man ;
 
@@ -1997,29 +1992,29 @@ int main()
                                 }
                             if(Time== 9) break;
 
-                        Player2:
-                            Time++;
-                            cout << "Player-2 :   ";
-                            Recall_Player2://
 
-                                if (kbhit())           //Control by arrow KEY
-                                {
-                                    this_thread::sleep_for(chrono::milliseconds(Time_Delay));
-                                    KEY = _getch();      Manager();
+                        Multi_Tabs_2 cout << "  Now Player-2 's Turn   ";
+                        Player_2_TicTacToe://
 
-                                    if      (KEY>='1' && KEY<='9') Player_2 = KEY-'0';
-                                    else if    (KEY==71 || KEY==79) goto Menu;
-                                    else goto Recall_Player2;
+                            if (kbhit())           //Control by arrow KEY
+                            {
+                                this_thread::sleep_for(chrono::milliseconds(Time_Delay));
+                                KEY = _getch();      Manager();
 
-                                }
+                                if      (KEY>='1' && KEY<='9') {Player_2 = KEY-'0'; Time++;}
+                                else if (KEY=='X' || KEY==79 )  goto Menu;
+                                else                           { Manager(); system("cls"); goto Print_Loop_Tic_Tac_Toe_Man_vs_Man ;}
 
-                                else goto Recall_Player2;
+                            }
 
-                                if(Index_Data[Player_2] != 0)
-                                {
-    //                                    NewLine cout << "Already Exist\n\n";
-                                        goto Recall_Player2;
-                                }
+                            else goto Player_2_TicTacToe;
+
+                            if(Index_Data[Player_2] != 0)
+                            {
+//                                    NewLine cout << "Already Exist\n\n";
+                                    Time--;
+                                    goto Player_2_TicTacToe;
+                            }
 
                             Index_Data[Player_1]= 2;
 
@@ -2400,6 +2395,7 @@ int main()
                     cout<<"\r";
 
                     Multi_Tabs_1 cout << "Enter Value of Markered Index";
+                    hideCursor();
 
 
                     while(true)
@@ -2647,6 +2643,7 @@ But if you want to close the program : Press <Capital 'X'> \n\n\n";
                 getch(); Multi_Tabs_1 cout << "  Further Congratulation!\n"; // 3 time Congratulation (not so necessary)
                 getch(); Multi_Tabs_1; cout<<"Many Many Congratulatipon!\n";
                 Multi_Tabs_1 cout << "       Thank You!\n";
+
 
                 Again = Dicission (Kall);
                 if(Again!= '1') goto Menu;
@@ -3025,6 +3022,7 @@ But if you want to close the program : Press <Capital 'X'> \n\n\n";
 
                             Multi_Tabs_1  cout<<"  Shooting Game\n\n";
 
+
                             Multi_Tabs_3 cout<<"Diffculty (Enter a Little Positive Intizer Number)  =  ";
                             cin>>Diffc ;
                             if(Diffc <0) goto Menu;
@@ -3037,9 +3035,11 @@ But if you want to close the program : Press <Capital 'X'> \n\n\n";
                             Multi_Tabs_3 cout<<"TARGATED ENEMY TO KILL                            =  "<<Enimi<<endl;
 
                             cout<<"\nEverytime Press Any KEY for shooting Bullet: \n\n";
-                          
+
+
                             for(int i=1;i<=Bulet;i++)
                             {
+                                /* srand(time(NULL)); */
                                 Temp++;
                                 getch();
                                 Shoot = rand() *3/2 + Temp;
@@ -3103,6 +3103,8 @@ But if you want to close the program : Press <Capital 'X'> \n\n\n";
                                 if(you==75) goto Menu;
                                 else if(you!='H' && you!= 'T') break;
 
+                                /* srand(time(NULL)); */
+
                                 n=rand()%2;
                                 if(n==0) com='T';
                                 else     com='H';
@@ -3111,7 +3113,9 @@ But if you want to close the program : Press <Capital 'X'> \n\n\n";
                                 Multi_Tabs_4 cout<<"\tPress 'H' to chose Head\n";
                                 Multi_Tabs_4 cout<<"\tPress 'T' to chose Tail\n";
                                 Multi_Tabs_4 cout<<"\tPress 'x' to Close the game\n\n";
-                              
+
+
+
                                 NewLine
                                 cout<<"  You chose       : "<<you ; NewLine
                                 cout<<"& Computer chose  : "<<com<<"\n\n";
@@ -3119,6 +3123,7 @@ But if you want to close the program : Press <Capital 'X'> \n\n\n";
                                 Sound NewLine NewLine Multi_Tabs_1
                                 if(you==com) { cout<<"  Winner\n\n"; win++;}
                                 else         { cout<<"   Loser \n\n";                           lost++;}
+
                             }
                             Multi_Tabs_1 cout<<"   Toss Game\n\n";
 
