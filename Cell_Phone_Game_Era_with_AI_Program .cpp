@@ -2,7 +2,7 @@
 #include <windows.h>
 #include <conio.h>                     //for getch() & kbhit condition;
 
-// Tabs:
+/// Tabs & Carriage_Return
 #define tab cout<<"\t";
 #define tabs for (iGlobal=0;iGlobal<TabNumber;iGlobal++) tab
 #define Multi_Tabs_1  tabs tab tab    //Likhagulo Middle Show korar jonno
@@ -11,9 +11,9 @@
 #define Multi_Tabs_4 tabs
 #define Carriage cout<<"\r";
 
-//New-Line & Sound
+///New-Line & Sound
 #define NewLine cout << "\n";
-#define Sound if(SoundFlag == true) cout << "\a";                 // Sound
+#define Sound if(SoundFlag == true) cout << "\a";
 //#define Auto_Change_Text_Color if (is_Continuous_Change_Color) changeTextColour();
 
 #define Border_Sign          if(Snake_Marker==1 || Snake_Marker==2 || Snake_Marker==5 || Snake_Marker==6) cout<<". ";                             else cout<<char(219);
@@ -64,50 +64,6 @@ void SetConsoleColor(ConsoleColor color) {
 
 void SetConsoleColour(ConsoleColor textColor, ConsoleColor bgColor) {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (bgColor << 4) | textColor);
-}
-
-int rd1=0, rd2=0, rd3=0;
-
-void DisplayAdvise()
-{
-    rd1 = 1 + rd1 % 4;
-
-    if(rd1==1) cout<<"\r"<<"BE OBIDIENT TO ALLAH (SUBH.)        ";
-    if(rd1==2) cout<<"\r"<<"FOLLOW PROPHET MUHAMMAD (SM.)       ";
-    if(rd1==3) cout<<"\r"<<"READ QURAN                          ";
-    if(rd1==4) cout<<"\r"<<"FOLLOW SUNNAH, NOT WESTERN          ";
-
-    if(TabNumber<4) cout<<"                    ";
-
-}
-
-void DisplayWorld()
-{
-    rd3 = 1 + rd3 % 2;
-
-    if(rd3==1) cout<<"\r"<<"Never Forget Filistin          ";
-    if(rd3==2) cout<<"\r"<<"They Oppressed Heavily         ";
-    if(rd3==3) cout<<"\r"<<"Stand with Them                ";
-
-    if(TabNumber<4) cout<<"                    ";
-
-}
-
-void DisplayWorldView()
-{
-    rd2 = 1 + rd2 % 9;
-
-    if(rd2==1) cout<<"\r"<<"Pray For Arakan                ";
-    if(rd2==2) cout<<"\r"<<"Pray For Kashmir               ";
-    if(rd2==3) cout<<"\r"<<"Pray For Uighur                ";
-    if(rd2==4) cout<<"\r"<<"Pray For Gaza                 ";
-    if(rd2==5) cout<<"\r"<<"Pray For Yemen                 ";
-    if(rd2==7) cout<<"\r"<<"Pray For Africa                ";
-    if(rd2==6) cout<<"\r"<<"Pray For Baytul Mukaddis       ";
-    if(rd2==8) cout<<"\r"<<"Pray For Whole_Oppressed_Ummah ";
-    if(rd2==9) cout<<"\r"<<"Never Forget Them              ";
-
-//    if(TabNumber<4) cout<<"                    ";
 }
 
 
@@ -208,6 +164,51 @@ void clearScreen() {
     SetConsoleCursorPosition(console, topLeft);
 }
 
+int rd1=0, rd2=0, rd3=0;
+
+void DisplayAdvise()
+{
+    rd1 = 1 + rd1 % 4;
+
+    if(rd1==1) cout<<"\r"<<"BE OBIDIENT TO ALLAH (SUBH.)        ";
+    if(rd1==2) cout<<"\r"<<"FOLLOW PROPHET MUHAMMAD (SM.)       ";
+    if(rd1==3) cout<<"\r"<<"READ QURAN                          ";
+    if(rd1==4) cout<<"\r"<<"FOLLOW SUNNAH, NOT WESTERN          ";
+
+    if(TabNumber<4) cout<<"                    ";
+
+}
+
+void DisplayWorld()
+{
+    rd3 = 1 + rd3 % 3;
+
+    if(rd3==1) cout<<"\r"<<"Never Forget Filistin          ";
+    if(rd3==2) cout<<"\r"<<"They Oppressed Heavily         ";
+    if(rd3==3) cout<<"\r"<<"Stand with Them                ";
+
+    if(TabNumber<4) cout<<"                    ";
+
+}
+
+void DisplayWorldView()
+{
+    rd2 = 1 + rd2 % 9;
+
+    if(rd2==1) cout<<"\r"<<"Pray For Arakan                ";
+    if(rd2==2) cout<<"\r"<<"Pray For Kashmir               ";
+    if(rd2==3) cout<<"\r"<<"Pray For Uighur                ";
+    if(rd2==4) cout<<"\r"<<"Pray For Gaza                 ";
+    if(rd2==5) cout<<"\r"<<"Pray For Yemen                 ";
+    if(rd2==7) cout<<"\r"<<"Pray For Africa                ";
+    if(rd2==6) cout<<"\r"<<"Pray For Baytul Mukaddis       ";
+    if(rd2==8) cout<<"\r"<<"Pray For Whole_Oppressed_Ummah ";
+    if(rd2==9) cout<<"\r"<<"Never Forget Them              ";
+
+    if(TabNumber<4) cout<<"                    ";
+}
+
+
 void Instruction()
 {
     system("cls");
@@ -250,7 +251,25 @@ void Instruction()
 
 void Snake_Instruction()
 {
-    cout<<"\n\nSNAKE-GAME INSTRUCTION :  Here your target is Eat more Fruit to Increase Score. The Snake's Size is increasing according to eat Fruit. You should Control the Snake by using Arrow KEY. Select Snake Game Type & Select Level Then Play the Game. You can customize Snake Area Size.\n\n";
+//    SetConsoleColour (Black,BrightWhite);
+
+    cout<<"\n\nSNAKE-GAME INSTRUCTION :\n Here your target is Eat more Fruit to Increase Score. The Snake's Size is increasing according to eat Fruit. You should Control the Snake by using Arrow KEY.\
+Select Snake Game Type & Select Level Then Play the Game. You can customize Snake Area Size. You can Also Change Snake Style & Color. You can Also see the Playing of AI.\n\nIn Playing Time : \n";
+
+     Multi_Tabs_1 cout<<"To Move Snake         -> Press <      Arrow_Keys    >"<<endl;
+     Multi_Tabs_1 cout<<"To Pause              -> Press <      Space Key     >"<<endl;
+     Multi_Tabs_1 cout<<"To Change Snake Style -> Press < Small p/u/i/o Keys >"<<endl;
+     Multi_Tabs_1 cout<<"To Shift PlayGround   -> Press < Angle Bracket Keys >"<<endl;
+     Multi_Tabs_1 cout<<"To Change Color       -> Press <    []{}'\";:  Keys >"<<endl;
+     Multi_Tabs_1 cout<<"Any Graphical Problem -> Press <      Enter-Key     >"<<endl;
+     Multi_Tabs_1 cout<<"To Quit the Game      -> Press <       End Key      >\n"<<endl;
+     Multi_Tabs_1 cout<<"Now to Back the Game  -> Press     Space/Enter Key   \n"<<endl;
+
+//     changeTextColour(); changeTextColour2();
+//     changeBgColour();   changeBgColour2();
+
+     getch(); system("cls");
+
 }
 
 
@@ -504,7 +523,7 @@ int Tic_Tac_Toe_Position_Genaration_Function (int Return_Tic_Tac_Toe_Random_Poss
     return Return_Tic_Tac_Toe_Random_Possition;
 }
 
-Tic_Tac_Toe_Index_Instructior_Function()
+void Tic_Tac_Toe_Index_Instructior_Function()
 {
     NewLine
     Multi_Tabs_1   NewLine
@@ -524,8 +543,8 @@ Tic_Tac_Toe_Index_Instructior_Function()
 void Show_Main_Menu()
 {
     hideCursor();  // cursor lukano
-    system("cls"); //All Previous Print Erased
-    //SetConsoleColour(Black,BrightWhite);
+    if(KEY!=80 && KEY!=72) system("cls"); //All Previous Print Erased
+    else                   gotoxy(0,0);
 
     if(is_Premium) Markered_Symbol = char(2);
     else           Markered_Symbol = char(251);
@@ -571,23 +590,28 @@ int main()
         if (kbhit())           //Control by arrow KEY
         {
             KEY = _getch();
-//            /** changeTextColour(); */
 
             if      (KEY>='0' && KEY<='9') {Marker= KEY-'0'; break;}
             else if (KEY=='x' || KEY=='X' || KEY==79 ) {Marker=100; break;}
+
             else if (KEY==80 ) { Marker++; if(Marker>8) Marker=1; goto Menu; }
             else if (KEY==72 ) { Marker--; if(Marker<1) Marker=8; goto Menu; }
-//            else if (KEY=='a' || KEY=='A') {Marker= KEY-55; break;}
+
             else if (KEY=='p') {is_Premium = true;  goto Menu;}
             else if (KEY=='u') {is_Premium = false; goto Menu; }
+
             else if (KEY=='?' || KEY=='/' ) {Instruction(); continue;}
+
             else if (KEY=='`')  {SoundFlag=false; cout<<"\rMuted";}
             else if (KEY=='~')  {SoundFlag= true; cout<<"\r\aUnmuted"; }
+
             else if (KEY=='<' || KEY==',' )  {TabNumber--; if(TabNumber<0) TabNumber=0; goto Menu;}
             else if (KEY=='>' || KEY=='.' )  {TabNumber++; goto Menu;}
             else if (KEY=='^')  {TabNumber=6; goto Menu;}
+
             else if (KEY=='\\'){SetConsoleColor(BrightWhite);         goto Menu;}
             else if (KEY=='|') {SetConsoleColour(Black,BrightWhite);  goto Menu;}
+
             else if (KEY=='\'' )  { changeTextColour();   goto Menu;}
             else if (KEY==';' )   { ColorVar -=2; changeTextColour();   goto Menu;}
             else if (KEY=='"' )   { changeTextColour2();  goto Menu;}
@@ -597,18 +621,23 @@ int main()
             else if (KEY==']')  { changeBgColour2();  goto Menu;}
             else if (KEY=='{')  { ColorVar -=2; changeBgColour();   goto Menu;}
             else if (KEY=='[')  { ColorVar -=2; changeBgColour2();  goto Menu;}
+
             else if (KEY=='!') ;
+            else if(KEY=='@' ){ cout<<"\r"<<Coder_Name;  }
+
+            else if(KEY==8 || KEY==75 || KEY==71)   goto Menu;
             else if ( KEY==13 || KEY==77 || KEY==32)   break;
-            //else if (KEY==75) {goto Menu;}
+
             else if(KEY=='+' || KEY=='=') {Time_Delay++; if(Time_Delay>100) Time_Delay=91; if(Time_Delay>10) Time_Delay+=9; cout<<"\rPolling_Delay(ms): "<<Time_Delay<<"                          ";}
             else if(KEY=='-' || KEY=='_') {Time_Delay--; if(Time_Delay<0  ) Time_Delay=0;  if(Time_Delay>10) Time_Delay-=9; cout<<"\rPolling_Delay(ms): "<<Time_Delay<<"                          ";}
-            else if(KEY=='@' ){ cout<<"\r"<<Coder_Name;  }
-            else if(KEY==8 || KEY==75 || KEY==71)   goto Menu;
+
 //            else if (KEY=='g' && is_Continuous_Change_Color==false) is_Continuous_Change_Color=true;
 //            else if (KEY=='g' && is_Continuous_Change_Color==true) is_Continuous_Change_Color= false;
+
             else if(KEY>=65 && KEY <=90            )   DisplayWorld();
             else if(KEY>=97 && KEY <=122           )   DisplayWorldView();
             else if(KEY>=32 && KEY <=126 && KEY!=75)   DisplayAdvise();
+
             else ;
 
         }
@@ -626,16 +655,20 @@ int main()
             int Snake_Marker;
 
             Multi_Tabs_2 printf("            WELCOME TO SNAKE ERA\n\n");
+
             Multi_Tabs_2 printf(" Press 1,   to Play              CLASSIC_SNAKE_GAME\n");
             Multi_Tabs_2 printf(" Press 2,   to Play     CLASSIC_SNAKE_GAME (NO_BITE)\n");
             Multi_Tabs_2 printf(" Press 3,   to Play                  BOX_SNAKE_GAME\n");
             Multi_Tabs_2 printf(" Press 4,   to Play    BOX_SNAKE_GAME (NO_SELF-BITE)\n\n");
+
             Multi_Tabs_2 printf(" Press 5,   to see            AI CLASSIC_SNAKE_GAME\n");
             Multi_Tabs_2 printf(" Press 6,   to see   AI CLASSIC_SNAKE_GAME (NO_BITE)\n");
             Multi_Tabs_2 printf(" Press 7,   to see                AI BOX_SNAKE_GAME\n");
             Multi_Tabs_2 printf(" Press 8,   to see  AI BOX_SNAKE_GAME (NO_SELF-BITE)\n\n");
+
             Multi_Tabs_2 printf(" Press 9,   to                  Customize Snake Area\n");
             Multi_Tabs_2 printf(" Press 0,   to                      see Instructions\n\n");
+
             Multi_Tabs_2 printf(" Press x,   to                       Go to Main Menu\n");
 
             while(true)
@@ -659,11 +692,11 @@ int main()
                         system("cls"); Multi_Tabs_1 printf("     WELCOME TO SNAKE ERA\n\n");
 
                         Multi_Tabs_1 cout<<"Snake_Game_Settings\n\n";
-                        cout<<"Enter Area Height (Enter a Intiger Number from 1 to 25) \t:\t ";
-                        cin>> Snake_Area_Row; if(Snake_Area_Row<1) Snake_Area_Row=1;  if(Snake_Area_Row>25) Snake_Area_Row=25;
+                        cout<<"Enter Area Height (Enter a Intiger Number from 1 to 20) \t:\t ";
+                        cin>> Snake_Area_Row; if(Snake_Area_Row<1) Snake_Area_Row=1;  if(Snake_Area_Row>20) Snake_Area_Row=20;
 
-                        cout<<"Enter Area Weight (Enter a Intiger Number from 4 to 50) \t:\t ";
-                        cin>> Snake_Area_Column; if(Snake_Area_Column<4) Snake_Area_Column=4;  if(Snake_Area_Column>50) Snake_Area_Column=50;
+                        cout<<"Enter Area Weight (Enter a Intiger Number from 4 to 40) \t:\t ";
+                        cin>> Snake_Area_Column; if(Snake_Area_Column<4) Snake_Area_Column=4;  if(Snake_Area_Column>40) Snake_Area_Column=40;
 
                         goto Snake_Menu;
                     }
@@ -672,7 +705,7 @@ int main()
                     {
                              Instruction();
                              Snake_Instruction();
-                             getch(); goto Snake_Menu;
+                             goto Snake_Menu;
                     }
 
                 }
@@ -710,6 +743,11 @@ int main()
                     You should use Arrow KEYs to control the Snake.\n\n";
                 }
 
+                if(Snake_Marker==5) {Multi_Tabs_1 cout << "     AI SNAKE GAME [CLASSIC]\n\n";}
+                if(Snake_Marker==6) {Multi_Tabs_1 cout << "  AI SNAKE GAME [CLASSIC-NO-END]\n\n";}
+                if(Snake_Marker==7) {Multi_Tabs_1 cout << "       AI SNAKE GAME [BOX]\n\n";}
+                if(Snake_Marker==8) {Multi_Tabs_1 cout << "  AI SNAKE GAME [BOX-N0-SELF-BITE]\n\n";}
+
                 int Level;
                 bool DoubleSnake = false;
                 Multi_Tabs_1 cout<< "SPEED (1-8) :  ";
@@ -728,20 +766,18 @@ int main()
                 }
 
                 int Delay = 0;
-    //            Delay = 450-50*Level; //Speed
 
                 while(1)
                 {
                     system("cls");
-                    int Bonus_Life_Var=0;
+
                     bool Finish=false, Is_Completed=false, is_Fruit_in_Blank_Space = true, BonusFlag=false;
-                    int Fruit, Bonus=Snake_Area_Row * Snake_Area_Column, Score = 0,Point= 0,Fruit_Blink_Var,Call,Change,i,FruitCount=0, BonusCount=0;
+                    int Fruit, Bonus=Snake_Area_Row * Snake_Area_Column, Score = 0,Point= 0, Call=0,Change=0,i,FruitCount=0, BonusCount=0, Step = 0, Bonus_Life_Var=0;
                     int Snake_Head= ( Snake_Area_Row /2)* Snake_Area_Column  +  Snake_Area_Column /2; //0-based: 0 to row*col-1
                     int Snake_Body[ Snake_Area_Row * Snake_Area_Column +5];
                     fill(Snake_Body, Snake_Body + Snake_Area_Row * Snake_Area_Column + 5, Snake_Area_Row * Snake_Area_Column); //sentinel = row*col (display range er baire)
                     char Move='6';
                     char PlayGround[ Snake_Area_Row * Snake_Area_Column +6]; //0-99,NULL+Primary body Size(4)+Extra some for avoid silly risk
-                    Fruit_Blink_Var++;
 
                     Fruit  =  Snake_Fruit_position_Declaration_Function (Call);
 
@@ -799,10 +835,10 @@ int main()
                             PlayGround [i] = ' ' ;
                         }
 
-                        if(is_Premium)PlayGround [Bonus] = Fruit_Blink_Var%2+5;
-                        else          PlayGround [Bonus] = '$' - Fruit_Blink_Var%2;
+                        if(is_Premium)PlayGround [Bonus] = Step%2+5;
+                        else          PlayGround [Bonus] = '$' - Step%2;
 
-                        PlayGround [Fruit] = Fruit_Blink_Var%2+42; //Fruit Symbol (*,+)
+                        PlayGround [Fruit] = Step%2+42; //Fruit Symbol (*,+)
 
                         for(i = Score+3; i>0; i--)
                         {
@@ -850,14 +886,17 @@ int main()
                                              Multi_Tabs_1 cout<<"         ";    show_Point
                                              Multi_Tabs_1 cout<<"           Fruit Count : "<<FruitCount<<endl;
                                              Multi_Tabs_1 cout<<"           Bonus Count : "<<BonusCount<<endl;
+                                             Multi_Tabs_1 cout<<"           Step        : "<<Step      <<endl;
+                                             NewLine
+                                             Multi_Tabs_1 cout<<"   To See Instructions : Press Slash Key "<<endl;
+
 
                         this_thread::sleep_for(chrono::milliseconds(Delay));    //Time Delay for Update Printing
 
                         if(Finish || Is_Completed)  break;//snake nijeke bite korle game over
-                        if(Snake_Marker==3 || Snake_Marker==4 || Snake_Marker==7 || Snake_Marker==8) if(Snake_Head >= Snake_Area_Row * Snake_Area_Column  || Snake_Head< 0 || Finish ) break;
+                        if(Snake_Marker==3 || Snake_Marker==4 || Snake_Marker==7 || Snake_Marker==8) if(Snake_Head >= Snake_Area_Row * Snake_Area_Column  || Snake_Head< 0 ) break;
 
-                        Fruit_Blink_Var++; Change = 0;
-
+                        Step++;
 
                         if (kbhit())           //Control by arrow KEY
                         {
@@ -880,6 +919,8 @@ int main()
 
                                 else if(KEY=='0' || KEY=='5' || KEY==32 )   getch();
                                 else if(KEY==13  || KEY==8              )   system("cls");
+
+                                else if(KEY=='/' || KEY=='?') {system("cls"); Instruction(); Snake_Instruction(); system("cls"); }
 
                                 else if(KEY=='x'  )  break;
 
@@ -904,7 +945,7 @@ int main()
                             int down_pos  = (Snake_Head + Snake_Area_Column) % total;
                             int up_pos    = (Snake_Head - Snake_Area_Column + total) % total;
 
-                            for(i = 3+Score; i>0; i--)
+                            for(i = 2+Score; i>0; i--)
                             {
                                 if(right_pos == Snake_Body[i]) cp=false;
                                 if(left_pos  == Snake_Body[i]) cm=false;
@@ -968,7 +1009,7 @@ int main()
                             bool rp,rm,cp,cm;
                             rp=rm=cp=cm=true;
 
-                            for(i = 3+Score; i>0; i--)
+                            for(i = 2+Score; i>0; i--)
                             {
                                 if(Snake_Head+1 == Snake_Body[i]) cp=false;
                                 if(Snake_Head-1 == Snake_Body[i]) cm=false;
@@ -1042,8 +1083,8 @@ int main()
 
                         if(Snake_Marker==3 || Snake_Marker==4 || Snake_Marker==7 || Snake_Marker==8)
                         {
-                            if(Move== '6') {Snake_Head++;      if(Snake_Head% Snake_Area_Column == 0)  { Snake_Head= -1; continue; }}      //Box e touch lagle Game over
-                            if(Move== '4') {Snake_Head--;      if(Snake_Head < 0 || Snake_Head% Snake_Area_Column == Snake_Area_Column-1)  { Snake_Head= -1; continue; }}      // " " "
+                            if(Move== '6') {Snake_Head++;      if(Snake_Head% Snake_Area_Column == 0)                        { Snake_Head= -1; continue; }}      //Box e touch lagle Game over
+                            if(Move== '4') {Snake_Head--;      if(Snake_Head < 0 || (Snake_Head+1)% Snake_Area_Column == 0)  { Snake_Head= -1; continue; }}      // " " "
                             if(Move== '8') {Snake_Head -=  Snake_Area_Column ;    }
                             if(Move== '2') {Snake_Head +=  Snake_Area_Column ;    }
 
@@ -1067,7 +1108,7 @@ int main()
                             Fruit =  Snake_Fruit_position_Declaration_Function (Call);     // -fruit er possition change hobe
                         }
 
-                        Bonus_Life_Var++;
+                        if(BonusFlag)   Bonus_Life_Var++;
                         if(Bonus_Life_Var>5+ Snake_Area_Row + Snake_Area_Column ) {Bonus=Snake_Area_Row * Snake_Area_Column; BonusFlag=false;}
 
                         if(Snake_Head == Bonus)         //Snake Bonus eat korar sathe sathe -
@@ -1093,7 +1134,7 @@ int main()
                         else            { NewLine NewLine Multi_Tabs_1  cout << "       TOUCH BORDER!";}
                     }
 
-                    if (!Is_Completed) {NewLine Multi_Tabs_1 cout<<"\tGame Over!"<<endl;  NewLine}
+                    if (!Is_Completed) {NewLine Multi_Tabs_1 cout<<"\t    Game Over!"<<endl;  NewLine}
                     else
                     {
                         NewLine NewLine
@@ -1142,6 +1183,8 @@ int main()
                     if(Pac_Marker == 9)
                     {
                              Instruction();
+                             cout << "\n#PacMan Instruction :\n Here Pacman's Target is Eat All Fruit in the Box and Save Himself from Ghost. Ghost is Always try to catch Pacman. If Ghost Catch Pacman then Pacman's Life will Decreased. Use Arrow KEYs for Moving. Pacman has 3 Life. If Pacman lost his all life then Game is over. If PacMan Eat all fruit in the Box then Level will be Completed.\n\n";
+
                              getch(); goto PacMan_Menu;
                     }
 
@@ -1822,7 +1865,7 @@ int main()
             while(1)
             {
                 int  i, Player_1= 0, Player_2= 0, Time= 0, Win_1= 0, Win_2= 0;
-                char Index_Data [10];
+                short Index_Data [10];
                 char Index_Symbol [10];
 
                 Multi_Tabs_1 cout << "TIC TAC TOE\n";
@@ -1998,7 +2041,7 @@ int main()
                 NewLine Multi_Tabs_3
 
                 Sound
-                if(Win_1>0)         cout << "Congratulation! Player-1 is Winner.\n";
+                if     (Win_1>0)    cout << "Congratulation! Player-1 is Winner.\n";
                 else if(Win_2>0)    cout << "Congratulation! Player-2 is Winner.\n";
                 else                cout << "\t\tMatch Drawn\n";
 
@@ -2038,7 +2081,7 @@ int main()
 
                     if(Ludo_Marker == 9)
                     {
-                             cout<<"\nPress Any key to Hit the Dice. If You reached to 100, then You are Winner\n\n";
+                             cout<<"\nPress Any key to Hit the Dice. We get Any Value Randomly from 1 to 6. There are some Snakes & Ladder on Board. If You reached to 100, then You are Winner\n\n";
                              cout<<"Snakes : 97 --> 12 , 63 --> 3 , 70 --> 25, 32 --> 13, 60 --> 38, 89 --> 53, 73 --> 47, 82 --> 43 \n";
                              cout<<"Ladders : 8 --> 41, 50 --> 93, 55 --> 80, 59 --> 84, 6-->16, 26 --> 29\n\n";
 
@@ -2347,7 +2390,7 @@ int main()
                 }
 
                 cout << "\n\n\n";
-    //            Multi_Tabs_3 cout << "You should Fill Up All The Empty(Dot Sign) Index by Inserting Proper Value\n\n";
+
                 NewLine NewLine
 
                 while(true)
@@ -2604,7 +2647,6 @@ But if you want to close the program : Press <Capital 'X'> \n\n\n";
                 getch(); Multi_Tabs_1 cout << "  Further Congratulation!\n"; // 3 time Congratulation (not so necessary)
                 getch(); Multi_Tabs_1; cout<<"Many Many Congratulatipon!\n";
                 Multi_Tabs_1 cout << "       Thank You!\n";
-
 
                 Again = Dicission (Kall);
                 if(Again!= '1') goto Menu;
@@ -2983,7 +3025,6 @@ But if you want to close the program : Press <Capital 'X'> \n\n\n";
 
                             Multi_Tabs_1  cout<<"  Shooting Game\n\n";
 
-
                             Multi_Tabs_3 cout<<"Diffculty (Enter a Little Positive Intizer Number)  =  ";
                             cin>>Diffc ;
                             if(Diffc <0) goto Menu;
@@ -2996,11 +3037,9 @@ But if you want to close the program : Press <Capital 'X'> \n\n\n";
                             Multi_Tabs_3 cout<<"TARGATED ENEMY TO KILL                            =  "<<Enimi<<endl;
 
                             cout<<"\nEverytime Press Any KEY for shooting Bullet: \n\n";
-
-
+                          
                             for(int i=1;i<=Bulet;i++)
                             {
-                                /* srand(time(NULL)); */
                                 Temp++;
                                 getch();
                                 Shoot = rand() *3/2 + Temp;
@@ -3064,8 +3103,6 @@ But if you want to close the program : Press <Capital 'X'> \n\n\n";
                                 if(you==75) goto Menu;
                                 else if(you!='H' && you!= 'T') break;
 
-                                /* srand(time(NULL)); */
-
                                 n=rand()%2;
                                 if(n==0) com='T';
                                 else     com='H';
@@ -3074,9 +3111,7 @@ But if you want to close the program : Press <Capital 'X'> \n\n\n";
                                 Multi_Tabs_4 cout<<"\tPress 'H' to chose Head\n";
                                 Multi_Tabs_4 cout<<"\tPress 'T' to chose Tail\n";
                                 Multi_Tabs_4 cout<<"\tPress 'x' to Close the game\n\n";
-
-
-
+                              
                                 NewLine
                                 cout<<"  You chose       : "<<you ; NewLine
                                 cout<<"& Computer chose  : "<<com<<"\n\n";
@@ -3084,7 +3119,6 @@ But if you want to close the program : Press <Capital 'X'> \n\n\n";
                                 Sound NewLine NewLine Multi_Tabs_1
                                 if(you==com) { cout<<"  Winner\n\n"; win++;}
                                 else         { cout<<"   Loser \n\n";                           lost++;}
-
                             }
                             Multi_Tabs_1 cout<<"   Toss Game\n\n";
 
@@ -3270,7 +3304,6 @@ But if you want to close the program : Press <Capital 'X'> \n\n\n";
 
         default:
             goto Menu;
-
 
     }
     goto Menu;
