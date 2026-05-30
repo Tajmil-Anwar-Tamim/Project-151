@@ -86,7 +86,7 @@ void changeTextColour()
 
 }
 
-int changeTextColour2()
+void changeTextColour2()
 {
     ColorVar++;
     if(ColorVar<0) ColorVar+=8;
