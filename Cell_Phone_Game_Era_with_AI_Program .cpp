@@ -1,4 +1,14 @@
-#include <bits/stdc++.h>
+//#include <bits/stdc++.h>
+
+#include <iostream>    // cout, cin, endl, printf
+#include <cstdlib>     // rand, srand, abs, system()
+#include <ctime>       // time() — srand(time(0)) এর জন্য
+#include <thread>      // this_thread::sleep_for
+#include <chrono>      // chrono::milliseconds
+#include <string>      // string (মাত্র ৪ জায়গায় use হয়েছে)
+#include <algorithm>   // fill, min, max
+#include <cmath>
+
 #include <windows.h>
 #include <conio.h>                     //for getch() & kbhit condition;
 
