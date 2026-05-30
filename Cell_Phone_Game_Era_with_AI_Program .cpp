@@ -16,8 +16,8 @@
 #define Sound if(SoundFlag == true) cout << "\a";
 //#define Auto_Change_Text_Color if (is_Continuous_Change_Color) changeTextColour();
 
-#define Border_Sign          if(Snake_Marker==1 || Snake_Marker==2 || Snake_Marker==5 || Snake_Marker==6) cout<<". ";                             else cout<<char(219);
-#define Multiple_Border_Sign if(Marker==2) for(int i=0;i<21;i++) cout<<char(219); else if(Snake_Marker==1 || Snake_Marker==2 || Snake_Marker==5 || Snake_Marker==6) for(int i=0;i< Snake_Area_Column + 1; i++) Border_Sign       else for(int i=0;i<2*Snake_Area_Column +1;i++) Border_Sign
+#define Border_Sign          if(Snake_Marker==1 || Snake_Marker==2 || Snake_Marker==5 || Snake_Marker==6 || Snake_Marker==9) cout<<". ";                             else cout<<char(219);
+#define Multiple_Border_Sign if(Marker==2) for(int i=0;i<21;i++) cout<<char(219); else if(Snake_Marker==1 || Snake_Marker==2 || Snake_Marker==5 || Snake_Marker==6 || Snake_Marker==9) for(int i=0;i< Snake_Area_Column + 1; i++) Border_Sign       else for(int i=0;i<2*Snake_Area_Column +1;i++) Border_Sign
 
 #define show_Point  cout << "\tScore : " << (Level)*Point << endl << endl;
 #define showScore   cout << "\tScore : " << Score << endl;
@@ -36,6 +36,7 @@ int TabNumber=5,iGlobal;
 
 bool SoundFlag  = true;
 bool is_Premium = false;
+bool is_Playing = false;
 //bool is_Continuous_Change_Color= false;
 
 enum ConsoleColor {
@@ -164,28 +165,16 @@ void clearScreen() {
     SetConsoleCursorPosition(console, topLeft);
 }
 
-int rd1=0, rd2=0, rd3=0;
+int rd1=0, rd2=0;
 
 void DisplayAdvise()
 {
     rd1 = 1 + rd1 % 4;
 
-    if(rd1==1) cout<<"\r"<<"BE OBIDIENT TO ALLAH (SUBH.)        ";
-    if(rd1==2) cout<<"\r"<<"FOLLOW PROPHET MUHAMMAD (SM.)       ";
-    if(rd1==3) cout<<"\r"<<"READ QURAN                          ";
-    if(rd1==4) cout<<"\r"<<"FOLLOW SUNNAH, NOT WESTERN          ";
-
-    if(TabNumber<4) cout<<"                    ";
-
-}
-
-void DisplayWorld()
-{
-    rd3 = 1 + rd3 % 3;
-
-    if(rd3==1) cout<<"\r"<<"Never Forget Filistin          ";
-    if(rd3==2) cout<<"\r"<<"They Oppressed Heavily         ";
-    if(rd3==3) cout<<"\r"<<"Stand with Them                ";
+    if(rd1==1) cout<<"\r"<<"BE OBIDIENT TO ALLAH (SUBH.) IF YOU ARE A MUSLIM        ";
+    if(rd1==2) cout<<"\r"<<"FOLLOW PROPHET MUHAMMAD (SM.) IF YOU ARE A MUSLIM       ";
+    if(rd1==3) cout<<"\r"<<"READ HOLY QURAN                      ";
+    if(rd1==4) cout<<"\r"<<"FOLLOW SUNNAH, NOT WESTERN OR OTHERS ";
 
     if(TabNumber<4) cout<<"                    ";
 
@@ -198,11 +187,11 @@ void DisplayWorldView()
     if(rd2==1) cout<<"\r"<<"Pray For Arakan                ";
     if(rd2==2) cout<<"\r"<<"Pray For Kashmir               ";
     if(rd2==3) cout<<"\r"<<"Pray For Uighur                ";
-    if(rd2==4) cout<<"\r"<<"Pray For Gaza                 ";
+    if(rd2==4) cout<<"\r"<<"Pray For Filistin              ";
     if(rd2==5) cout<<"\r"<<"Pray For Yemen                 ";
-    if(rd2==7) cout<<"\r"<<"Pray For Africa                ";
-    if(rd2==6) cout<<"\r"<<"Pray For Baytul Mukaddis       ";
-    if(rd2==8) cout<<"\r"<<"Pray For Whole_Oppressed_Ummah ";
+    if(rd2==6) cout<<"\r"<<"Pray For Africa                ";
+    if(rd2==7) cout<<"\r"<<"Pray For Baytul Mukaddis       ";
+    if(rd2==8) cout<<"\r"<<"Pray For All_Oppressed_Man     ";
     if(rd2==9) cout<<"\r"<<"Never Forget Them              ";
 
     if(TabNumber<4) cout<<"                    ";
@@ -273,7 +262,7 @@ Select Snake Game Type & Select Level Then Play the Game. You can customize Snak
 }
 
 
-void Manager()
+void Key_Hit_Maintainor()
 {
     if(KEY=='+' || KEY=='=') {Time_Delay++; Sound if(Time_Delay>100) Time_Delay=91; if(Time_Delay>10) Time_Delay+=9; }
     if(KEY=='-' || KEY=='_') {Time_Delay--; Sound if(Time_Delay<0)   Time_Delay=0;  if(Time_Delay>10) Time_Delay-=9; }
@@ -347,9 +336,9 @@ void Manager()
         cout <<"\r[Flash Color B/W]";
     }
 
-    if (KEY=='<' || KEY==',')  {TabNumber--; if(TabNumber<0) TabNumber=0; if(Marker==1 || Marker==2 ) system("cls");}
-    if (KEY=='>' || KEY=='.')  {TabNumber++;                              if(Marker==1 || Marker==2 ) system("cls");}
-    if (KEY=='^')  {TabNumber=5;                                          if(Marker==1 || Marker==2 ) system("cls"); }
+    if (KEY=='<' || KEY==',')  {TabNumber--; if(TabNumber<0) TabNumber=0; if((Marker==1 || Marker==2) && is_Playing == true) system("cls");}
+    if (KEY=='>' || KEY=='.')  {TabNumber++;                              if((Marker==1 || Marker==2) && is_Playing == true) system("cls");}
+    if (KEY=='^')  {TabNumber=5;                                          if((Marker==1 || Marker==2) && is_Playing == true) system("cls");}
     if (KEY=='`')  {SoundFlag=false; cout<<"\rMuted";}
     if (KEY=='~')  {SoundFlag= true; cout<<"\r\aUnmuted";}
 
@@ -364,20 +353,17 @@ char Dicission (char a)
     NewLine NewLine NewLine
     Multi_Tabs_2 cout << "\tTo Play Again     Press- <Space> or <Enter>  \n";
     Multi_Tabs_2 cout << "\tTo Goto Menu      Press- <Home>  or  <End>   \n";
-//    Multi_Tabs_2 cout << "\tTo Close Program  Press- <End>   \n";
 
     while(true)
     {
         this_thread::sleep_for(chrono::milliseconds(Time_Delay));
         if (kbhit())           //Control by arrow KEY
         {
-            KEY = _getch();      Manager();
+            KEY = _getch();      Key_Hit_Maintainor();
 
             if    (KEY==' ' || KEY == 13 )                                  {a= '1';   break;}
             if    (KEY=='x' || KEY=='X' || KEY==71 )                        {a= '0';   break;}
             if    (KEY==79)                                                 {a= '0';   break;}
-//            if    (KEY==75)              {a= '1';   break;}
-//            if    (KEY==77)              {a= '1';   break;}
 
         }
     }
@@ -399,7 +385,7 @@ char Dicission_in_Snake_Game  (char a)
         this_thread::sleep_for(chrono::milliseconds(Time_Delay));
         if (kbhit())           //Control by arrow KEY
         {
-            KEY = _getch();      Manager();
+            KEY = _getch();      Key_Hit_Maintainor();
 
             if    (KEY==' ' || KEY == 13 )                          {a= '2';   break;}
             if    (KEY== 27 )                                       {a= '1';   break;}
@@ -427,7 +413,7 @@ char Dicission_TicTacToe (char a)
         this_thread::sleep_for(chrono::milliseconds(Time_Delay));
         if (kbhit())           //Control by arrow KEY
         {
-            KEY = _getch();      Manager();
+            KEY = _getch();      Key_Hit_Maintainor();
 
 //            if    (KEY>='0' && KEY<='4')                 {a= KEY;   break;}
             if    (KEY=='x' || KEY==71 || KEY==79 )      {a= '0';   break;}
@@ -475,7 +461,7 @@ char Dicission_cricket (char a)
             if    (KEY== 'r' || KEY=='$' )               {a= '4';   break;}
 
             if    (KEY=='x' || KEY== 71 || KEY== 79 )     {a= '0';   break;}
-            Manager();
+            Key_Hit_Maintainor();
 
         }
     }
@@ -497,7 +483,7 @@ char Dicission_in_Mini_Games  (char a)
 
         if (kbhit())           //Control by arrow KEY
         {
-            KEY = _getch();      Manager();
+            KEY = _getch();      Key_Hit_Maintainor();
 
 //            if    (KEY>='0' && KEY<='3') {a= KEY; break;}
             if    (KEY=='x' || KEY == 71 || KEY==79  )   {a= '0';   break;}
@@ -553,21 +539,21 @@ void Show_Main_Menu()
 
     Multi_Tabs_1 cout << char(2) << " WELCOME TO YOU IN GAME ERA "<<char(2);     for(int i=0;i<3;i++) NewLine
 
-    Multi_Tabs_3 if(Marker==1) cout<<Markered_Symbol; else cout<<char(32); printf(" Press 1,   to Enter                    SNAKE  ERA \n");
-    Multi_Tabs_3 if(Marker==2) cout<<Markered_Symbol; else cout<<char(32); printf(" Press 2,   to Enter                    PACMAN ERA \n\n");
+    Multi_Tabs_3 if(Marker==1) cout<<Markered_Symbol; else cout<<char(32); printf(" Press 1 :   to Enter                    SNAKE  ERA \n");
+    Multi_Tabs_3 if(Marker==2) cout<<Markered_Symbol; else cout<<char(32); printf(" Press 2 :   to Enter                    PACMAN ERA \n\n");
 
-    Multi_Tabs_3 if(Marker==3) cout<<Markered_Symbol; else cout<<char(32); printf(" Press 3,   to Enter   TIC TAC TOE ERA (MAN VS COM)\n");
-    Multi_Tabs_3 if(Marker==4) cout<<Markered_Symbol; else cout<<char(32); printf(" Press 4,   to Enter   TIC TAC TOE ERA (MAN VS MAN)\n\n");
+    Multi_Tabs_3 if(Marker==3) cout<<Markered_Symbol; else cout<<char(32); printf(" Press 3 :   to Enter   TIC TAC TOE ERA (MAN VS COM)\n");
+    Multi_Tabs_3 if(Marker==4) cout<<Markered_Symbol; else cout<<char(32); printf(" Press 4 :   to Enter   TIC TAC TOE ERA (MAN VS MAN)\n\n");
 
-    Multi_Tabs_3 if(Marker==5) cout<<Markered_Symbol; else cout<<char(32); printf(" Press 5,   to Enter          SNAKE-LADDER-LUDO ERA\n");
-    Multi_Tabs_3 if(Marker==6) cout<<Markered_Symbol; else cout<<char(32); printf(" Press 6,   to Enter                     SUDOKU ERA\n\n");
+    Multi_Tabs_3 if(Marker==5) cout<<Markered_Symbol; else cout<<char(32); printf(" Press 5 :   to Enter          SNAKE-LADDER-LUDO ERA\n");
+    Multi_Tabs_3 if(Marker==6) cout<<Markered_Symbol; else cout<<char(32); printf(" Press 6 :   to Enter                     SUDOKU ERA\n\n");
 
-    Multi_Tabs_3 if(Marker==7) cout<<Markered_Symbol; else cout<<char(32); printf(" Press 7,   to Enter                    CRICKET ERA\n");
-    Multi_Tabs_3 if(Marker==8) cout<<Markered_Symbol; else cout<<char(32); printf(" Press 8,   to Enter                 Mini GAMES ERA\n\n");
+    Multi_Tabs_3 if(Marker==7) cout<<Markered_Symbol; else cout<<char(32); printf(" Press 7 :   to Enter                    CRICKET ERA\n");
+    Multi_Tabs_3 if(Marker==8) cout<<Markered_Symbol; else cout<<char(32); printf(" Press 8 :   to Enter                 Mini GAMES ERA\n\n");
 
 //    Multi_Tabs_3                                           cout<<char(32); printf(" Press (' \" ] } ),       to Change Text & BG Colour\n");                //Instruction end
-    Multi_Tabs_3                                           cout<<char(32); printf(" Press ?,                to See    More Instruction\n");
-    Multi_Tabs_3                                           cout<<char(32); printf(" Press X,                to CLOSE       THE PROGRAM\n\n");
+    Multi_Tabs_3                                           cout<<char(32); printf(" Press ? :                to See    More Instruction\n");
+    Multi_Tabs_3                                           cout<<char(32); printf(" Press X :                to CLOSE       THE PROGRAM\n\n");
 
     NewLine NewLine
 
@@ -626,8 +612,8 @@ int main()
             else if (KEY=='!') ;
             else if(KEY=='@' ){ cout<<"\r"<<Coder_Name;  }
 
-            else if(KEY==8 || KEY==75 || KEY==71)   goto Menu;
-            else if ( KEY==13 || KEY==77 || KEY==32)   break;
+            else if(KEY==8 || KEY==75 || KEY==71 || KEY==32)   goto Menu;
+            else if ( KEY==13 || KEY==77 )   break;
 
             else if(KEY=='+' || KEY=='=') {Time_Delay++; if(Time_Delay>100) Time_Delay=91; if(Time_Delay>10) Time_Delay+=9; cout<<"\rPolling_Delay(ms): "<<Time_Delay<<"                          ";}
             else if(KEY=='-' || KEY=='_') {Time_Delay--; if(Time_Delay<0  ) Time_Delay=0;  if(Time_Delay>10) Time_Delay-=9; cout<<"\rPolling_Delay(ms): "<<Time_Delay<<"                          ";}
@@ -635,7 +621,7 @@ int main()
 //            else if (KEY=='g' && is_Continuous_Change_Color==false) is_Continuous_Change_Color=true;
 //            else if (KEY=='g' && is_Continuous_Change_Color==true) is_Continuous_Change_Color= false;
 
-            else if(KEY>=65 && KEY <=90            )   DisplayWorld();
+            else if(KEY>=65 && KEY <=90            )   DisplayWorldView();
             else if(KEY>=97 && KEY <=122           )   DisplayWorldView();
             else if(KEY>=32 && KEY <=126 && KEY!=75)   DisplayAdvise();
 
@@ -655,22 +641,25 @@ int main()
             system("cls");
             int Snake_Marker;
 
-            Multi_Tabs_2 printf("            WELCOME TO SNAKE ERA\n\n");
+            Multi_Tabs_3 printf("            WELCOME TO SNAKE ERA\n\n");
 
-            Multi_Tabs_2 printf(" Press 1,   to Play              CLASSIC_SNAKE_GAME\n");
-            Multi_Tabs_2 printf(" Press 2,   to Play     CLASSIC_SNAKE_GAME (NO_BITE)\n");
-            Multi_Tabs_2 printf(" Press 3,   to Play                  BOX_SNAKE_GAME\n");
-            Multi_Tabs_2 printf(" Press 4,   to Play    BOX_SNAKE_GAME (NO_SELF-BITE)\n\n");
+            Multi_Tabs_3 printf(" Press --> 1 :    to Play              CLASSIC SNAKE GAME\n");
+            Multi_Tabs_3 printf(" Press --> 2 :    to Play     CLASSIC SNAKE GAME (NO-BITE)\n");
+            Multi_Tabs_3 printf(" Press --> 3 :    to Play                  BOX SNAKE GAME\n");
+            Multi_Tabs_3 printf(" Press --> 4 :    to Play    BOX SNAKE GAME (NO-SELF-BITE)\n\n");
 
-            Multi_Tabs_2 printf(" Press 5,   to see            AI CLASSIC_SNAKE_GAME\n");
-            Multi_Tabs_2 printf(" Press 6,   to see   AI CLASSIC_SNAKE_GAME (NO_BITE)\n");
-            Multi_Tabs_2 printf(" Press 7,   to see                AI BOX_SNAKE_GAME\n");
-            Multi_Tabs_2 printf(" Press 8,   to see  AI BOX_SNAKE_GAME (NO_SELF-BITE)\n\n");
+            Multi_Tabs_3 printf(" Press --> 5 :    to see             AI CLASSIC SNAKE GAME\n");
+            Multi_Tabs_3 printf(" Press --> 6 :    to see     NO-BITE AI CLASSIC SNAKE GAME\n");
+            Multi_Tabs_3 printf(" Press --> 7 :    to see                 AI BOX SNAKE GAME\n");
+            Multi_Tabs_3 printf(" Press --> 8 :    to see    NO-SELF-BITE AI BOX SNAKE GAME \n\n");
 
-            Multi_Tabs_2 printf(" Press 9,   to                  Customize Snake Area\n");
-            Multi_Tabs_2 printf(" Press 0,   to                      see Instructions\n\n");
+            Multi_Tabs_3 printf(" Press --> 9 :    to see   SAFE MOVE AI CLASSIC SNAKE GAME\n");
+            Multi_Tabs_3 printf(" Press --> 0 :    to see   SAFE MOVE AI   BOX   SNAKE GAME\n\n");
 
-            Multi_Tabs_2 printf(" Press x,   to                       Go to Main Menu\n");
+            Multi_Tabs_3 printf(" Press --> S :    to                  Customize Snake Area\n");
+            Multi_Tabs_3 printf(" Press --> ? :    to                      see Instructions\n\n");
+
+            Multi_Tabs_3 printf(" Press --> X :    to                       Go to Main Menu\n");
 
             while(true)
             {
@@ -683,13 +672,13 @@ int main()
 
                     Snake_Marker = KEY - '0';
 
-                    if (Snake_Marker >= 1 && Snake_Marker <= 8  ) break;
+                    if (Snake_Marker == 0)                             {if(Snake_Area_Column%2!=0) Snake_Area_Column++; if(Snake_Area_Row==1) Snake_Area_Row++; break;}
+                    if (Snake_Marker >= 0 && Snake_Marker <= 9  )       break;
+                    if (KEY=='x' || KEY=='X' || KEY==75 || KEY==71 || KEY==79 )     goto Menu;
 
-                    if (KEY=='x' || KEY==75 )          goto Menu;
+                    Key_Hit_Maintainor();
 
-                    Manager();
-
-                    if(Snake_Marker == 9)
+                    if(KEY=='s')
                     {
                         system("cls"); Multi_Tabs_1 printf("     WELCOME TO SNAKE ERA\n\n");
 
@@ -703,7 +692,7 @@ int main()
                         goto Snake_Menu;
                     }
 
-                    if(Snake_Marker == 0)
+                    if(KEY=='/'|| KEY=='?')
                     {
                              Instruction();
                              Snake_Instruction();
@@ -717,7 +706,7 @@ int main()
 
             while(true)
             {
-                Multi_Tabs_1 printf("     WELCOME TO SNAKE ERA\n\n");
+                Multi_Tabs_1      printf("     WELCOME TO SNAKE ERA\n\n");
 
                 if(Snake_Marker==1)
                 {
@@ -727,39 +716,42 @@ int main()
 
                 if(Snake_Marker==2)
                 {
-                    Multi_Tabs_1 cout << "   SNAKE GAME [Classic-No-End]\n\n";
+                    Multi_Tabs_1 cout << "  SNAKE GAME [Classic-No-End]\n\n";
                     cout<<"#Instruction : Here your target is eat more Fruit to Increase Score. The Snake's Size is increasing according to eat Fruit. To Close the game Press - 'x' or 'end' Key. You should Control the Snake by using Arrow KEY\n\n";
                 }
 
                 if(Snake_Marker==3)
                 {
-                    Multi_Tabs_1 cout << "   SNAKE GAME [Box])\n\n";
+                    Multi_Tabs_1 cout << "  SNAKE GAME [Box])\n\n";
                     cout<<"#Instruction : Here your target is eat more Fruit to Increase Score. The Snake's Size is increasing according to eat Fruit. If the Snake Bites its Body or Border then the Game is Over.\
                      You should use Arrow KEYs to control the Snake.\n\n";
                 }
 
                 if(Snake_Marker==4)
                 {
-                    Multi_Tabs_1 cout << "   SNAKE GAME [Box-No-Self-Bite]\n\n";
+                    Multi_Tabs_1 cout << "  SNAKE GAME [Box-No-Self-Bite]\n\n";
                     cout<<"#Instruction : Here your target is eat more Fruit to Increase Score. The Snake's Size is increasing according to eat Fruit. If the Snake Bites Border then the Game is Over.\
                     You should use Arrow KEYs to control the Snake.\n\n";
                 }
 
-                if(Snake_Marker==5) {Multi_Tabs_1 cout << "     AI SNAKE GAME [CLASSIC]\n\n";}
-                if(Snake_Marker==6) {Multi_Tabs_1 cout << "  AI SNAKE GAME [CLASSIC-NO-END]\n\n";}
-                if(Snake_Marker==7) {Multi_Tabs_1 cout << "       AI SNAKE GAME [BOX]\n\n";}
+                if(Snake_Marker==5) {Multi_Tabs_1 cout << "       AI SNAKE GAME [CLASSIC]    \n\n";}
+                if(Snake_Marker==6) {Multi_Tabs_1 cout << "    AI SNAKE GAME [CLASSIC-NO-END]\n\n";}
+                if(Snake_Marker==7) {Multi_Tabs_1 cout << "          AI SNAKE GAME [BOX]     \n\n";}
                 if(Snake_Marker==8) {Multi_Tabs_1 cout << "  AI SNAKE GAME [BOX-N0-SELF-BITE]\n\n";}
+
+                if(Snake_Marker==9) {Multi_Tabs_1 cout << "     AI SAFE SNAKE GAME [CLASSIC]  \n\n";}
+                if(Snake_Marker==0) {Multi_Tabs_1 cout << "       AI_SAFE_ SNAKE GAME [BOX]   \n\n";}
 
                 int Level;
                 bool DoubleSnake = false;
-                Multi_Tabs_1 cout<< "SPEED (1-8) :  ";
+                Multi_Tabs_1 cout<< "        SPEED (1-8) :  ";
 
                 while(true)
                 {
                     this_thread::sleep_for(chrono::milliseconds(Time_Delay));
                     if (kbhit())           //Control by arrow KEY
                     {
-                        KEY = _getch();      Manager();
+                        KEY = _getch();      Key_Hit_Maintainor();
 
                         if    (KEY>='1' && KEY<='8') {Level= KEY-'0'; break;}
                         if    (KEY==75 || KEY==71)  goto Snake_Menu;
@@ -773,6 +765,7 @@ int main()
                 {
                     system("cls");
 
+                    is_Playing = true;
                     bool Finish=false, Is_Completed=false, is_Fruit_in_Blank_Space = true, BonusFlag=false;
                     int Fruit, Bonus=Snake_Area_Row * Snake_Area_Column, Score = 0,Point= 0, Call=0,Change=0,i,FruitCount=0, BonusCount=0, Step = 0, Bonus_Life_Var=0;
                     int Snake_Head= ( Snake_Area_Row /2)* Snake_Area_Column  +  Snake_Area_Column /2; //0-based: 0 to row*col-1
@@ -800,7 +793,7 @@ int main()
                             {
                                 if(Fruit == Snake_Body[i]) {is_Fruit_in_Blank_Space = false;  break; }
                             }
-                            if((is_Fruit_in_Blank_Space == false || Fruit == Snake_Head) && Change <= 2* Snake_Area_Row * Snake_Area_Column  ) //Chnge variable ta NewLinear karon holo jodi snake body r size full arear soman hoy orthat fruit dewar moto kono jayga na thake tahole snake body borabor porbe , eta na dile oi muhurte program continiously choltei thakto, susthu vabe game complete hoto na
+                            if((is_Fruit_in_Blank_Space == false || Fruit == Snake_Head) && Change <= Snake_Area_Row * Snake_Area_Column  ) //Chnge variable ta NewLinear karon holo jodi snake body r size full arear soman hoy orthat fruit dewar moto kono jayga na thake tahole snake body borabor porbe , eta na dile oi muhurte program continiously choltei thakto, susthu vabe game complete hoto na
                             {
                                 is_Fruit_in_Blank_Space = true;
                                 Fruit++;
@@ -820,7 +813,7 @@ int main()
                             {
                                 if(Bonus == Snake_Body[i]) {is_Fruit_in_Blank_Space = false;  break; }
                             }
-                            if((is_Fruit_in_Blank_Space == false || Bonus == Snake_Head) && Change <= 2* Snake_Area_Row * Snake_Area_Column  ) //Chnge variable ta NewLinear karon holo jodi snake body r size full arear soman hoy orthat fruit dewar moto kono jayga na thake tahole snake body borabor porbe , eta na dile oi muhurte program continiously choltei thakto, susthu vabe game complete hoto na
+                            if((is_Fruit_in_Blank_Space == false || Bonus == Snake_Head) && Change <= Snake_Area_Row * Snake_Area_Column  ) //Chnge variable ta NewLinear karon holo jodi snake body r size full arear soman hoy orthat fruit dewar moto kono jayga na thake tahole snake body borabor porbe , eta na dile oi muhurte program continiously choltei thakto, susthu vabe game complete hoto na
                             {
                                 is_Fruit_in_Blank_Space = true;
                                 Bonus++;
@@ -856,17 +849,20 @@ int main()
                         else           PlayGround [Snake_Head] = '@';
 
 
-                                             Multi_Tabs_1 printf("        WELCOME TO SNAKE ERA\n\n");
+                                             Multi_Tabs_1  printf("       WELCOME TO SNAKE ERA       \n\n");
 
-                        if(Snake_Marker==1) {Multi_Tabs_1 cout << "        SNAKE GAME [CLASSIC]\n\n";}
-                        if(Snake_Marker==2) {Multi_Tabs_1 cout << "     SNAKE GAME [CLASSIC-NO-END]\n\n";}
-                        if(Snake_Marker==3) {Multi_Tabs_1 cout << "          SNAKE GAME [BOX]\n\n";}
-                        if(Snake_Marker==4) {Multi_Tabs_1 cout << "     SNAKE GAME [BOX-N0-SELF-BITE]\n\n";}
+                        if(Snake_Marker==1) {Multi_Tabs_1 cout << "       SNAKE GAME [CLASSIC]       \n\n";}
+                        if(Snake_Marker==2) {Multi_Tabs_1 cout << "     SNAKE GAME [CLASSIC-NO-END]  \n\n";}
+                        if(Snake_Marker==3) {Multi_Tabs_1 cout << "         SNAKE GAME [BOX]         \n\n";}
+                        if(Snake_Marker==4) {Multi_Tabs_1 cout << "   SNAKE GAME [BOX-N0-SELF-BITE]  \n\n";}
 
-                        if(Snake_Marker==5) {Multi_Tabs_1 cout << "     AI SNAKE GAME [CLASSIC]\n\n";}
-                        if(Snake_Marker==6) {Multi_Tabs_1 cout << "  AI SNAKE GAME [CLASSIC-NO-END]\n\n";}
-                        if(Snake_Marker==7) {Multi_Tabs_1 cout << "       AI SNAKE GAME [BOX]\n\n";}
+                        if(Snake_Marker==5) {Multi_Tabs_1 cout << "       AI SNAKE GAME [CLASSIC]    \n\n";}
+                        if(Snake_Marker==6) {Multi_Tabs_1 cout << "    AI SNAKE GAME [CLASSIC-NO-END]\n\n";}
+                        if(Snake_Marker==7) {Multi_Tabs_1 cout << "          AI SNAKE GAME [BOX]     \n\n";}
                         if(Snake_Marker==8) {Multi_Tabs_1 cout << "  AI SNAKE GAME [BOX-N0-SELF-BITE]\n\n";}
+
+                        if(Snake_Marker==9) {Multi_Tabs_1 cout << "     AI SAFE SNAKE GAME [CLASSIC]  \n\n";}
+                        if(Snake_Marker==0) {Multi_Tabs_1 cout << "       AI_SAFE_ SNAKE GAME [BOX]   \n\n";}
 
 
                                              Multi_Tabs_1 cout << "             Level : "<<Level<<endl;
@@ -896,7 +892,7 @@ int main()
                         this_thread::sleep_for(chrono::milliseconds(Delay));    //Time Delay for Update Printing
 
                         if(Finish || Is_Completed)  break;//snake nijeke bite korle game over
-                        if(Snake_Marker==3 || Snake_Marker==4 || Snake_Marker==7 || Snake_Marker==8) if(Snake_Head >= Snake_Area_Row * Snake_Area_Column  || Snake_Head< 0 ) break;
+                        if(Snake_Marker==3 || Snake_Marker==4 || Snake_Marker==7 || Snake_Marker==8 || Snake_Marker==0) if(Snake_Head >= Snake_Area_Row * Snake_Area_Column  || Snake_Head< 0 ) break;
 
                         Step++;
 
@@ -929,7 +925,7 @@ int main()
                                 else if(KEY=='i') DoubleSnake=false;
                                 else if(KEY=='o') DoubleSnake=true;
 
-                                else { Manager(); continue;}
+                                else { Key_Hit_Maintainor(); continue;}
                         }
 
                         if(Snake_Marker==5)
@@ -1054,6 +1050,83 @@ int main()
                             else if (S_Col < F_Col && S_Col != Snake_Area_Column-1) Move = '6';  // একই row, Snake বামে → ডানে যাও
                         }
 
+                        if(Snake_Marker==9)
+                        {
+                            int row = Snake_Area_Row;
+                            int col = Snake_Area_Column;
+                            int sh = Snake_Head;
+                            short mv = Move - '0';
+
+                            int srow = sh / col;
+                            int scol = sh % col;
+
+
+                            if (col % 2 == 0)
+                            {
+                                if(scol % 2 == 0) if(srow==row-1)  mv=6; else  mv=2;
+                                else              if(srow==0)      mv=6; else  mv = 8;
+                            }
+
+                            else if(row % 2 == 0)
+                            {
+                                if(row%4==0 || row%4==1) // ei shorte snake row er initial head row = odd hobe
+                                {
+                                    if(srow%2==0)   if(scol==col-1) mv=2; else mv=6;
+                                    else            if(scol==0)     mv=2; else mv=4;
+                                }
+
+                                else
+                                {
+                                    if(srow%2==0) if(scol==0)      mv=2;  else mv=4;
+                                    else          if(scol==col-1)  mv=2;  else mv=6;
+                                }
+                            }
+
+                            else
+                            {
+                                if     (scol == col-2) if(srow%2==0)   mv=6; else               mv=8;
+                                else if(scol == col-1) if(srow==0)     mv=6; else if(srow%2==0) mv=8; else mv=4;
+                                else if(scol%2==0)     if(srow==row-1) mv=6; else               mv=2;
+                                else                   if(srow==0)     mv=6; else               mv=8;
+                            }
+
+                            Move = char(mv) + '0';
+
+                        }
+
+                        if(Snake_Marker==0)
+                        {
+                            int row = Snake_Area_Row;
+                            int col = Snake_Area_Column;
+                            int sh = Snake_Head;
+                            short mv = Move - '0';
+
+                            int srow = sh / col;
+                            int scol = sh % col;
+
+
+                            if (srow == 0)
+                            {
+                                if(scol == 0)    mv=2;
+                                else             mv=4;
+                            }
+
+                            else if(scol % 2 == 0)
+                            {
+                                    if(srow==row-1)  mv=6;
+                                    else             mv=2;
+                            }
+
+                            else
+                            {
+                                if     (srow==1)  {if(scol==col-1) mv=8; else     mv=6;}
+                                else              mv=8;
+                            }
+
+                            Move = char(mv) + '0';
+
+                        }
+
                          if(Level==1) Delay=500;
                          if(Level==2) Delay=300;
                          if(Level==3) Delay=200;
@@ -1070,7 +1143,7 @@ int main()
                         }
                         Snake_Body[1] =  Snake_Head;
 
-                        if(Snake_Marker==1 || Snake_Marker==2 || Snake_Marker==5 || Snake_Marker==6)
+                        if(Snake_Marker==1 || Snake_Marker==2 || Snake_Marker==5 || Snake_Marker==6 || Snake_Marker==9)
                         {
                             //to move to up / down / left / right (below) - (According to KEY-board Numarical Pads)
                             if(Move == '6') {Snake_Head++;     /** to move Right */  if(Snake_Head% Snake_Area_Column  == 0) Snake_Head -=  Snake_Area_Column ; /**Dan dike ber hoye gele oi borabor Bam dik diye asbe */ }
@@ -1083,7 +1156,7 @@ int main()
 
                         }
 
-                        if(Snake_Marker==3 || Snake_Marker==4 || Snake_Marker==7 || Snake_Marker==8)
+                        if(Snake_Marker==3 || Snake_Marker==4 || Snake_Marker==7 || Snake_Marker==8 || Snake_Marker==0)
                         {
                             if(Move== '6') {Snake_Head++;      if(Snake_Head% Snake_Area_Column == 0)                        { Snake_Head= -1; continue; }}      //Box e touch lagle Game over
                             if(Move== '4') {Snake_Head--;      if(Snake_Head < 0 || (Snake_Head+1)% Snake_Area_Column == 0)  { Snake_Head= -1; continue; }}      // " " "
@@ -1097,7 +1170,7 @@ int main()
 
                         for(i = 3+Score; i>0; i--)
                         {
-                            if(Snake_Head == Snake_Body[i]) { if(Snake_Marker==1 || Snake_Marker==3) {Finish = true;} continue; } //jodi Snake nijeke Bite kore, then game over
+                            if(Snake_Head == Snake_Body[i]) { if(Snake_Marker==1 || Snake_Marker==3 || Snake_Marker==9) {Finish = true;} continue; } //jodi Snake nijeke Bite kore, then game over
                         }
 
                         if(Snake_Head == Fruit)         //Snake Fruit eat korar sathe sathe -
@@ -1128,6 +1201,7 @@ int main()
                         }
                     }
 
+                    is_Playing = false;
                     Sound;
 
                     if(Snake_Marker==3 || Snake_Marker==4)
@@ -1161,13 +1235,13 @@ int main()
             system("cls");
             int Pac_Marker;
 
-            Multi_Tabs_1 printf("          WELCOME TO PAAMAN ERA\n\n");
-            Multi_Tabs_1 printf(" Press 1,   to Play      PACMAN in EASY MODE\n");
-            Multi_Tabs_1 printf(" Press 2,   to Play      PACMAN in HARD MODE\n");
+            Multi_Tabs_3 printf("          WELCOME TO PAAMAN ERA\n\n");
+            Multi_Tabs_3 printf(" Press --> 1 :   to Play      PACMAN in EASY MODE\n");
+            Multi_Tabs_3 printf(" Press --> 2 :   to Play      PACMAN in HARD MODE\n");
 
-//            Multi_Tabs_1 printf(" Press 8,   to          Customize PacMan Area\n");
-            Multi_Tabs_1 printf(" Press 9,   to               see Instructions\n\n");
-            Multi_Tabs_1 printf(" Press 0,   to                Go to Main Menu\n");
+//            Multi_Tabs_3 printf(" Press --> 8 :   to          Customize PacMan Area\n");
+            Multi_Tabs_3 printf(" Press --> 9 :   to               see Instructions\n\n");
+            Multi_Tabs_3 printf(" Press --> 0 :   to                Go to Main Menu\n");
 
             while(true)
             {
@@ -1191,7 +1265,7 @@ int main()
                              getch(); goto PacMan_Menu;
                     }
 
-                    Manager();
+                    Key_Hit_Maintainor();
 
                 }
             }
@@ -1209,7 +1283,7 @@ int main()
                     this_thread::sleep_for(chrono::milliseconds(Time_Delay));
                     if (kbhit())           //Control by arrow KEY
                     {
-                        KEY = _getch();      Manager();
+                        KEY = _getch();      Key_Hit_Maintainor();
 
                         if    (KEY>='1' && KEY<='8') {Level= KEY-'0'; break;}
                         if    (KEY=='x' || KEY==75)  goto Menu;
@@ -1222,8 +1296,9 @@ int main()
 
                 while(true)
                 {
+                    is_Playing = true;
                     bool Temp= true;
-                    int Score = 0,i,j,x = 0,Number_of_Enemy=4, Life=3;
+                    int Score = 0,i,j,x = 0,Number_of_Enemy=1, Life=3;
                     int PacMan,Enemy[Number_of_Enemy];
                     char Move;
                     char PlayGround[111],Fruit[111];                    /// Playground Size 10*10=100 (0-99) + extra 10(just for avoiding silly risk
@@ -1326,7 +1401,7 @@ int main()
 
                             else if(KEY=='x'  )  break;
 
-                            else {Manager(); continue;}
+                            else {Key_Hit_Maintainor(); continue;}
                         }
 
                          if(Level==1) Delay=500;
@@ -1384,6 +1459,7 @@ int main()
                         Sound; NewLine Multi_Tabs_1
                         cout<<"\tGame Over!"; NewLine Multi_Tabs_1
                         cout<<"\tScore : "<<Score<<endl;  NewLine
+                        is_Playing = false;
                     }
 
                     if(Score == 100)
@@ -1392,6 +1468,7 @@ int main()
                         Multi_Tabs_1 cout<< "\tCongratulation!\n";
                         Multi_Tabs_1 cout<<"\tLevel Complete!";          //100 is highest score , because there are 100 fruit in the ground
                         NewLine NewLine
+                        is_Playing = false;
                     }
 
                     Again = Dicission_in_Snake_Game (Kall);
@@ -1411,12 +1488,12 @@ int main()
                 Multi_Tabs_4 cout << "\t       TIC TAC TOE   \n\n";
                 Multi_Tabs_4 cout << "\t    [Man vs Computer]\n\n";
 
-                cout << "  Press 'Left-Arrow-KEY'  to goto 'Back'\n";
-                cout << "  Press 'HOME' or 'END'   to      'Exit'\n";
+                cout << "  Press --> 'Left-Arrow-KEY'  to goto 'Back'\n";
+                cout << "  Press --> 'HOME' or 'END'   to      'Exit'\n";
 
                 NewLine Multi_Tabs_1  cout << "Choice Level";
                 NewLine Multi_Tabs_2 cout << "Easy / Medium / Hard";
-                NewLine Multi_Tabs_3 cout << "   Press - '1' / '2' / '3' : ";
+                NewLine Multi_Tabs_3 cout << "   Press --> '1' / '2' / '3' : ";
 
                 int Level;
                 while(true)
@@ -1425,7 +1502,7 @@ int main()
 
                     if (kbhit())           //Control by arrow KEY
                     {
-                        KEY = _getch();      Manager();
+                        KEY = _getch();      Key_Hit_Maintainor();
 
                         if    (KEY>='1' && KEY<='3') {Level= KEY-'0'; break;}
                         if    (KEY == 'x' || KEY == 75 || KEY==71 || KEY==79) break;
@@ -1449,13 +1526,13 @@ int main()
                 TTT_first_move:
                 Multi_Tabs_2 cout << "    Who Play First?\n";
                 Multi_Tabs_2 cout << "  ('You'/'Computer')\n\n";
-                Multi_Tabs_2 cout << "  Press 'i' for    'You'   \n";
-                Multi_Tabs_2 cout << "  Press 'c' for 'Computer' \n";
-                Multi_Tabs_2 cout << "  Press 't' for 'Tossing'\n";
+                Multi_Tabs_2 cout << "  Press --> 'i' for    'You'   \n";
+                Multi_Tabs_2 cout << "  Press --> 'c' for 'Computer' \n";
+                Multi_Tabs_2 cout << "  Press --> 't' for 'Tossing'\n";
                 Multi_Tabs_2 cout << "   (Without Quatation) :\n\n";
 
-                cout << "  Press 'Left-Arrow-KEY'    to goto 'Back'\n";
-                cout << "  Press  <HOME> or <END>    to      'Exit'\n";
+                cout << "  Press --> 'Left-Arrow-KEY'    to goto 'Back'\n";
+                cout << "  Press -->  <HOME> or <END>    to      'Exit'\n";
 
                 char who;
                 while(true)
@@ -1463,7 +1540,7 @@ int main()
                     this_thread::sleep_for(chrono::milliseconds(Time_Delay));
                     if (kbhit())           //Control by arrow KEY
                     {
-                        KEY = _getch();      Manager();
+                        KEY = _getch();      Key_Hit_Maintainor();
 
                         if    (KEY=='i' || KEY=='c' || KEY == 't' ) {who=KEY; break;}
                         if    (KEY=='I' || KEY=='C' || KEY == 'T' ) {who=KEY; break;}
@@ -1513,7 +1590,7 @@ int main()
                     else                {Multi_Tabs_1 cout << "HARD LEVEL\n"; }
                     NewLine
                     for(iGlobal=0;iGlobal<TabNumber-2;iGlobal++) tab
-                    cout << "[Everytime Press 'Any Integer Number' from '1' to '9' For Push Your Symbol in the Box] " << endl << endl;
+                    cout << "[Everytime Press --> 'Any Integer Number' from '1' to '9' For Push Your Symbol in the Box] " << endl << endl;
 
                     Index_Data[Me]= 1;
                     Index_Data[Computer]= 2;
@@ -1557,7 +1634,7 @@ int main()
 
                                 if         (KEY>='1' && KEY<='9') {Me= KEY-'0'; Time++; break;}
                                 else if    (KEY=='X' || KEY==79)  {goto Menu;}
-                                else                              {Manager(); system("cls"); goto Print_Loop_Tic_Tac_Toe_Man_vs_Computer;}
+                                else                              {Key_Hit_Maintainor(); system("cls"); goto Print_Loop_Tic_Tac_Toe_Man_vs_Computer;}
                             }
                         }
 
@@ -1872,10 +1949,10 @@ int main()
                 //ke age chalbe Player '1' na '2' naki Toss
                 Multi_Tabs_2 cout<<"  Who Play First?\n";
                 Multi_Tabs_2 cout<<" ('Player-1'/'Player-2')\n\n";
-                Multi_Tabs_2 cout << "  Press '1' for 'Player 1'   \n";
-                Multi_Tabs_2 cout << "  Press '2' for 'Player 2' \n";
-                Multi_Tabs_2 cout << "  Press '0' for 'Tossing'\n";
-                Multi_Tabs_2 cout << "  Press 'x' for 'Exit'\n";
+                Multi_Tabs_2 cout << "  Press --> '1' for 'Player 1' \n";
+                Multi_Tabs_2 cout << "  Press --> '2' for 'Player 2' \n";
+                Multi_Tabs_2 cout << "  Press --> '0' for 'Tossing'\n";
+                Multi_Tabs_2 cout << "  Press --> 'x' for 'Exit'\n";
                 Multi_Tabs_2 cout << "   (Without Quatation) :\n\n";
                 Multi_Tabs_1  cout<<"   ";
 
@@ -1884,7 +1961,7 @@ int main()
                 {
                     if (kbhit())           //Control by arrow KEY
                     {
-                        KEY = _getch();      Manager();
+                        KEY = _getch();      Key_Hit_Maintainor();
 
                         if    (KEY=='1' || KEY=='2' || KEY == '0' || KEY=='x' || KEY == 75  ) { break;}
 
@@ -1966,7 +2043,7 @@ int main()
 
                                 if      (KEY>='1' && KEY<='9') {Player_1 = KEY-'0'; Time++;}
                                 else if (KEY=='X' || KEY==79 )  goto Menu;
-                                else                           { Manager(); system("cls"); goto Print_Loop_Tic_Tac_Toe_Man_vs_Man ;}
+                                else                           { Key_Hit_Maintainor(); system("cls"); goto Print_Loop_Tic_Tac_Toe_Man_vs_Man ;}
 
                             }
 
@@ -1999,11 +2076,11 @@ int main()
                             if (kbhit())           //Control by arrow KEY
                             {
                                 this_thread::sleep_for(chrono::milliseconds(Time_Delay));
-                                KEY = _getch();      Manager();
+                                KEY = _getch();      Key_Hit_Maintainor();
 
                                 if      (KEY>='1' && KEY<='9') {Player_2 = KEY-'0'; Time++;}
                                 else if (KEY=='X' || KEY==79 )  goto Menu;
-                                else                           { Manager(); system("cls"); goto Print_Loop_Tic_Tac_Toe_Man_vs_Man ;}
+                                else                           { Key_Hit_Maintainor(); system("cls"); goto Print_Loop_Tic_Tac_Toe_Man_vs_Man ;}
 
                             }
 
@@ -2054,11 +2131,11 @@ int main()
             system("cls");
             int Ludo_Marker;
 
-            Multi_Tabs_1 printf("          WELCOME TO SNAKE-LADDER\n\n");
-            Multi_Tabs_1 printf(" Press 1,   to Play           MAN VS COMPUTER\n");
-            Multi_Tabs_1 printf(" Press 2,   to Play           MULTIPLE PLAYER\n");
-            Multi_Tabs_1 printf(" Press 9,   to               see Instructions\n\n");
-            Multi_Tabs_1 printf(" Press 0,   to                Go to Main Menu\n");
+            Multi_Tabs_3 printf("          WELCOME TO SNAKE-LADDER\n\n");
+            Multi_Tabs_3 printf(" Press --> 1 :   to Play           MAN VS COMPUTER\n");
+            Multi_Tabs_3 printf(" Press --> 2 :   to Play           MULTIPLE PLAYER\n");
+            Multi_Tabs_3 printf(" Press --> 9 :   to               see Instructions\n\n");
+            Multi_Tabs_3 printf(" Press --> 0 :   to                Go to Main Menu\n");
 
             while(true)
             {
@@ -2083,7 +2160,7 @@ int main()
                              getch(); goto Snake_Ladder_Ludo_Menu;
                     }
 
-                    Manager();
+                    Key_Hit_Maintainor();
                 }
             }
             system("cls");
@@ -2404,7 +2481,7 @@ int main()
 
                         if (kbhit())           //Control by arrow KEY
                         {
-                            KEY = _getch();      Manager();
+                            KEY = _getch();      Key_Hit_Maintainor();
 
                             if    (KEY==72)  {row--;break;}
                             if    (KEY==80)  {row++;break;}
@@ -2439,7 +2516,7 @@ int main()
                             {
                                 if(Sudoku[i]== k) cnt++;
                             }
-                            if(cnt != 1) {flag= 0; break; }
+                            if(cnt != 1) {flag= 0; break; }  //Sobgulo Number Kebol-Matro 1 bar ache kina; na thakle shorto puron hoyni
                         }
                         if(flag== 0) break;
                     }
@@ -2655,7 +2732,6 @@ But if you want to close the program : Press <Capital 'X'> \n\n\n";
 
             while(1)
             {
-
                 int Cri_Choise;
 
                 Multi_Tabs_1 cout << "    CRICKET      \n\n";
@@ -2674,14 +2750,14 @@ But if you want to close the program : Press <Capital 'X'> \n\n\n";
                     int Your_Toss_Choise, Toss_Coin;
 
                     Multi_Tabs_1 cout<<"      Now Tossing! \n\n";
-                    Multi_Tabs_3 cout<<"What do you want? Head / Tail? Press - '1' / '2'.\n\n";
+                    Multi_Tabs_3 cout<<"What do you want? Head / Tail? Press --> - '1' / '2'.\n\n";
 
                     while(true)
                     {
                         this_thread::sleep_for(chrono::milliseconds(Time_Delay));
                         if (kbhit())           //Control by arrow KEY
                         {
-                            KEY = _getch();  Manager();
+                            KEY = _getch();  Key_Hit_Maintainor();
 
                             if    (KEY=='1') {Your_Toss_Choise = 0; break;}
                             if    (KEY=='2') {Your_Toss_Choise = 1; break;}
@@ -2693,8 +2769,8 @@ But if you want to close the program : Press <Capital 'X'> \n\n\n";
                     if(Your_Toss_Choise == Toss_Coin)
                     {
                         Multi_Tabs_2 cout<<"Congratulation! You won the Toss!\n\n";
-                        Multi_Tabs_2 cout<<" Press '1' for  Batting First\n";
-                        Multi_Tabs_2 cout<<" Press '2' for Fielding First\n";
+                        Multi_Tabs_2 cout<<" Press --> '1' for  Batting First\n";
+                        Multi_Tabs_2 cout<<" Press --> '2' for Fielding First\n";
                         NewLine
 
                         while(true)
@@ -2702,7 +2778,7 @@ But if you want to close the program : Press <Capital 'X'> \n\n\n";
                             this_thread::sleep_for(chrono::milliseconds(Time_Delay));
                             if (kbhit())           //Control by arrow KEY
                             {
-                                KEY = _getch();  Manager();
+                                KEY = _getch();  Key_Hit_Maintainor();
 
                                 if    (KEY=='1') {break;}
                                 if    (KEY=='2') {break;}
@@ -2738,10 +2814,8 @@ But if you want to close the program : Press <Capital 'X'> \n\n\n";
 
                     case 1:
 
-
                         while(true)
                         {
-
                             int over = Over_Total, wick = Wicket_Total;
                             int Run= 0, w= 0, Ball= 0, temp;
                             int Hit, c, Hit_Op, i;
@@ -2763,7 +2837,7 @@ But if you want to close the program : Press <Capital 'X'> \n\n\n";
                                     this_thread::sleep_for(chrono::milliseconds(Time_Delay));
                                     if (kbhit())           //Control by arrow KEY
                                     {
-                                        KEY = _getch(); Manager();
+                                        KEY = _getch(); Key_Hit_Maintainor();
 
                                         if    (KEY>='0' && KEY<='6')                        { break;}
                                         if    (KEY=='x' || KEY=='X' || KEY==71 || KEY==79)   { goto Menu;}
@@ -2818,7 +2892,7 @@ But if you want to close the program : Press <Capital 'X'> \n\n\n";
                                     this_thread::sleep_for(chrono::milliseconds(Time_Delay));
                                     if (kbhit())           //Control by arrow KEY
                                     {
-                                        KEY = _getch();  Manager();
+                                        KEY = _getch();  Key_Hit_Maintainor();
 
                                         if    (KEY>='0' && KEY<='6')                            { break;}
                                         if    (KEY=='x' || KEY=='X' || KEY==71 || KEY==79)       { goto Menu;}
@@ -2888,7 +2962,7 @@ But if you want to close the program : Press <Capital 'X'> \n\n\n";
                                     this_thread::sleep_for(chrono::milliseconds(Time_Delay));
                                     if (kbhit())           //Control by arrow KEY
                                     {
-                                        KEY = _getch();  Manager();
+                                        KEY = _getch();  Key_Hit_Maintainor();
 
                                         if    (KEY>='0' && KEY<='6') { break;}
                                         if    (KEY=='x' || KEY=='X' || KEY==71 || KEY==79) {goto Menu;}
@@ -2937,7 +3011,7 @@ But if you want to close the program : Press <Capital 'X'> \n\n\n";
                                     this_thread::sleep_for(chrono::milliseconds(Time_Delay));
                                     if (kbhit())           //Control by arrow KEY
                                     {
-                                        KEY = _getch(); Manager();
+                                        KEY = _getch(); Key_Hit_Maintainor();
 
                                         if    (KEY>='0' && KEY<='6')                            { break;}
                                         if    (KEY=='x' || KEY=='X' || KEY==71 || KEY==79)      {goto Menu;}
@@ -3075,22 +3149,22 @@ But if you want to close the program : Press <Capital 'X'> \n\n\n";
                         while(1)
                         {
                             Multi_Tabs_1 cout<<"   Toss Game\n\n";
-                            Multi_Tabs_4 cout<<"\tPress 'H' to chose Head\n";
-                            Multi_Tabs_4 cout<<"\tPress 'T' to chose Tail\n";
-                            Multi_Tabs_4 cout<<"\tPress 'x' to Close the game\n\n";
+                            Multi_Tabs_4 cout<<"\tPress --> 'H' to chose Head\n";
+                            Multi_Tabs_4 cout<<"\tPress --> 'T' to chose Tail\n";
+                            Multi_Tabs_4 cout<<"\tPress --> 'x' to Close the game\n\n";
 
                             int win=0,lost=0;
                             while(1)
                             {
                                 int n;
                                 char you,com;
-                                cout<<"Press 'H' or 'T' (without quatation)\t:\t";
+                                cout<<"Press --> 'H' or 'T' (without quatation)\t:\t";
                                 while(true)
                                 {
                                     this_thread::sleep_for(chrono::milliseconds(Time_Delay));
                                     if (kbhit())           //Control by arrow KEY
                                     {
-                                        KEY = _getch();      Manager();
+                                        KEY = _getch();      Key_Hit_Maintainor();
 
                                         if(KEY=='h' || KEY == 't' || KEY == 'x' || KEY==75) break;
                                         if(KEY=='H' || KEY == 'T' || KEY == 'X' || KEY==77) break;
@@ -3110,9 +3184,9 @@ But if you want to close the program : Press <Capital 'X'> \n\n\n";
                                 else     com='H';
 
                                 Multi_Tabs_1 cout<<"   Toss Game\n\n";
-                                Multi_Tabs_4 cout<<"\tPress 'H' to chose Head\n";
-                                Multi_Tabs_4 cout<<"\tPress 'T' to chose Tail\n";
-                                Multi_Tabs_4 cout<<"\tPress 'x' to Close the game\n\n";
+                                Multi_Tabs_4 cout<<"\tPress --> 'H' to chose Head\n";
+                                Multi_Tabs_4 cout<<"\tPress --> 'T' to chose Tail\n";
+                                Multi_Tabs_4 cout<<"\tPress --> 'x' to Close the game\n\n";
 
 
 
@@ -3149,7 +3223,8 @@ But if you want to close the program : Press <Capital 'X'> \n\n\n";
                         {
                             int Bulet,Kil=0,Shoot,Diffc,Temp=100 ;
 
-                            Multi_Tabs_1  cout<<"  Battle Game\n\n";
+                            Multi_Tabs_1  cout<<"    BATTLE GAME\n";
+                            Multi_Tabs_1  cout<<"[PALESTINE vs ISRAEL]\n\n";
 
                             Multi_Tabs_3 cout<<"Diffculty (Enter a Little Positive Intizer Number)  =  ";
                             cin>>Diffc ;
@@ -3160,13 +3235,12 @@ But if you want to close the program : Press <Capital 'X'> \n\n\n";
 
                             int Enimi = ceil(Bulet/1.0/(Diffc +1));  // avarage luck
 
-                            Multi_Tabs_3 cout<<"TARGATED TANK TO DESTROY                            =  "<<Enimi<<endl;
+                            Multi_Tabs_3 cout<<"TARGATED MARCAVA TANK TO DESTROY                     =  "<<Enimi<<endl;
 
                             cout<<"\nEverytime Press Any KEY for shooting Bullet: \n\n";
 
                             for(int i=1;i<=Bulet;i++)
                             {
-
                                 /* srand(time(NULL)); */
                                 Temp++;
                                 getch();
@@ -3204,10 +3278,10 @@ But if you want to close the program : Press <Capital 'X'> \n\n\n";
                         while(1)
                         {
                             tabs cout<<"\tRock Paper Seissor Game\n\n";
-                            tabs cout<<"\tPress 'R' to chose Rock\n";
-                            tabs cout<<"\tPress 'P' to chose Paper\n";
-                            tabs cout<<"\tPress 'Z' to chose Seissor\n";
-                            tabs cout<<"\tPress 'X' to close the game\n\n";
+                            tabs cout<<"\tPress --> 'R' to chose Rock\n";
+                            tabs cout<<"\tPress --> 'P' to chose Paper\n";
+                            tabs cout<<"\tPress --> 'Z' to chose Seissor\n";
+                            tabs cout<<"\tPress --> 'X' to close the game\n\n";
                             int win=0,lost=0;
 
                             while(1)
@@ -3215,13 +3289,13 @@ But if you want to close the program : Press <Capital 'X'> \n\n\n";
                                 int n;
                                 Sound
                                 char you,com;
-                                cout<<"\nPress 'R' or 'P' or 'Z' (without quatation)\t:\t";
+                                cout<<"\nPress --> 'R' or 'P' or 'Z' (without quatation)\t:\t";
                                 while(true)
                                 {
                                     this_thread::sleep_for(chrono::milliseconds(Time_Delay));
                                     if (kbhit())           //Control by arrow KEY
                                     {
-                                        KEY = _getch();      Manager();
+                                        KEY = _getch();      Key_Hit_Maintainor();
 
                                         if(KEY=='r' || KEY == 'p' || KEY == 'z' || KEY == 'x' || KEY==75) break;
                                         if(KEY=='R' || KEY == 'P' || KEY == 'Z' || KEY == 'X' || KEY==77) break;
@@ -3242,10 +3316,10 @@ But if you want to close the program : Press <Capital 'X'> \n\n\n";
                                 else         com='Z';
 
                                 tabs cout<<"\tRock Paper Seissor Game\n\n";
-                                tabs cout<<"\tPress 'R' to chose Rock\n";
-                                tabs cout<<"\tPress 'P' to chose Paper\n";
-                                tabs cout<<"\tPress 'Z' to chose Seissor\n";
-                                tabs cout<<"\tPress 'X' to close the game\n\n";
+                                tabs cout<<"\tPress --> 'R' to chose Rock\n";
+                                tabs cout<<"\tPress --> 'P' to chose Paper\n";
+                                tabs cout<<"\tPress --> 'Z' to chose Seissor\n";
+                                tabs cout<<"\tPress --> 'X' to close the game\n\n";
 
                                 NewLine
                                 cout<<"Your    Choice         \t:\t"<<you<<endl;
