@@ -93,7 +93,6 @@ void changeTextColour()
     if(ColorVar == 13) SetConsoleColor(LightMagenta);
     if(ColorVar == 14) SetConsoleColor(LightYellow);
     if(ColorVar == 15) SetConsoleColor(BrightWhite);
-
 }
 
 void changeTextColour2()
@@ -110,7 +109,6 @@ void changeTextColour2()
     if(ColorVar == 4) SetConsoleColour(Magenta,BrightWhite);
     if(ColorVar == 6) SetConsoleColour(Yellow,BrightWhite);
     if(ColorVar == 7) SetConsoleColour(Black,BrightWhite);
-
 }
 
 void changeBgColour()
@@ -175,21 +173,21 @@ void clearScreen() {
     SetConsoleCursorPosition(console, topLeft);
 }
 
-int rd2=0;
+int DisplayWorldView_Var=0;
 
 void DisplayWorldView()
 {
-    rd2 = 1 + rd2 % 9;
+    DisplayWorldView_Var = 1 + DisplayWorldView_Var % 9;
 
-    if(rd2==1) cout<<"\r"<<"Pray For Arakan                ";
-    if(rd2==2) cout<<"\r"<<"Pray For Kashmir               ";
-    if(rd2==3) cout<<"\r"<<"Pray For Uighur                ";
-    if(rd2==4) cout<<"\r"<<"Pray For Filistin              ";
-    if(rd2==5) cout<<"\r"<<"Pray For Yemen                 ";
-    if(rd2==6) cout<<"\r"<<"Pray For Africa                ";
-    if(rd2==7) cout<<"\r"<<"Pray For Baytul Mukaddis       ";
-    if(rd2==8) cout<<"\r"<<"Pray For All Oppressed         ";
-    if(rd2==9) cout<<"\r"<<"Never Forget Them              ";
+    if(DisplayWorldView_Var==1) cout<<"\r"<<"Pray For Arakan                ";
+    if(DisplayWorldView_Var==2) cout<<"\r"<<"Pray For Kashmir               ";
+    if(DisplayWorldView_Var==3) cout<<"\r"<<"Pray For Uighur                ";
+    if(DisplayWorldView_Var==4) cout<<"\r"<<"Pray For Filistin              ";
+    if(DisplayWorldView_Var==5) cout<<"\r"<<"Pray For Yemen                 ";
+    if(DisplayWorldView_Var==6) cout<<"\r"<<"Pray For Africa                ";
+    if(DisplayWorldView_Var==7) cout<<"\r"<<"Pray For Baytul Mukaddis       ";
+    if(DisplayWorldView_Var==8) cout<<"\r"<<"Pray For All Oppressed         ";
+    if(DisplayWorldView_Var==9) cout<<"\r"<<"Never Forget Them              ";
 
     if(TabNumber<4) cout<<"                    ";
 }
@@ -220,12 +218,12 @@ void Instruction()
     cout<< "Press < ` Key > : to Mute       \n";
     cout<< "Press < ~ Key > : to UnMute     \n\n";
 
-    cout<< "Press <Small'p'> for Premium ASCII Mode (This can be misbehave in Some System)\n";
-    cout<< "Press <Small'u'> for Come-back Normal  ASCII Mode\n\n";
+    cout<< "Press <Small'p'> for Premium ASCII Mode (This can be misbehave in Some System) or Come-back Normal  ASCII Mode (Run Perfectly in All System)\n";
+    cout<<"Always try to Turn off Caps Lock. Because in KeyHit Time, Capital Some Letter Conflict with other keys.\n\n";
 
     SetConsoleColour (Black,BrightWhite);
     cout<<"Press < Home Key >, to Goto Main Menu\n";
-    cout<<"Press < End  Key >, to close the Program\n\n";
+    cout<<"Press < End  Key >, to close the Program or End the playing Game\n\n";
 
     //SetConsoleColor(BrightWhite);
 
@@ -244,7 +242,7 @@ Select Snake Game Type & Select Level Then Play the Game. You can customize Snak
 
      Multi_Tabs_1 cout<<"To Move Snake         -> Press <      Arrow_Keys    >"<<endl;
      Multi_Tabs_1 cout<<"To Pause              -> Press <      Space Key     >"<<endl;
-     Multi_Tabs_1 cout<<"To Change Snake Style -> Press < Small p/u/i/o Keys >"<<endl;
+     Multi_Tabs_1 cout<<"To Change Snake Style -> Press < Small  o / p  Keys >"<<endl;
      Multi_Tabs_1 cout<<"To Shift PlayGround   -> Press < Angle Bracket Keys >"<<endl;
      Multi_Tabs_1 cout<<"To Change Color       -> Press <    []{}'\";:  Keys >"<<endl;
      Multi_Tabs_1 cout<<"Any Graphical Problem -> Press <      Enter-Key     >"<<endl;
@@ -264,8 +262,8 @@ void Key_Hit_Maintainor()
     if(KEY=='+' || KEY=='=') {Time_Delay++; Sound if(Time_Delay>100) Time_Delay=91; if(Time_Delay>10) Time_Delay+=9; }
     if(KEY=='-' || KEY=='_') {Time_Delay--; Sound if(Time_Delay<0)   Time_Delay=0;  if(Time_Delay>10) Time_Delay-=9; }
 
-    if (KEY=='p') is_Premium = true;
-    if (KEY=='u') is_Premium = false;
+    if (KEY=='p' && is_Premium == false) is_Premium = true ;
+    else if (KEY=='p' && is_Premium == true ) is_Premium = false;
 
     if (KEY=='\'')
     {
@@ -336,7 +334,7 @@ void Key_Hit_Maintainor()
     if (KEY=='<' || KEY==',')  {TabNumber--; if(TabNumber<0) TabNumber=0; if((Marker==1 || Marker==2) && is_Playing == true) system("cls");}
     if (KEY=='>' || KEY=='.')  {TabNumber++;                              if((Marker==1 || Marker==2) && is_Playing == true) system("cls");}
     if (KEY=='^')  {TabNumber=5;                                          if((Marker==1 || Marker==2) && is_Playing == true) system("cls");}
-    if (KEY=='`')  {SoundFlag=false; cout<<"\rMuted";}
+    if (KEY=='`')  {SoundFlag=false; cout<<"\rMuted  ";}
     if (KEY=='~')  {SoundFlag= true; cout<<"\r\aUnmuted";}
 
     KeyHit_Cheak_Count++; // not necessery
@@ -371,12 +369,15 @@ char Dicission (char a)
 }
 
 int  Snake_Area_Row = 15 , Snake_Area_Column = 20 ;
+
 char Dicission_in_Snake_Game  (char a)
 {
     NewLine
     Multi_Tabs_3 cout << "\tTo Play Again in Different Speed                 :  Press-  <Esc> \n";
     Multi_Tabs_3 cout << "\tTo Play Again in    Same   Speed                 :  Press- <Space> \n";
-    Multi_Tabs_3 cout << "\tTo Goto Main Menu                                :  Press- <Home>\n";
+    Multi_Tabs_3 cout << "\tTo Goto Snake Menu                               :  Press-  <Home>\n";
+    Multi_Tabs_3 cout << "\tTo Goto Main  Menu                               :  Press-  <End>\n";
+
     while(true)
     {
         this_thread::sleep_for(chrono::milliseconds(Time_Delay));
@@ -384,10 +385,10 @@ char Dicission_in_Snake_Game  (char a)
         {
             KEY = _getch();      Key_Hit_Maintainor();
 
-            if    (KEY==' ' || KEY == 13 )                          {a= '2';   break;}
-            if    (KEY== 27 )                                       {a= '1';   break;}
-            if    (KEY=='x' || KEY=='X' || KEY==79 || KEY==71 )     {a= '0';   break;}
-
+            if    (KEY== 32 || KEY == 13 || KEY == 75 || KEY==77)               {a= '3';   break;}
+            if    (KEY== 27 || KEY == 72)                                       {a= '2';   break;}
+            if    (KEY=='x' || KEY=='X' || KEY==71 )                            {a= '1';   break;}
+            if    (KEY== 79)                                                    {a= '0';   break;}
         }
     }
 
@@ -413,7 +414,7 @@ char Dicission_TicTacToe (char a)
             KEY = _getch();      Key_Hit_Maintainor();
 
 //            if    (KEY>='0' && KEY<='4')                 {a= KEY;   break;}
-            if    (KEY=='x' || KEY==71 || KEY==79 )      {a= '0';   break;}
+            if    (KEY=='x' || KEY=='X' || KEY==71 || KEY==79 )      {a= '0';   break;}
             if    (KEY == 32)                            {a= '3';   break;}
             if    (KEY == 13)                            {a= '4';   break;}
             if    (KEY == 8 )                            {a= '2';   break;}
@@ -581,8 +582,8 @@ int main()
             else if (KEY==80 ) { Marker++; if(Marker>8) Marker=1; goto Menu; }
             else if (KEY==72 ) { Marker--; if(Marker<1) Marker=8; goto Menu; }
 
-            else if (KEY=='p') {is_Premium = true;  goto Menu;}
-            else if (KEY=='u') {is_Premium = false; goto Menu; }
+            else if (KEY=='p' && is_Premium == false) {is_Premium = true;  goto Menu;}
+            else if (KEY=='p' && is_Premium == true ) {is_Premium = false; goto Menu; }
 
             else if (KEY=='?' || KEY=='/' ) {Instruction(); continue;}
 
@@ -699,7 +700,6 @@ int main()
                 }
             }
             system("cls");
-
 
             while(true)
             {
@@ -827,16 +827,18 @@ int main()
                             PlayGround [i] = ' ' ;
                         }
 
-                        if(is_Premium)PlayGround [Bonus] = Step%2+5;
+                        if(is_Premium)PlayGround [Bonus] =  5  + Step%2;
                         else          PlayGround [Bonus] = '$' - Step%2;
 
                         PlayGround [Fruit] = Step%2+42; //Fruit Symbol (*,+)
 
                         for(i = Score+3; i>0; i--)
                         {
-                            if     (!is_Premium)  PlayGround [Snake_Body[i]]  =  'o';
-                            else if(!DoubleSnake) PlayGround [Snake_Body[i]]  =  254; //Snake Body Symbol
-                            else if( DoubleSnake) PlayGround [Snake_Body[i]]  =  219; //Snake Body Symbol
+                            if     (!is_Premium && !DoubleSnake)  PlayGround [Snake_Body[i]]  =  'o';
+                            if     (!is_Premium &&  DoubleSnake)  PlayGround [Snake_Body[i]]  =  'O';
+
+                            if     ( is_Premium && !DoubleSnake)  PlayGround [Snake_Body[i]]  =  254; //Snake Body Symbol
+                            if     ( is_Premium &&  DoubleSnake)  PlayGround [Snake_Body[i]]  =  219; //Snake Body Symbol
                         }
 
                         if(is_Premium) PlayGround [Snake_Body[Score+3]] = 4;    //Snake Tail Symbol
@@ -853,9 +855,9 @@ int main()
                         if(Snake_Marker==3) {Multi_Tabs_1 cout << "         SNAKE GAME [BOX]         \n\n";}
                         if(Snake_Marker==4) {Multi_Tabs_1 cout << "   SNAKE GAME [BOX-N0-SELF-BITE]  \n\n";}
 
-                        if(Snake_Marker==5) {Multi_Tabs_1 cout << "       AI SNAKE GAME [CLASSIC]    \n\n";}
-                        if(Snake_Marker==6) {Multi_Tabs_1 cout << "    AI SNAKE GAME [CLASSIC-NO-END]\n\n";}
-                        if(Snake_Marker==7) {Multi_Tabs_1 cout << "          AI SNAKE GAME [BOX]     \n\n";}
+                        if(Snake_Marker==5) {Multi_Tabs_1 cout << "      AI SNAKE GAME [CLASSIC]    \n\n";}
+                        if(Snake_Marker==6) {Multi_Tabs_1 cout << "   AI SNAKE GAME [CLASSIC-NO-END]\n\n";}
+                        if(Snake_Marker==7) {Multi_Tabs_1 cout << "         AI SNAKE GAME [BOX]     \n\n";}
                         if(Snake_Marker==8) {Multi_Tabs_1 cout << "  AI SNAKE GAME [BOX-N0-SELF-BITE]\n\n";}
 
                         if(Snake_Marker==9) {Multi_Tabs_1 cout << "     AI SAFE SNAKE GAME [CLASSIC]  \n\n";}
@@ -919,8 +921,8 @@ int main()
 
                                 else if(KEY=='x'  )  break;
 
-                                else if(KEY=='i') DoubleSnake=false;
-                                else if(KEY=='o') DoubleSnake=true;
+                                else if(DoubleSnake==true  && KEY=='o') DoubleSnake=false;
+                                else if(DoubleSnake==false && KEY=='o') DoubleSnake=true;
 
                                 else { Key_Hit_Maintainor(); continue;}
                         }
@@ -1217,9 +1219,10 @@ int main()
                     }
 
                     Again = Dicission_in_Snake_Game  (Kall);
-                    if      (Again== '2') continue;
-                    else if (Again== '1') break;
-                    else                  goto Snake_Menu;
+                    if      (Again== '3') continue;
+                    else if (Again== '2') break;
+                    else if (Again== '1') goto Snake_Menu;
+                    else                  goto Menu;
 
                 }
             }
@@ -2745,17 +2748,17 @@ int main()
                     int Your_Toss_Choise, Toss_Coin;
 
                     Multi_Tabs_1 cout<<"      Now Tossing! \n\n";
-                    Multi_Tabs_3 cout<<"What do you want? Head / Tail? Press --> - '1' / '2'.\n\n";
+                    Multi_Tabs_3 cout<<"What do you want? Head / Tail? Press --> - 'H' / 'T'.\n\n";
 
                     while(true)
                     {
                         this_thread::sleep_for(chrono::milliseconds(Time_Delay));
                         if (kbhit())           //Control by arrow KEY
                         {
-                            KEY = _getch();  Key_Hit_Maintainor();
+                            KEY = _getch();
 
-                            if    (KEY=='1') {Your_Toss_Choise = 0; break;}
-                            if    (KEY=='2') {Your_Toss_Choise = 1; break;}
+                            if    (KEY=='h') {Your_Toss_Choise = 0; break;}
+                            if    (KEY=='t') {Your_Toss_Choise = 1; break;}
                         }
                     }
 
@@ -2773,7 +2776,7 @@ int main()
                             this_thread::sleep_for(chrono::milliseconds(Time_Delay));
                             if (kbhit())           //Control by arrow KEY
                             {
-                                KEY = _getch();  Key_Hit_Maintainor();
+                                KEY = _getch();
 
                                 if    (KEY=='1') {break;}
                                 if    (KEY=='2') {break;}
@@ -2832,10 +2835,10 @@ int main()
                                     this_thread::sleep_for(chrono::milliseconds(Time_Delay));
                                     if (kbhit())           //Control by arrow KEY
                                     {
-                                        KEY = _getch(); Key_Hit_Maintainor();
+                                        KEY = _getch();
 
                                         if    (KEY>='0' && KEY<='6')                        { break;}
-                                        if    (KEY=='x' || KEY=='X' || KEY==71 || KEY==79)   { goto Menu;}
+                                        if    (KEY=='x' || KEY=='X' || KEY==71 || KEY==79)  { goto Menu;}
                                         if    (KEY==77 || KEY==' ')                         {KEY=rand()%7 +'0';   break;}
 
                                     }
@@ -2887,7 +2890,7 @@ int main()
                                     this_thread::sleep_for(chrono::milliseconds(Time_Delay));
                                     if (kbhit())           //Control by arrow KEY
                                     {
-                                        KEY = _getch();  Key_Hit_Maintainor();
+                                        KEY = _getch();
 
                                         if    (KEY>='0' && KEY<='6')                            { break;}
                                         if    (KEY=='x' || KEY=='X' || KEY==71 || KEY==79)       { goto Menu;}
@@ -2957,7 +2960,7 @@ int main()
                                     this_thread::sleep_for(chrono::milliseconds(Time_Delay));
                                     if (kbhit())           //Control by arrow KEY
                                     {
-                                        KEY = _getch();  Key_Hit_Maintainor();
+                                        KEY = _getch();
 
                                         if    (KEY>='0' && KEY<='6') { break;}
                                         if    (KEY=='x' || KEY=='X' || KEY==71 || KEY==79) {goto Menu;}
@@ -3006,7 +3009,7 @@ int main()
                                     this_thread::sleep_for(chrono::milliseconds(Time_Delay));
                                     if (kbhit())           //Control by arrow KEY
                                     {
-                                        KEY = _getch(); Key_Hit_Maintainor();
+                                        KEY = _getch();
 
                                         if    (KEY>='0' && KEY<='6')                            { break;}
                                         if    (KEY=='x' || KEY=='X' || KEY==71 || KEY==79)      {goto Menu;}
@@ -3373,9 +3376,9 @@ int main()
 
             getch();
             cout<<"\n\nTotal Polling   : "<<KeyHit_Cheak_Count<<endl;
-          
+
             return 0;
-      
+
         default:
             goto Menu;
 
