@@ -299,8 +299,8 @@ void Key_Hit_Maintainor()
 char Dicission (char a)
 {
     NewLine NewLine NewLine
-    Multi_Tabs_2 cout << "\tTo Play Again     Press- <Space> or <Enter>  \n";
-    Multi_Tabs_2 cout << "\tTo Goto Menu      Press- <Home>  or  <End>   \n";
+    Multi_Tabs_4 cout << "\tTo Play Again     Press -->  <Space> or <Enter>  \n";
+    Multi_Tabs_4 cout << "\tTo Goto Menu      Press -->  <Home>  or  <End>   \n";
 
     while(true)
     {
@@ -326,10 +326,10 @@ int  Snake_Area_Row = 15 , Snake_Area_Column = 20 ;
 char Dicission_in_Snake_And_Pac_Game  (char a)
 {
     NewLine
-    Multi_Tabs_3 cout << "\tTo Play Again in Different Speed                 :  Press-  <Esc> \n";
-    Multi_Tabs_3 cout << "\tTo Play Again in    Same   Speed                 :  Press- <Space> \n";
-    Multi_Tabs_3 cout << "\tTo Goto Local Menu                               :  Press-  <Home>\n";
-    Multi_Tabs_3 cout << "\tTo Goto Main  Menu                               :  Press-  <End>\n";
+    Multi_Tabs_3 cout << "\tTo Play Again in    Same   Speed             :  Press -->  <Space> \n";
+    Multi_Tabs_3 cout << "\tTo Play Again in Different Speed             :  Press -->   <Esc> \n";
+    Multi_Tabs_3 cout << "\tTo Goto Local Menu                           :  Press -->   <Home>\n";
+    Multi_Tabs_3 cout << "\tTo Goto Main  Menu                           :  Press -->   <End>\n";
 
     while(true)
     {
@@ -353,11 +353,11 @@ char Dicission_in_Snake_And_Pac_Game  (char a)
 char Dicission_TicTacToe (char a)
 {
     NewLine
-    Multi_Tabs_4 cout << "\tTo Play Again in 'Different Level'                     :  Press- <ESC> KEY\n";
-    Multi_Tabs_4 cout << "\tTo Play Again in 'Same Level'                          :  Press- <Back-Space> KEY\n";
-    Multi_Tabs_4 cout << "\tTo Play Again in 'Same Level' &   Same   'First Move'  :  Press- <Space> KEY \n";
-    Multi_Tabs_4 cout << "\tTo Play Again in 'Same Level' & Opposite 'First Move'  :  Press- <Enter>\n";
-    Multi_Tabs_4 cout << "\tTo Goto Main Menu                                      :  Press- <HOME> KEY\n";
+    Multi_Tabs_4 cout << "To Play Again in 'Same Level' &   Same   'First Move'  :  Press -->   <Space> KEY \n";
+    Multi_Tabs_4 cout << "To Play Again in 'Same Level' & Opposite 'First Move'  :  Press -->   <Enter> KEY\n";
+    Multi_Tabs_4 cout << "To Play Again in 'Same Level'                          :  Press --> <Back-Space> KEY\n";
+    Multi_Tabs_4 cout << "To Play Again in 'Different Level'                     :  Press -->   <HOME> KEY\n";
+    Multi_Tabs_4 cout << "To Goto Main Menu                                      :  Press -->   <END>  KEY\n";
 
     while(true)
     {
@@ -367,11 +367,11 @@ char Dicission_TicTacToe (char a)
             KEY = _getch();      Key_Hit_Maintainor();
 
 //            if    (KEY>='0' && KEY<='4')                 {a= KEY;   break;}
-            if    (KEY=='x' || KEY=='X' || KEY==71 || KEY==79 )      {a= '0';   break;}
+            if    (KEY=='x' || KEY=='X' || KEY==79 )      {a= '0';   break;}
             if    (KEY == 32)                            {a= '3';   break;}
             if    (KEY == 13)                            {a= '4';   break;}
             if    (KEY == 8 )                            {a= '2';   break;}
-            if    (KEY == 27)                            {a= '1';   break;}
+            if    (KEY == 71)                            {a= '1';   break;}
 
         }
     }
@@ -391,12 +391,12 @@ int win= 0, lost= 0, draw= 0;
 char Dicission_cricket (char a)
 {
     NewLine
-    Multi_Tabs_4 cout << "To Play Again in  'Different Team'    &   'Different Over-Wicket'                         :  Press-'q'\n";
-    Multi_Tabs_4 cout << "To Play Again in  '   Same   Team'    &   'Different Over-Wicket'                         :  Press-'w'\n";
-    Multi_Tabs_4 cout << "To Play Again in  '   Same   Team'    &   '   Same   Over-Wicket'   with     Tossing      :  Press-'e'\n";
-    Multi_Tabs_4 cout << "To Play Again in  '   Same   Team'    &   '   Same   Over-Wicket'  without   Tossing      :  Press-'r'\n";
+    Multi_Tabs_4 cout << "To Play Again in  'Different Team'    &   'Different Over-Wicket'                         :  Press --> 'q'\n";
+    Multi_Tabs_4 cout << "To Play Again in  '   Same   Team'    &   'Different Over-Wicket'                         :  Press --> 'w'\n";
+    Multi_Tabs_4 cout << "To Play Again in  '   Same   Team'    &   '   Same   Over-Wicket'   with     Tossing      :  Press --> 'e'\n";
+    Multi_Tabs_4 cout << "To Play Again in  '   Same   Team'    &   '   Same   Over-Wicket'  without   Tossing      :  Press --> 'r'\n";
 
-    Multi_Tabs_4 cout << "To Goto Main Menu                                                                         :  Press-'x'\n";
+    Multi_Tabs_4 cout << "To Goto Main Menu                                                                         :  Press --> 'x'\n";
 
     while(true)
     {
@@ -424,9 +424,9 @@ char Dicission_cricket (char a)
 char Dicission_in_Mini_Games  (char a)
 {
     NewLine
-    Multi_Tabs_3 cout << "\tTo Play Again,               Press- <Space>\n";
-    Multi_Tabs_3 cout << "\tTo Play Another  Mini GAME , Press- <Enter>\n";
-    Multi_Tabs_3 cout << "\tTo Goto MENU,                Press- <Home>\n";
+    Multi_Tabs_3 cout << "\tTo Play Again,               Press -->  <Space>\n";
+    Multi_Tabs_3 cout << "\tTo Play Another  Mini GAME , Press -->  <Enter>\n";
+    Multi_Tabs_3 cout << "\tTo Goto MENU,                Press -->  <Home>\n";
 
     while(true)
     {
@@ -874,7 +874,8 @@ int main()
                                 else if(KEY=='0' || KEY=='5' || KEY==32 )   getch();
                                 else if(KEY==13  || KEY==8              )   system("cls");
 
-                                else if(KEY=='/' || KEY=='?') {system("cls"); Instruction(); Snake_Instruction(); system("cls"); }
+                                else if(KEY=='/') {system("cls"); Snake_Instruction(); system("cls"); }
+                                else if(KEY=='?') {system("cls"); Instruction(); Snake_Instruction(); system("cls"); }
 
                                 else if(KEY=='x'  )  break;
 
@@ -2718,7 +2719,7 @@ int main()
                     int Your_Toss_Choise, Toss_Coin;
 
                     Multi_Tabs_1 cout<<"      Now Tossing! \n\n";
-                    Multi_Tabs_3 cout<<"What do you want? Head / Tail? Press --> - 'H' / 'T'.\n\n";
+                    Multi_Tabs_3 cout<<"What do you want? Head / Tail? Press -->  'H' / 'T'.\n\n";
 
                     while(true)
                     {
@@ -2727,8 +2728,8 @@ int main()
                         {
                             KEY = _getch();
 
-                            if    (KEY=='h') {Your_Toss_Choise = 0; break;}
-                            if    (KEY=='t') {Your_Toss_Choise = 1; break;}
+                            if    (KEY=='h' || KEY == 'H') {Your_Toss_Choise = 0; break;}
+                            if    (KEY=='t' || KEY == 'T') {Your_Toss_Choise = 1; break;}
                         }
                     }
 
