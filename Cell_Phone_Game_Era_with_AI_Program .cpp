@@ -5,7 +5,7 @@
 #include <ctime>       // time() — srand(time(0)) এর জন্য
 #include <thread>      // this_thread::sleep_for
 #include <chrono>      // chrono::milliseconds
-#include <string>      // string (মাত্র ৪ জায়গায় use হয়েছে)
+#include <string>      // string
 #include <algorithm>   // fill, min, max
 #include <cmath>
 
@@ -175,20 +175,7 @@ void clearScreen() {
     SetConsoleCursorPosition(console, topLeft);
 }
 
-int rd1=0, rd2=0;
-
-void DisplayAdvise()
-{
-    rd1 = 1 + rd1 % 4;
-
-    if(rd1==1) cout<<"\r"<<"BE OBIDIENT TO ALLAH (SUBH.) IF YOU ARE A MUSLIM        ";
-    if(rd1==2) cout<<"\r"<<"FOLLOW PROPHET MUHAMMAD (SM.) IF YOU ARE A MUSLIM       ";
-    if(rd1==3) cout<<"\r"<<"READ HOLY QURAN                      ";
-    if(rd1==4) cout<<"\r"<<"FOLLOW SUNNAH, NOT WESTERN OR OTHERS ";
-
-    if(TabNumber<4) cout<<"                    ";
-
-}
+int rd2=0;
 
 void DisplayWorldView()
 {
@@ -201,7 +188,7 @@ void DisplayWorldView()
     if(rd2==5) cout<<"\r"<<"Pray For Yemen                 ";
     if(rd2==6) cout<<"\r"<<"Pray For Africa                ";
     if(rd2==7) cout<<"\r"<<"Pray For Baytul Mukaddis       ";
-    if(rd2==8) cout<<"\r"<<"Pray For All_Oppressed_Man     ";
+    if(rd2==8) cout<<"\r"<<"Pray For All Oppressed         ";
     if(rd2==9) cout<<"\r"<<"Never Forget Them              ";
 
     if(TabNumber<4) cout<<"                    ";
@@ -633,7 +620,7 @@ int main()
 
             else if(KEY>=65 && KEY <=90            )   DisplayWorldView();
             else if(KEY>=97 && KEY <=122           )   DisplayWorldView();
-            else if(KEY>=32 && KEY <=126 && KEY!=75)   DisplayAdvise();
+            else if(KEY>=32 && KEY <=126 && KEY!=75)   DisplayWorldView();
 
             else ;
 
@@ -2379,7 +2366,7 @@ int main()
             while(true)
             {
                 Multi_Tabs_1 cout << "\tSUDOKU GAME\n\n\n";
-                cout<<"#Instruction : Here You should Fill Up All of the Blank Space Properly (According to Sudoku Rules).\n\n\Here ('*' Sign Before Number) Indicates Current Index, ('`' sign After Number) indicates Your Filled Index. To Change Index Possition Press <Arrow Keys: Left/Right/Up/Down>,   To insert value into the Index: Select Index Possition, then input the value < From 1 to 9>. If You want to Remove Inputed Value Press '0'. You can't change the Given Value. If you fill up all the blank space properly, then the level will be completed & You get Congratulation. Otherwise Game will be Running. But if you want to close the program : Press <Capital 'X'> \n\n\n";
+                cout<<"#Instruction : Here You should Fill Up All of the Blank Space Properly (According to Sudoku Rules).\n\n Here ('*' Sign Before Number) Indicates Current Index, ('`' sign After Number) indicates Your Filled Index. To Change Index Possition Press <Arrow Keys: Left/Right/Up/Down>,   To insert value into the Index: Select Index Possition, then input the value < From 1 to 9>. If You want to Remove Inputed Value Press '0'. You can't change the Given Value. If you fill up all the blank space properly, then the level will be completed & You get Congratulation. Otherwise Game will be Running. But if you want to close the program : Press <Capital 'X' or END KEY> \n\n\n";
                 Multi_Tabs_3 cout << "You should Fill Up All The Empty(Dot Sign) Index by Inserting Proper Value\n\n";
                 int Sudoku[101]= {0}, cnt, row=0, col=0, Index=11, Value=0, i, j, k;  //Sudoku holo Main Array jeti sokol index Value contain korbe, etake 2D array hisebeo NewLine a jaito but ami neini
                 bool Temp[101]={false}, Markerer[101] = {false};   // ei string-tar kaj holo, jate given index gulor value ami poriborton korte na pari.
@@ -2697,9 +2684,7 @@ int main()
                     system("cls");
                     Multi_Tabs_1 cout << "\tSUDOKU GAME\n\n\n";
 
-                    cout<<"#Instruction: Here You should Fill Up All of the Blank Space Properly (According to Sudoku Rules).\n\n\To insert value in the Index, select row(1-9) & column(1-9) number of the Index, \
-then input the value. You can't change the Given Value. If you fill up all the blank space properly, then the level will be completed & You get Congratulation. Otherwise Game will be Running.\
-But if you want to close the program : Press <Capital 'X'> \n\n\n";
+                    cout<<"#Instruction: Here You should Fill Up All of the Blank Space Properly (According to Sudoku Rules).\n\n To insert value in the Index, select row(1-9) & column(1-9) number of the Index, then input the value. You can't change the Given Value. If you fill up all the blank space properly, then the level will be completed & You get Congratulation. Otherwise Game will be Running. But if you want to close the program : Press <Capital 'X'> \n\n\n";
 
                     Multi_Tabs_3 cout << "You should Fill Up All The Empty(Dot Sign) Index by Inserting Proper Value.\n\n";
                     NewLine Multi_Tabs_1
@@ -3388,9 +3373,9 @@ But if you want to close the program : Press <Capital 'X'> \n\n\n";
 
             getch();
             cout<<"\n\nTotal Polling   : "<<KeyHit_Cheak_Count<<endl;
-
+          
             return 0;
-
+      
         default:
             goto Menu;
 
