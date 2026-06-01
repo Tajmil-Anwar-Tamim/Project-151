@@ -43,7 +43,7 @@ char KEY;
 int Time_Delay=1;   //time Delay in every KEY-hit.
 int KeyHit_Cheak_Count=0;
 
-int TabNumber=6,iGlobal;
+int TabNumber=3,iGlobal;
 
 bool SoundFlag  = true;
 bool is_Premium = false;
@@ -286,7 +286,7 @@ void Key_Hit_Maintainor()
 
     if (KEY=='<' || KEY==',')  {TabNumber--; if(TabNumber<0) TabNumber=0; if((Marker==1 || Marker==2) && is_Playing == true) system("cls");}
     if (KEY=='>' || KEY=='.')  {TabNumber++;                              if((Marker==1 || Marker==2) && is_Playing == true) system("cls");}
-    if (KEY=='^')  {TabNumber=5;                                          if((Marker==1 || Marker==2) && is_Playing == true) system("cls");}
+    if (KEY=='^')  {TabNumber=3;                                          if((Marker==1 || Marker==2) && is_Playing == true) system("cls");}
     if (KEY=='`')  {SoundFlag=false; cout<<"\rMuted  ";}
     if (KEY=='~')  {SoundFlag= true; cout<<"\r\aUnmuted";}
 
@@ -646,7 +646,13 @@ int main()
                         goto Snake_Menu;
                     }
 
-                    if(KEY=='/'|| KEY=='?')
+                    if(KEY=='/')
+                    {
+                             Snake_Instruction();
+                             goto Snake_Menu;
+                    }
+
+                    if(KEY=='?')
                     {
                              Instruction();
                              Snake_Instruction();
@@ -877,7 +883,7 @@ int main()
                                 else if(KEY=='/') {system("cls"); Snake_Instruction(); system("cls"); }
                                 else if(KEY=='?') {system("cls"); Instruction(); Snake_Instruction(); system("cls"); }
 
-                                else if(KEY=='x'  )  break;
+                                else if(KEY=='x' || KEY=='X' || KEY==79 )  break;
 
                                 else if(DoubleSnake==true  && KEY=='o') DoubleSnake=false;
                                 else if(DoubleSnake==false && KEY=='o') DoubleSnake=true;
@@ -1360,7 +1366,7 @@ int main()
                             else if(KEY=='+' || KEY=='=') {Level++; if(Level==9)  Level--;}
                             else if(KEY=='-' || KEY=='_') {Level--; if(Level==0)  Level++;}
 
-                            else if(KEY=='x'  )  break;
+                            else if(KEY=='x' || KEY=='X' || KEY==79 )  break;
 
                             else {Key_Hit_Maintainor(); continue;}
                         }
@@ -2267,7 +2273,10 @@ int main()
                         NewLine Multi_Tabs_3 cout << "     Press -->  Home/End/X KEY to CLOSE The GAME \n\n";
                         Sound
 
-                        int Board[Number_of_Player+1]= {0}, Temp= 0;
+                        int Board[Number_of_Player+1];
+                        fill(Board, Board + Number_of_Player + 1, 0);
+                        int Temp = 0;
+
                         int Dice, i;
                         bool x= true;
 
