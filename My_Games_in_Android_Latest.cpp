@@ -45,6 +45,8 @@ int _getch() {
 }
 // ──────────────────────────────────────────────────────────────────
 
+#define ENTER_KEY 10
+
 /// Tabs & Carriage_Return
 #define tab cout<<" ";
 #define tabs for (iGlobal=0;iGlobal<TabNumber;iGlobal++) tab
@@ -219,14 +221,16 @@ void Instruction()
     clearScreen();
     cout<<"COMMON INSTRUCTIONS :  \n\n";
 
-    cout<<"Txt Color : ' \" ; : " << endl;
-    cout<<"BG  Color : []{} " << endl;
+    cout<<"Txt Color   : ' \" ; : " << endl;
+    cout<<"BG  Color   : [ ] { } " << endl;
+    cout<<"Refrsh Colr : \ |" << endl;
     cout<<"Shift Text  : < >" << endl;
     cout<<"Mute/UnMute : ` ~" << endl;
+    cout<<"Poling Time : + -" << endl;
     cout<<"Symbl Style : p " << endl;
-    cout<<"Control Game: w/a/s/d " << endl;
-    cout<<"Go to Menu : H " << endl;
-    cout<<"Exit Game  : Q " << endl;
+    cout<<"Contrl Game : w/a/s/d " << endl;
+    cout<<"Go to Menu  : H " << endl;
+    cout<<"Exit Game   : Q or X" << endl;
     //_getch();
 }
 
@@ -242,9 +246,9 @@ Select Snake Game Type & Select Level Then Play the Game. You can customize Snak
      Multi_Tabs_1 cout<<"Snake Style  : i/o/p"<<endl;
      Multi_Tabs_1 cout<<"Shift Area   : <,>"<<endl;
      Multi_Tabs_1 cout<<"Change Color : []{}'\";: "<<endl;
-     Multi_Tabs_1 cout<<"Refresh      : 'O' "<<endl;
-     Multi_Tabs_1 cout<<"Quit the Game: 'Q'\n"<<endl;
-     Multi_Tabs_1 cout<<"Now to Back the Game : Space/'O' Key \n"<<endl;
+     Multi_Tabs_1 cout<<"Refresh      : ENTER_KEY "<<endl;
+     Multi_Tabs_1 cout<<"Quit the Game: 'Q' or 'X'\n"<<endl;
+     Multi_Tabs_1 cout<<"Now to Back the Game : Space/ENTER_KEY Key \n"<<endl;
 
 //     changeTextColour(); changeTextColour2();
 //     changeBgColour();   changeBgColour2();
@@ -290,7 +294,7 @@ void Key_Hit_Maintainor()
 char Dicission (char a)
 {
     NewLine NewLine NewLine
-    Multi_Tabs_4 cout << "To Play Again Press -->  <Space> or <'O'>  \n";
+    Multi_Tabs_4 cout << "To Play Again Press -->  <Space> or <ENTER_KEY>  \n";
     Multi_Tabs_4 cout << "To Goto Menu Press -->  <'H'>  or  <'Q'> \n";
 
     while(true)
@@ -300,7 +304,7 @@ char Dicission (char a)
         {
             KEY = _getch();      Key_Hit_Maintainor();
 
-            if    (KEY==' ' || KEY == 'O' )                                  {a= '1';   break;}
+            if    (KEY==' ' || KEY == ENTER_KEY )                                  {a= '1';   break;}
             if    (KEY=='x' || KEY=='X' || KEY=='H'  )                        {a= '0';   break;}
             if    (KEY=='Q' )                                                 {a= '0';   break;}
 
@@ -329,7 +333,7 @@ char Dicission_in_Snake_And_Pac_Game  (char a)
         {
             KEY = _getch();      Key_Hit_Maintainor();
 
-            if    (KEY== 32 || KEY == 'O' )                                      {a= '3';   break;}
+            if    (KEY== 32 || KEY == ENTER_KEY )                                      {a= '3';   break;}
             if    (KEY== 'Z' )                                                   {a= '2';   break;}
             if    (KEY=='x' || KEY=='X' || KEY=='H'  )                            {a= '1';   break;}
             if    (KEY== 'Q')                                                    {a= '0';   break;}
@@ -345,7 +349,7 @@ char Dicission_TicTacToe (char a)
 {
     NewLine
     Multi_Tabs_4 cout << "To Play Again in 'Same Level' & Same 'First Move'  :  Press --> <Space> KEY \n";
-    Multi_Tabs_4 cout << "To Play Again in 'Same Level' & Opposite 'First Move'  :  Press --> <'O'> KEY\n";
+    Multi_Tabs_4 cout << "To Play Again in 'Same Level' & Opposite 'First Move'  :  Press --> <ENTER_KEY> KEY\n";
     Multi_Tabs_4 cout << "To Play Again in 'Same Level' :  Press --> <'B'> KEY\n";
     Multi_Tabs_4 cout << "To Play Again in 'Different Level' :  Press --> <'H'> KEY\n";
     Multi_Tabs_4 cout << "To Goto Main Menu :  Press --> <'Q'>  KEY\n";
@@ -360,7 +364,7 @@ char Dicission_TicTacToe (char a)
 //            if    (KEY>='0' && KEY<='4')                 {a= KEY;   break;}
             if    (KEY=='x' || KEY=='X' || KEY=='Q'  )      {a= '0';   break;}
             if    (KEY == 32)                            {a= '3';   break;}
-            if    (KEY == 'O')                            {a= '4';   break;}
+            if    (KEY == ENTER_KEY)                            {a= '4';   break;}
             if    (KEY == 'B' )                            {a= '2';   break;}
             if    (KEY == 'H')                            {a= '1';   break;}
 
@@ -416,7 +420,7 @@ char Dicission_in_Mini_Games  (char a)
 {
     NewLine
     Multi_Tabs_3 cout << "To Play Again, Press -->  <Space>\n";
-    Multi_Tabs_3 cout << "To Play Another  Mini GAME , Press -->  <'O'>\n";
+    Multi_Tabs_3 cout << "To Play Another  Mini GAME , Press -->  <ENTER_KEY>\n";
     Multi_Tabs_3 cout << "To Goto MENU, Press -->  <'H'>\n";
 
     while(true)
@@ -428,7 +432,7 @@ char Dicission_in_Mini_Games  (char a)
             KEY = _getch();      Key_Hit_Maintainor();
 
 //            if    (KEY>='0' && KEY<='3') {a= KEY; break;}
-            if    (KEY=='x' || KEY == 'H' || KEY=='Q'   )   {a= '0';   break;}
+            if    (KEY=='x' || KEY == 'H' || KEY=='Q'   )                       {a= '0';   break;}
             if    (KEY=='d' || KEY=='D' || KEY=='s'  || KEY == 'S'  || KEY == 13  )   {a= '2';   break;}
             if    (KEY==' '  )                           {a= '1';   break;}
             if    (KEY=='w' || KEY=='W' || KEY == 'a' || KEY=='A'   )               {a= '1';   break;}
@@ -467,8 +471,6 @@ void Tic_Tac_Toe_Index_Instructior_Function()
     Multi_Tabs_1   NewLine NewLine
 
     Sound
-    Multi_Tabs_1  NewLine                       //Index Border Degign
-    Multi_Tabs_1
 }
 
 void Show_Main_Menu()
@@ -559,7 +561,7 @@ int main()
             else if(KEY=='@' ){ cout<<"\r"<<Coder_Name;  }
 
             else if(KEY=='B' || KEY=='a' || KEY=='A' || KEY=='H'  || KEY==32)   goto Menu;
-            else if ( KEY=='O' || KEY=='d' || KEY=='D' )   break;
+            else if ( KEY==ENTER_KEY || KEY=='d' || KEY=='D' )   break;
 
             else if(KEY=='+' ) {Time_Delay++; if(Time_Delay>100) Time_Delay=91; if(Time_Delay>10) Time_Delay+=9; cout<<"\rPolling_Delay(ms): "<<Time_Delay<<" ";}
             else if(KEY=='-' ) {Time_Delay--; if(Time_Delay<0  ) Time_Delay=0;  if(Time_Delay>10) Time_Delay-=9; cout<<"\rPolling_Delay(ms): "<<Time_Delay<<" ";}
@@ -700,7 +702,7 @@ int main()
 
                         if    (KEY>='1' && KEY<='8') {Level= KEY-'0'; break;}
                         if    (KEY=='a' || KEY=='A' || KEY=='H' )  goto Snake_Menu;
-                        if    (KEY=='Q'  || KEY=='x') goto Menu;
+                        if    (KEY=='Q'  || KEY=='X') goto Menu;
                     }
                 }
 
@@ -864,12 +866,12 @@ int main()
                                 else if(KEY=='-' ) {Level--; if(Level==0) Level++;}
 
                                 else if(KEY=='0' || KEY=='5' || KEY==32 )   _getch();
-                                else if(KEY=='O'  || KEY=='B'              )   clearScreen();
+                                else if(KEY==ENTER_KEY  || KEY=='B'              )   clearScreen();
 
                                 else if(KEY=='/') {clearScreen(); Snake_Instruction(); clearScreen(); }
                                 else if(KEY=='?') {clearScreen(); Instruction(); Snake_Instruction(); clearScreen(); }
 
-                                else if(KEY=='X'  )  break;
+                                else if(KEY=='X' || KEY=='Q'  )  break;
 
                                 else if(DoubleSnake==true  && KEY=='o') DoubleSnake=false;
                                 else if(DoubleSnake==false && KEY=='o') DoubleSnake=true;
@@ -1110,13 +1112,13 @@ int main()
 
                         if(Snake_Marker==3 || Snake_Marker==4 || Snake_Marker==7 || Snake_Marker==8 || Snake_Marker==0)
                         {
-                            if(Move== '6') {Snake_Head++;      if(Snake_Head% Snake_Area_Column == 0)                        { Snake_Head= -1; continue; }}      //Box e touch lagle Game over
-                            if(Move== '4') {Snake_Head--;      if(Snake_Head < 0 || (Snake_Head+1)% Snake_Area_Column == 0)  { Snake_Head= -1; continue; }}      // " " "
+                            if(Move== '6') {Snake_Head++;      if(Snake_Head% Snake_Area_Column == 0)                        { Snake_Head= Snake_Area_Row*Snake_Area_Column; continue; }}      //Box e touch lagle Game over
+                            if(Move== '4') {Snake_Head--;      if(Snake_Head < 0 || (Snake_Head+1)% Snake_Area_Column == 0)  { Snake_Head= Snake_Area_Row*Snake_Area_Column; continue; }}      // " " "
                             if(Move== '8') {Snake_Head -=  Snake_Area_Column ;    }
                             if(Move== '2') {Snake_Head +=  Snake_Area_Column ;    }
 
-                            if(Snake_Head >= Snake_Area_Row * Snake_Area_Column ) continue;  //Box e touch lagle Game over
-                            if(Snake_Head <   0) continue;  // " " "
+                            if(Snake_Head >= Snake_Area_Row * Snake_Area_Column ) { Snake_Head= Snake_Area_Row*Snake_Area_Column; continue; }  //Box e touch lagle Game over
+                            if(Snake_Head <   0)                                  { Snake_Head= Snake_Area_Row*Snake_Area_Column; continue; }  // " " "
                         }
 
 
@@ -1346,13 +1348,13 @@ int main()
                             else if(KEY=='a' || KEY=='A' || KEY=='4'  )   Move='4';   // Left arrow
                             else if(KEY=='d' || KEY=='D' || KEY=='6')    Move='6';   // Right arrow
 
-                            else if(KEY=='O')    clearScreen();
+                            else if(KEY==ENTER_KEY)    clearScreen();
                             else if(KEY=='0' || KEY=='5' || KEY==32) _getch();
 
                             else if(KEY=='+' ) {Level++; if(Level==9)  Level--;}
                             else if(KEY=='-' ) {Level--; if(Level==0)  Level++;}
 
-                            else if(KEY=='X'  )  break;
+                            else if(KEY=='X' || KEY=='Q'  )  break;
 
                             else {Key_Hit_Maintainor(); continue;}
                         }
@@ -1556,6 +1558,9 @@ int main()
                         if(Index_Data[i]== 2) Index_Symbol[i]= 'o';     //Filled by Computer
 
                     }
+
+                    Multi_Tabs_1  NewLine                       //Index Border Degign
+                    Multi_Tabs_1
 
                     for(i=1;i<=9;i++)  // Printing Loop
                     {
