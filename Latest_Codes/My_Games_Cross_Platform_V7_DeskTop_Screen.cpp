@@ -2,7 +2,7 @@
 
 #include <iostream>    // cout, cin, endl, printf
 #include <cstdlib>     // rand, srand, abs, system()
-#include <ctime>       // time() 
+#include <ctime>       // time 
 #include <thread>      // this_thread::sleep_for
 #include <chrono>      // chrono::milliseconds
 #include <string>      // string
