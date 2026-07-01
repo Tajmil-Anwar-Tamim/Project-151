@@ -2,7 +2,7 @@
 
 #include <iostream>    // cout, cin, endl, printf
 #include <cstdlib>     // rand, srand, abs, system()
-#include <ctime>       // time() — srand(time(0)) এর জন্য
+#include <ctime>       // time() য
 #include <thread>      // this_thread::sleep_for
 #include <chrono>      // chrono::milliseconds
 #include <string>      // string
@@ -554,7 +554,7 @@ int ReadKey()
 void Key_Hit_Maintainor()
 {
     if(KEY=='+' || KEY=='=') {Time_Delay++; Sound if(Time_Delay>100) Time_Delay=91; if(Time_Delay>10) Time_Delay+=9; }
-    if(KEY=='-' || KEY=='_') {Time_Delay--; Sound if(Time_Delay<0)   Time_Delay=0;  if(Time_Delay>10) Time_Delay-=9; }
+    if(KEY=='-' || KEY=='_') {Time_Delay--; Sound if(Time_Delay<=0)   Time_Delay=1; if(Time_Delay>10) Time_Delay-=9; }
 
     if (KEY=='p' && is_Premium == false) is_Premium = true ;
     else if (KEY=='p' && is_Premium == true ) is_Premium = false;
@@ -751,16 +751,17 @@ int Snake_or_Pac_Lavel_Generator(int Level)
 {
     int Delay;
 
-    if(Level==1) Delay=500;
-    if(Level==2) Delay=300;
-    if(Level==3) Delay=200;
-    if(Level==4) Delay=100;
-    if(Level==5) Delay=50;
-    if(Level==6) Delay=25;
-    if(Level==7) Delay=10;
-    if(Level==8) Delay=0;
+     if(Level==1) Delay=500;
+     if(Level==2) Delay=330;
+     if(Level==3) Delay=200;
+     if(Level==4) Delay=100;
+     if(Level==5) Delay=50;
+     if(Level==6) Delay=25;
+     if(Level==7) Delay=10;
+     if(Level==8)  Delay=1;
+     if(Level==9)  Delay=0;
 
-    return Delay;
+     return Delay;
 }
 
 int Snake_Fruit_position_Declaration_Function  (int Return_Fruit) //Decited Fruit possition in Snake Game
@@ -803,6 +804,7 @@ void Print_Ludo(int *Board,int n, int Dice, int k)
     Multi_Tabs_4 cout<<"Ladders : 6  --> 16,  8 --> 41, 26 --> 29, 50 --> 93, 55 --> 80, 59 --> 84, 66 --> 88 \n\n";
 
     NewLine Multi_Tabs_3 cout << "     Press -->      Any    KEY to  HIT  The DICE   ";
+    NewLine Multi_Tabs_3 cout << "     Press -->      '*'    KEY for      AutoPlay   ";
     NewLine Multi_Tabs_3 cout << "     Press -->  Home/End/X KEY to CLOSE The GAME \n\n\n\n";
 
     for(int i=1;i<=n;i++)
@@ -881,7 +883,7 @@ int main()
         {
             KEY = ReadKey();
 
-            if      (KEY>='0' && KEY<='9')                  {Marker= KEY-'0'; break;}
+            if      (KEY>='0' && KEY<='8')                  {Marker= KEY-'0'; break;}
             else if (KEY=='x' || KEY=='X' || KEY==END_KEY ) {Marker=100; break;}
 
             else if (KEY==DOWN_KEY || KEY=='s' ) { Marker++; if(Marker>8) Marker=1; goto Menu; }
@@ -919,7 +921,7 @@ int main()
             else if ( KEY==ENTER_KEY || KEY==RIGHT_KEY )                                        break;
 
             else if(KEY=='+' || KEY=='=') {Time_Delay++; if(Time_Delay>100) Time_Delay=91; if(Time_Delay>10) Time_Delay+=9; cout<<"\rPolling_Delay(ms): "<<Time_Delay<<"                          ";}
-            else if(KEY=='-' || KEY=='_') {Time_Delay--; if(Time_Delay<0  ) Time_Delay=0;  if(Time_Delay>10) Time_Delay-=9; cout<<"\rPolling_Delay(ms): "<<Time_Delay<<"                          ";}
+            else if(KEY=='-' || KEY=='_') {Time_Delay--; if(Time_Delay<1 )  Time_Delay=1;  if(Time_Delay>10) Time_Delay-=9; cout<<"\rPolling_Delay(ms): "<<Time_Delay<<"                          ";}
 
             //            else if (KEY=='g' && is_Continuous_Change_Color==false) is_Continuous_Change_Color=true;
             //            else if (KEY=='g' && is_Continuous_Change_Color==true) is_Continuous_Change_Color= false;
@@ -960,12 +962,12 @@ int main()
                 SoundFlag= true; Show_Main_Menu(); cout<<"\r\aUnmuted";   if (kbhit()) { getch(); goto Menu;} this_thread::sleep_for(chrono::milliseconds(Time_Delay*10));
 
 
-                int pre_Time_Delay = Time_Delay;
-                Time_Delay=10;
-                for(int i=0;i<9;i++)  {Time_Delay++; if(Time_Delay>100) Time_Delay=91; if(Time_Delay>10) Time_Delay+=9; cout<<"\rPolling_Delay(ms): "<<Time_Delay<<"                          ";Sleep(10);}
-                for(int i=0;i<19;i++) {Time_Delay--; if(Time_Delay<0  ) Time_Delay=0;  if(Time_Delay>10) Time_Delay-=9; cout<<"\rPolling_Delay(ms): "<<Time_Delay<<"                          ";Sleep(10);}
-                for(int i=0;i<10;i++) {Time_Delay++; if(Time_Delay>100) Time_Delay=91; if(Time_Delay>10) Time_Delay+=9; cout<<"\rPolling_Delay(ms): "<<Time_Delay<<"                          ";Sleep(10);}
-                Time_Delay = pre_Time_Delay;
+//                int pre_Time_Delay = Time_Delay;
+//                Time_Delay=10;
+//                for(int i=0;i<9;i++)  {Time_Delay++; if(Time_Delay>100) Time_Delay=91; if(Time_Delay>10) Time_Delay+=9; cout<<"\rPolling_Delay(ms): "<<Time_Delay<<"                          ";Sleep(10);}
+//                for(int i=0;i<18;i++) {Time_Delay--; if(Time_Delay<0  ) Time_Delay=0;  if(Time_Delay>10) Time_Delay-=9; cout<<"\rPolling_Delay(ms): "<<Time_Delay<<"                          ";Sleep(10);}
+//                for(int i=0;i<9;i++) {Time_Delay++; if(Time_Delay>100) Time_Delay=91; if(Time_Delay>10) Time_Delay+=9; cout<<"\rPolling_Delay(ms): "<<Time_Delay<<"                          ";Sleep(10);}
+//                Time_Delay = pre_Time_Delay;
 
 
                 KEY=DOWN_KEY; cout<<"\r                                                   ";
@@ -1101,7 +1103,7 @@ int main()
                 if(Snake_Marker==0) {Multi_Tabs_1 cout << "       AI_SAFE_ SNAKE GAME [BOX]   \n\n";}
 
                 int Level;
-                Multi_Tabs_1 cout<< "        SPEED (1-8) :  ";
+                Multi_Tabs_1 cout<< "        SPEED LEVEL (1-9) :  ";
 
                 while(true)
                 {
@@ -1110,7 +1112,7 @@ int main()
                     {
                         KEY = ReadKey();      Key_Hit_Maintainor();
 
-                        if    (KEY>='1' && KEY<='8') {Level= KEY-'0'; break;}
+                        if    (KEY>='1' && KEY<='9') {Level= KEY-'0'; break;}
                         if    (KEY==LEFT_KEY || KEY==HOME_KEY)  goto Snake_Menu;
                         if    (KEY==END_KEY || KEY=='x' || KEY=='X') goto Menu;
                     }
@@ -1232,7 +1234,7 @@ int main()
                         if(Snake_Marker==0) {Multi_Tabs_1 cout << "       AI_SAFE_ SNAKE GAME [BOX]   \n";}
 
 
-                        Multi_Tabs_1 cout << "             Level : "<<Level<<endl;
+                        Multi_Tabs_1 cout << "             Level : "<<Level<<"  "<<endl;
 
                         NewLine;
                         Multi_Tabs_1;  Border_Sign;  Multiple_Border_Sign;  NewLine;  //Border
@@ -1280,8 +1282,8 @@ int main()
                             else if(KEY==RIGHT_KEY || KEY=='6' || KEY=='d'  || KEY=='D') // Right arrow
                             Move='6';
 
-                            else if(KEY=='+' || KEY=='=') {Level++; if(Level==9) Level--; Delay = Snake_or_Pac_Lavel_Generator(Level);}
-                            else if(KEY=='-' || KEY=='_') {Level--; if(Level==0) Level++; Delay = Snake_or_Pac_Lavel_Generator(Level);}
+                            else if(KEY=='+' || KEY=='=') {Level++; if(Level>9) Level--; Delay = Snake_or_Pac_Lavel_Generator(Level);}
+                            else if(KEY=='-' || KEY=='_') {Level--; if(Level<1) Level++; Delay = Snake_or_Pac_Lavel_Generator(Level);}
 
                             else if(KEY=='0' || KEY=='5' || KEY==SPACE_KEY )   getch();
                             else if(KEY==ENTER_KEY  || KEY==BACKSPACE_KEY  )   clearScreen();
@@ -1378,6 +1380,8 @@ int main()
                             else if (dr > 0) Move = '2';
                             else if (dc < 0) Move = '4';
                             else if (dc > 0) Move = '6';
+
+                            else /** Move='5';*/ {Finish = true; break;}
                         }
 
                         if(Snake_Marker==7)
@@ -1426,6 +1430,8 @@ int main()
                             else if (S_Row < F_Row && S_Row != Snake_Area_Row-1) Move = '2';  // Snake উপরে → নিচে যাও
                             else if (S_Col > F_Col && S_Col != 0               ) Move = '4';  // একই row, Snake ডানে → বামে যাও
                             else if (S_Col < F_Col && S_Col != Snake_Area_Column-1) Move = '6';  // একই row, Snake বামে → ডানে যাও
+
+                            else /** Move='5';*/ {Finish = true; break;}
                         }
 
                         if(Snake_Marker==9)
@@ -1570,13 +1576,13 @@ int main()
                     is_Playing = false;
                     Sound;
 
-                    if(Snake_Boundary)
+                    if      (Is_Quit  )     {NewLine Multi_Tabs_1 cout<<"\t    Game Quit!"<<endl;  NewLine}
+
+                    else if(Snake_Boundary)
                     {
                         if  (Finish)    { NewLine NewLine Multi_Tabs_1  cout << "       TOUCH BODY!";  }
                         else            { NewLine NewLine Multi_Tabs_1  cout << "       TOUCH BORDER!";}
                     }
-
-                    if      (Is_Quit  )     {NewLine Multi_Tabs_1 cout<<"\t    Game Quit!"<<endl;  NewLine}
 
                     else if (!Is_Completed) {NewLine Multi_Tabs_1 cout<<"\t    Game Over!"<<endl;  NewLine}
 
@@ -2661,6 +2667,7 @@ int main()
                     //cout << "#Disclaimer: \t\tLudo is Haram Game for Muslim. So you should avoid to play this.\n\n";
 
                     int Number_of_Player;
+                    bool Autoplay = false;
 
                     Multi_Tabs_1 cout << "Number of Player :\t";
                     cin >> Number_of_Player;
@@ -2686,8 +2693,9 @@ int main()
                         {
                             Print_Ludo(Board,Number_of_Player,Dice,i);
 
-                            KEY = ReadKey();
+                            if(!Autoplay)   KEY = ReadKey();
                             if (KEY=='x' || KEY=='X' || KEY==HOME_KEY || KEY==END_KEY) goto Menu;
+                            if (KEY=='*') Autoplay = true;
                             Key_Hit_Maintainor();
                             /** changeTextColour(); */
                             ///* srand(time(NULL)); */
@@ -3828,5 +3836,6 @@ int main()
     }
     goto Menu;
 }
+
 
 
